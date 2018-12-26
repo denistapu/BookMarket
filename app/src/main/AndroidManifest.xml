@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Signup"></activity>
+        <activity android:name=".Signup" />
+        <activity android:name=".forgotPsw"></activity>
     </application>
 
 </manifest>

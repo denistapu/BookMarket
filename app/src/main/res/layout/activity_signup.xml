@@ -98,7 +98,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
-                        android:text="Email already exists"
+                        android:text="Invalid or already existing Email"
                         android:textAllCaps="false"
                         android:visibility="invisible"
                         android:textColor="@color/red"
@@ -141,7 +141,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
-                        android:text="Username already exists"
+                        android:text="Invalid (can't use special characters) or already existing Username"
                         android:textAllCaps="false"
                         android:visibility="invisible"
                         android:textColor="@color/red"
@@ -176,6 +176,7 @@
                         android:textColor="@color/white"
                         android:textSize="15sp"
                         android:drawableLeft="@drawable/ic_lock"
+                        android:drawableRight="@drawable/ic_eye_off"
                         android:inputType="textPassword"
                         android:gravity="center"
                         android:ellipsize="start"
@@ -186,13 +187,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
-                        android:text="Insert a password that contains at least 8 characters, including at least 1 number and 1 upper-case letter"
+                        android:text="Insert a password that contains at least 8 characters, including at least 2 numbers and 1 upper-case letter"
                         android:textAllCaps="false"
                         android:visibility="invisible"
                         android:textColor="@color/red"
                         android:textSize="10sp" />
 
                 </LinearLayout>
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -221,6 +224,7 @@
                         android:textColor="@color/white"
                         android:textSize="15sp"
                         android:drawableLeft="@drawable/ic_lock"
+                        android:drawableRight="@drawable/ic_eye_off"
                         android:inputType="textPassword"
                         android:gravity="center"
                         android:ellipsize="start"
