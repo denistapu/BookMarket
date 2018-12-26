@@ -43,7 +43,7 @@ public class forgotPsw extends AppCompatActivity {
             public void onClick(View v) {
 
                 errorEmail.setVisibility(View.GONE);
-                info.setText("If you forgot your acoount's password, insert the corresponding Email address and we will provide a reset one.\n");
+                info.setText("If you forgot your account's password, insert the corresponding Email address and we will provide a reset one.\n");
                 String emailStr = email.getText().toString();
 
                 Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");

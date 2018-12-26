@@ -53,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="If you forgot your acoount's password, insert the corresponding Email address and we will provide a reset one.\n"
+                    android:text="If you forgot your account's password, insert the corresponding Email address and we will provide a reset one.\n"
                     android:textAllCaps="false"
                     android:textStyle="bold|italic"
                     android:textColor="@color/purple"
