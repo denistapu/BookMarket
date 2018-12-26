@@ -17,7 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Signup" />
-        <activity android:name=".forgotPsw"></activity>
+        <activity android:name=".forgotPsw" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Setup"></activity>
     </application>
 
 </manifest>

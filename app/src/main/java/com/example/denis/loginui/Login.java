@@ -2,7 +2,9 @@
 package com.example.denis.loginui;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +12,7 @@ import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -36,11 +39,16 @@ public class Login extends AppCompatActivity {
 
     TextView error;
 
-    Intent tLogin;
+    Intent tMain;
+    Intent tSetup;
     Intent tSignup;
     Intent tForgot;
 
     Boolean showPass;
+
+    SharedPreferences loginPreferences;
+    SharedPreferences.Editor loginPrefsEditor;
+    Boolean saveLogin;
 
 
     Handler hStart = new Handler();
@@ -68,6 +76,20 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+        loginPrefsEditor = loginPreferences.edit();
+
+
+        user= (EditText) findViewById(R.id.edtUser);
+        password= (EditText) findViewById(R.id.edtPass);
+
+        saveLogin = loginPreferences.getBoolean("saveLogin", false);
+        if (saveLogin == true) {
+            user.setText(loginPreferences.getString("username", ""));
+            password.setText(loginPreferences.getString("password", ""));
+            remember.setChecked(true);
+        }
+
         attempts = 5;
 
         showPass=false;
@@ -80,9 +102,6 @@ public class Login extends AppCompatActivity {
         login= (Button) findViewById(R.id.btnLogin);
         signup= (Button) findViewById(R.id.btnSignup);
         forgot = (Button) findViewById(R.id.btnForgot);
-
-        user= (EditText) findViewById(R.id.edtUser);
-        password= (EditText) findViewById(R.id.edtPass);
 
         remember = (CheckBox) findViewById(R.id.chbRemember);
 
@@ -99,14 +118,14 @@ public class Login extends AppCompatActivity {
 
                 String email = null;
 
-                //tLogin = new Intent(Login.this, MainActivity.class);
+
                 Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
                 Matcher matcher = pattern.matcher(userStr);
                 if(matcher.matches())
                     email=userStr;
 
 
-                //controllo se user e password sono giusti
+                //controllo nel DB se user e password sono giusti
 
 
                 //se non sono giusti faccio comparire una textView che dice che non sono giusti, con il numero
@@ -124,14 +143,34 @@ public class Login extends AppCompatActivity {
 
                 */
 
+                //se invexw sono giusti
 
                 //controllo se il remember è spuntato e in caso io abbia la combinazione giusta di user e password
                 //la prossima volta che accendo la app non devo fare il login
                 if(remember.isChecked()){
-
+                    loginPrefsEditor.putBoolean("saveLogin", true);
+                    loginPrefsEditor.putString("username", userStr);
+                    loginPrefsEditor.putString("password", passwordStr);
+                    loginPrefsEditor.commit();
+                } else {
+                    loginPrefsEditor.clear();
+                    loginPrefsEditor.commit();
                 }
 
+                //controllo se ho gia fatto il setup iniziale dell'account di quel utente
+                //tramite un flag nel DB
 
+                //se non l'ho fatto faccio partire l'activity di setup
+                /*
+                tSetup = new Intent(Login.this, Setup.class);
+                startActivity(tSetup);
+                 */
+
+                //se l'ho fatto, faccio partire la mainActivity
+                /*
+                tMain = new Intent(Login.this, MainActivity.class);
+                 startActivity(tMain);
+                   */
 
 
 
