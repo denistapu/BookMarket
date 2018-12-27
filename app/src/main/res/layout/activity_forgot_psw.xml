@@ -24,27 +24,28 @@
             android:src="@drawable/ic_logo" />
 
         <RelativeLayout
-            android:id="@+id/rellay1"
+            android:id="@+id/rellay1Forgot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imgView_logo"
             android:visibility="visible">
 
             <TextView
-                android:id="@+id/tv_login"
+                android:id="@+id/tv_forgot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
                 android:layout_marginTop="20dp"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="@font/lobster"
                 android:text="Forgot Password?"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
 
             <LinearLayout
-                android:id="@+id/linlay1"
+                android:id="@+id/linlay1Forgot"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_login"
+                android:layout_below="@+id/tv_forgot"
                 android:layout_marginTop="20dp"
                 android:orientation="vertical">
 
@@ -52,12 +53,13 @@
                     android:id="@+id/txtInfoForgot"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="If you forgot your account's password, insert the corresponding Email address and we will provide a reset one.\n"
+                    android:fontFamily="@font/lobster"
+                    android:text="If you forgot your account's password, insert the corresponding Email address or Username and we will provide a reset one.\n"
                     android:textAllCaps="false"
                     android:textStyle="bold|italic"
-                    android:textColor="@color/purple"
-                    android:textSize="20dp" />
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:textSize="27dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -67,11 +69,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
-                        android:text="Email"
+                        android:fontFamily="@font/beauty"
+                        android:text="Email or Username"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:textSize="20sp" />
 
                     <EditText
                         android:id="@+id/edtEmailF"
@@ -108,11 +110,11 @@
                 android:id="@+id/btnForgotF"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_below="@+id/linlay1"
+                android:layout_below="@+id/linlay1Forgot"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/btn_bg"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="@font/lobster"
                 android:paddingLeft="70dp"
                 android:paddingRight="70dp"
                 android:text="Send Password"
@@ -128,7 +130,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rellay2"
+        android:id="@+id/rellay2Forgot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -143,7 +145,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:background="@color/transparent"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/lobster"
             android:text="Back"
             android:textAllCaps="true"
             android:textColor="@color/white"

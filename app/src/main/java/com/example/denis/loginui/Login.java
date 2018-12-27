@@ -1,4 +1,3 @@
-//Prova123
 package com.example.denis.loginui;
 
 import android.annotation.SuppressLint;
@@ -16,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,6 +28,8 @@ public class Login extends AppCompatActivity {
 
     RelativeLayout rellay1, rellay2;
 
+    ImageView imgLogo;
+
     Button login;
     Button signup;
     Button forgot;
@@ -38,6 +40,7 @@ public class Login extends AppCompatActivity {
     CheckBox remember;
 
     TextView error;
+    TextView loginText;
 
     Intent tMain;
     Intent tSetup;
@@ -57,6 +60,10 @@ public class Login extends AppCompatActivity {
         public void run() {
             rellay1.setVisibility(View.VISIBLE);
             rellay2.setVisibility(View.VISIBLE);
+            loginText.setVisibility(View.GONE);
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) imgLogo.getLayoutParams();
+            params.addRule(RelativeLayout.CENTER_HORIZONTAL, 0);
+            imgLogo.setLayoutParams(params);
         }
     };
 
@@ -97,6 +104,8 @@ public class Login extends AppCompatActivity {
         rellay1 = (RelativeLayout) findViewById(R.id.rellay1);
         rellay2 = (RelativeLayout) findViewById(R.id.rellay2);
 
+        imgLogo = (ImageView) findViewById(R.id.imgView_logo);
+
         hStart.postDelayed(rStart, 1700);
 
         login= (Button) findViewById(R.id.btnLogin);
@@ -106,6 +115,7 @@ public class Login extends AppCompatActivity {
         remember = (CheckBox) findViewById(R.id.chbRemember);
 
         error = (TextView) findViewById(R.id.txtError);
+        loginText = (TextView) findViewById(R.id.txtLogin);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,12 +174,14 @@ public class Login extends AppCompatActivity {
                 /*
                 tSetup = new Intent(Login.this, Setup.class);
                 startActivity(tSetup);
+                finish();
                  */
 
                 //se l'ho fatto, faccio partire la mainActivity
                 /*
                 tMain = new Intent(Login.this, MainActivity.class);
                  startActivity(tMain);
+                 finish();
                    */
 
 

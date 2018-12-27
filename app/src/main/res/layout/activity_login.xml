@@ -21,7 +21,19 @@
             android:layout_height="80dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
+            android:layout_centerHorizontal="true"
             android:src="@drawable/ic_logo" />
+
+        <TextView
+            android:id="@+id/txtLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:fontFamily="@font/lobster"
+            android:text="Book Market"
+            android:layout_alignParentTop="@+id/imgView_logo"
+            android:textColor="@color/white"
+            android:textSize="50sp" />
 
         <RelativeLayout
             android:id="@+id/rellay1"
@@ -35,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="@font/lobster"
                 android:text="Login"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
@@ -56,11 +68,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
+                        android:fontFamily="@font/beauty"
                         android:text="Username or Email"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:textSize="20sp" />
 
                     <EditText
                         android:id="@+id/edtUser"
@@ -89,11 +101,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="sans-serif-light"
+                        android:fontFamily="@font/beauty"
                         android:text="Password"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:textSize="20sp" />
 
                     <EditText
                         android:id="@+id/edtPass"
@@ -128,7 +140,10 @@
                         android:layout_marginTop="8dp"
                         android:textColor="@color/white"
                         android:text="Remember me"
-                        android:padding="8dp"
+                        android:fontFamily="@font/hills"
+                        android:textSize="20sp"
+                        android:layout_marginHorizontal="70sp"
+                        android:padding="5dp"
                         />
 
 
@@ -157,7 +172,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/btn_bg"
-                android:fontFamily="sans-serif-medium"
+                android:fontFamily="@font/lobster"
                 android:paddingLeft="70dp"
                 android:paddingRight="70dp"
                 android:text="Login Now"
@@ -185,7 +200,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
-            android:fontFamily="sans-serif"
+            android:fontFamily="@font/lobster"
             android:text="Signup"
             android:textAllCaps="true"
             android:textColor="@color/white" />
@@ -196,8 +211,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@color/transparent"
-            android:fontFamily="sans-serif"
-            android:text="Forgot Password?"
+            android:fontFamily="@font/lobster"
+            android:text="Forgot   Password?"
             android:textAllCaps="true"
             android:textColor="@color/white" />
 

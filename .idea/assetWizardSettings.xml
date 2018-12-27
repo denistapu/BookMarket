@@ -28,9 +28,10 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ffffff" />
-                            <entry key="outputName" value="ic_lock" />
-                            <entry key="sourceFile" value="C:\Users\Denis" />
+                            <entry key="outputName" value="ic_setup" />
+                            <entry key="sourceFile" value="C:\Users\Denis\Downloads\setup.svg" />
                           </map>
                         </option>
                       </PersistentState>
