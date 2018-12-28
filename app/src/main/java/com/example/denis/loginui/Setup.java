@@ -1,23 +1,38 @@
 package com.example.denis.loginui;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.IOException;
+import java.util.Calendar;
+
 public class Setup extends AppCompatActivity {
 
     Boolean success;
 
+    int REQUEST_CODE = 1;
+
+    DatePickerDialog.OnDateSetListener datePicker;
+
     Intent tStart;
+    Intent tGo;
 
     RelativeLayout rellay1, rellay2;
 
@@ -47,6 +62,7 @@ public class Setup extends AppCompatActivity {
             params.addRule(RelativeLayout.CENTER_HORIZONTAL, 0);
             imgLogo.setLayoutParams(params);
             profilePic.setVisibility(View.VISIBLE);
+            imgLogo.setClickable(true);
         }
     };
 
@@ -93,8 +109,9 @@ public class Setup extends AppCompatActivity {
                 String surnameStr = surname.getText().toString();
                 String cityStr = city.getText().toString();
                 String genderStr = gender.getSelectedItem().toString();
+                String birthStr = birthDay.getText().toString();
 
-                success = false;
+                success = true;
 
                 if(!is_Valid_Name(nameStr)){
                     success = false;
@@ -111,13 +128,17 @@ public class Setup extends AppCompatActivity {
                     error.setVisibility(View.VISIBLE);
                 }
 
-                //datanascita
 
-                //sesso
+                if(birthStr.equals("Birth Day")){
+                    success=false;
+                }
 
-
-
-                //fotoprofilo
+                if(success){
+                    //salva i dati sul DB (non dimenticarsi della foto profilo)
+                    //imposta il booleano setup sul DB a true
+                    tGo = new Intent(Setup.this, MainActivity.class);
+                    finish();
+                }
 
             }
         });
@@ -125,9 +146,59 @@ public class Setup extends AppCompatActivity {
         birthDay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                int month=calendar.get(Calendar.MONTH);
+                int year= calendar.get(Calendar.YEAR);
 
+                DatePickerDialog dialog = new DatePickerDialog(
+                        Setup.this,
+                        android.R.style.Theme_DeviceDefault_Light_DarkActionBar,
+                        datePicker,
+                        year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
             }
         });
+
+        datePicker = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                String date = day + "/" + month + "/" + year;
+                birthDay.setText(date);
+            }
+        };
+
+        imgLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent t = new Intent();
+                t.setType("image/*");
+                t.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(t, "Select Profile Pirture"), REQUEST_CODE);
+            }
+        });
+
+
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,Intent data){
+        super.onActivityResult(requestCode,resultCode,data);
+
+        if(requestCode == REQUEST_CODE && resultCode == RESULT_OK  && data != null && data.getData() != null){
+            Uri uri = data.getData();
+            try{
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
+                imgLogo.setImageBitmap(bitmap);
+            }
+            catch (IOException e){
+                e.printStackTrace();
+            }
+        }
     }
 
     //controllo se username è valido

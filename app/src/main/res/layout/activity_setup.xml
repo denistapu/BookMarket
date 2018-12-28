@@ -38,7 +38,10 @@
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_setup" />
+            android:src="@drawable/ic_setup"
+            android:clickable="false"
+
+            />
 
         <TextView
             android:id="@+id/txtSetup"
