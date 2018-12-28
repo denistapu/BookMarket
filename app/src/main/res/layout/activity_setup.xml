@@ -16,9 +16,20 @@
         android:layout_marginRight="40dp">
 
 
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/txtPicture"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:fontFamily="@font/lobster"
+            android:text="Click on the image to change your profile picture."
+            android:textAllCaps="false"
+            android:visibility="gone"
+            android:textColor="@color/black"
+            android:layout_toRightOf="@+id/imgView_setup"
+            android:padding="10dip"
+            android:textAlignment="center"
+            android:textStyle="bold|italic"
+            android:textSize="26sp" />
 
         <ImageView
             android:id="@+id/imgView_setup"
@@ -131,6 +142,38 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/beauty"
+                        android:text="City"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="30sp" />
+
+                    <EditText
+                        android:id="@+id/edtCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/et_bg"
+                        android:fontFamily="sans-serif-light"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:drawableLeft="@drawable/ic_city"
+                        android:gravity="center"
+                        />
+
+                </LinearLayout>
+
 
 
                 <TextView
@@ -138,16 +181,56 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="Incorrect Username or Password, number of attempts remaining: "
+                    android:text="Error, you must use only letters"
                     android:textAllCaps="false"
                     android:visibility="invisible"
                     android:textColor="@color/red"
                     android:textSize="12sp" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/btnDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/linlay1Setup"
+                        android:background="@drawable/btn_bg"
+                        android:fontFamily="@font/lobster"
+                        android:paddingLeft="70dp"
+                        android:paddingRight="70dp"
+                        android:text="Birth Day"
+                        android:textAllCaps="false"
+                        android:layout_marginLeft="30sp"
+                        android:textColor="@color/white"
+                        android:drawableRight="@drawable/ic_go"
+                        android:drawablePadding="15dp"
+                        android:textSize="15sp" />
+
+                    <Spinner
+                        android:id="@+id/spnGender"
+                        android:layout_width="200dp"
+                        android:layout_height="40dp"
+                        android:layout_below="@+id/linlay1Setup"
+                        android:background="@drawable/btn_bg"
+                        android:fontFamily="@font/lobster"
+                        android:text="Gender"
+                        android:textAllCaps="false"
+                        android:layout_marginLeft="50sp"
+                        android:textColor="@color/white"
+                        android:drawablePadding="15dp"
+                        android:textSize="15sp" />
+
+                 </LinearLayout>
+
             </LinearLayout>
 
+
+
             <Button
-                android:id="@+id/btnNext"
+                android:id="@+id/btnStart"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_below="@+id/linlay1Setup"
@@ -157,7 +240,7 @@
                 android:fontFamily="@font/lobster"
                 android:paddingLeft="70dp"
                 android:paddingRight="70dp"
-                android:text="Next"
+                android:text="Start"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:drawableRight="@drawable/ic_go"
@@ -165,31 +248,6 @@
                 android:textSize="16sp" />
 
         </RelativeLayout>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rellay2Setup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:visibility="gone">
-
-        <Button
-            android:id="@+id/btnPrevious"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@color/transparent"
-            android:fontFamily="@font/lobster"
-            android:text="Previous"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:visibility="gone"
-            android:drawableLeft="@drawable/ic_back"
-            />
 
     </RelativeLayout>
 

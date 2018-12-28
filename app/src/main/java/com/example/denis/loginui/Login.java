@@ -153,9 +153,9 @@ public class Login extends AppCompatActivity {
 
                 */
 
-                //se invexw sono giusti
+                //se invece sono giusti
 
-                //controllo se il remember è spuntato e in caso io abbia la combinazione giusta di user e password
+                //controllo se il remember è spuntato e in caso io abbia la combinazione giusta di user e password e la mail sia verificata
                 //la prossima volta che accendo la app non devo fare il login
                 if(remember.isChecked()){
                     loginPrefsEditor.putBoolean("saveLogin", true);
