@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -18,6 +19,18 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -51,6 +64,7 @@ public class Login extends AppCompatActivity {
 
     SharedPreferences loginPreferences;
     SharedPreferences.Editor loginPrefsEditor;
+    SessionManager session;
     Boolean saveLogin;
 
 
@@ -85,17 +99,17 @@ public class Login extends AppCompatActivity {
 
         loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
         loginPrefsEditor = loginPreferences.edit();
-
+        session = new SessionManager(this);
 
         user= (EditText) findViewById(R.id.edtUser);
         password= (EditText) findViewById(R.id.edtPass);
 
         saveLogin = loginPreferences.getBoolean("saveLogin", false);
-        if (saveLogin == true) {
+       /* if (saveLogin == true) {
             user.setText(loginPreferences.getString("username", ""));
             password.setText(loginPreferences.getString("password", ""));
             remember.setChecked(true);
-        }
+        }*/
 
         attempts = 5;
 
@@ -123,11 +137,11 @@ public class Login extends AppCompatActivity {
 
                 error.setVisibility(View.GONE);
 
-                String userStr = user.getText().toString();
-                String passwordStr = password.getText().toString();
+                final String userStr = user.getText().toString();
+                final String passwordStr = password.getText().toString();
 
                 String email = null;
-
+                String params = null;
 
                 Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
                 Matcher matcher = pattern.matcher(userStr);
@@ -136,53 +150,65 @@ public class Login extends AppCompatActivity {
 
 
                 //controllo nel DB se user e password sono giusti
+                if(email!=null)
+                    params = "email="+email+"&password="+passwordStr;
+                else
+                    params = "username="+userStr+"&password="+passwordStr;
+                RequestQueue mQueue = Volley.newRequestQueue(Login.this);
+                String url = "http:/localhost/AppAndroid/LoginSystem/api.php?request=login&"+params;
 
+                JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                try {
+                                    if(!response.getString("status").equals("OK")) {
+                                        attempts--;
+                                        if(attempts == 0){
+                                            hDisableLogin.postDelayed(rDisableLogin, 10000);
+                                            login.setEnabled(true);
+                                            attempts=5;
+                                        }
+                                        error.setText("Username or password incorrect, number of attempts remaining: " + Integer.toString(attempts));
+                                        error.setVisibility(View.VISIBLE);
+                                    }else{
 
-                //se non sono giusti faccio comparire una textView che dice che non sono giusti, con il numero
-                // di tentativi rimanenti, che quando scaduti disabilitano il bottone di login per 10 secondi
+                                        JSONArray arr = response.getJSONArray("data");
+                                        JSONObject data = arr.getJSONObject(0);
+                                        session.createSession(new User(data));
+                                        if(remember.isChecked()){
+                                            loginPrefsEditor.putBoolean("saveLogin", true);
+                                            loginPrefsEditor.putString("username", userStr);
+                                            loginPrefsEditor.putString("password", passwordStr);
+                                            loginPrefsEditor.apply();
+                                        } else {
+                                            loginPrefsEditor.clear();
+                                            loginPrefsEditor.apply();
+                                        }
+                                        if(session.isLoggedIn())
+                                        if(!session.getUser().isSetup()){
+                                            tSetup = new Intent(Login.this, Setup.class);
+                                            startActivity(tSetup);
+                                            finish();
+                                        } else {
+                                            tMain = new Intent(Login.this, MainActivity.class);
+                                            startActivity(tMain);
+                                            finish();
+                                        }
 
-                /*
-                attempts--;
-                if(attempts == 0){
-                    hDisableLogin.postDelayed(rDisableLogin, 10000);
-                    login.setEnabled(true);
-                    attempts=5;
-                }
-                error.setText("Username or password incorrect, number of attempts remaining: " + Integer.toString(attempts));
-                error.setVisibility(View.VISIBLE);
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                });
 
-                */
-
-                //se invece sono giusti
-
-                //controllo se il remember è spuntato e in caso io abbia la combinazione giusta di user e password e la mail sia verificata
-                //la prossima volta che accendo la app non devo fare il login
-                if(remember.isChecked()){
-                    loginPrefsEditor.putBoolean("saveLogin", true);
-                    loginPrefsEditor.putString("username", userStr);
-                    loginPrefsEditor.putString("password", passwordStr);
-                    loginPrefsEditor.commit();
-                } else {
-                    loginPrefsEditor.clear();
-                    loginPrefsEditor.commit();
-                }
-
-                //controllo se ho gia fatto il setup iniziale dell'account di quel utente
-                //tramite un flag nel DB
-
-                //se non l'ho fatto faccio partire l'activity di setup
-                /*
-                tSetup = new Intent(Login.this, Setup.class);
-                startActivity(tSetup);
-                finish();
-                 */
-
-                //se l'ho fatto, faccio partire la mainActivity
-                /*
-                tMain = new Intent(Login.this, MainActivity.class);
-                 startActivity(tMain);
-                 finish();
-                   */
+                mQueue.add(request);
 
 
 
