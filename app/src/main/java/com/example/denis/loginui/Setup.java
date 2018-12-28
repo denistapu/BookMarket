@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,6 +30,7 @@ public class Setup extends AppCompatActivity {
 
     TextView setupText;
     TextView profilePic;
+    TextView error;
 
     ImageView imgLogo;
 
@@ -63,6 +65,12 @@ public class Setup extends AppCompatActivity {
         imgLogo = (ImageView) findViewById(R.id.imgView_logo);
 
         gender = (Spinner) findViewById(R.id.spnGender);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Setup.this,
+                R.array.gender, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        gender.setAdapter(adapter);
+        gender.setSelection(0);
+
 
         start = (Button) findViewById(R.id.btnStart);
         birthDay = (Button) findViewById(R.id.btnDate);
@@ -73,14 +81,43 @@ public class Setup extends AppCompatActivity {
 
         setupText = (TextView) findViewById(R.id.txtSetup);
         profilePic = (TextView) findViewById(R.id.txtPicture);
+        error = (TextView) findViewById(R.id.txtErrorSetup);
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                error.setVisibility(View.GONE);
+
+                String nameStr = name.getText().toString();
+                String surnameStr = surname.getText().toString();
+                String cityStr = city.getText().toString();
+                String genderStr = gender.getSelectedItem().toString();
+
                 success = false;
 
+                if(!is_Valid_Name(nameStr)){
+                    success = false;
+                    error.setVisibility(View.VISIBLE);
+                }
 
+                if(!is_Valid_Name(surnameStr)){
+                    success = false;
+                    error.setVisibility(View.VISIBLE);
+                }
+
+                if(!is_Valid_Name(cityStr)){
+                    success = false;
+                    error.setVisibility(View.VISIBLE);
+                }
+
+                //datanascita
+
+                //sesso
+
+
+
+                //fotoprofilo
 
             }
         });
