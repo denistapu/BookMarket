@@ -1,5 +1,6 @@
 package com.example.denis.loginui;
 
+import android.content.Intent;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,12 +12,16 @@ public class Account extends AppCompatActivity {
     public static final String TAG = "Account" ;
     public static final int ACTIVITY_NUM = 3 ;
 
+    Intent tStart;
+
     BottomNavigationView bottomNav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+
+        tStart = getIntent();
 
         bottomNav = (BottomNavigationView) findViewById(R.id.navigationM);
 

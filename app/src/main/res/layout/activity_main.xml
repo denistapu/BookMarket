@@ -8,31 +8,111 @@
     tools:context=".MainActivity">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/rellay1YourBooks"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp">
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:visibility="visible">
 
-        <ImageView
-            android:id="@+id/imgView_profilePic"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginBottom="400dp"
-            android:layout_marginRight="200dp"
-            app:srcCompat="@drawable/ic_setup" />
+
+        <Button
+            android:id="@+id/btnAddBook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:fontFamily="@font/lobster"
+            android:text="Add  Book"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/btnRemoveBooks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@color/transparent"
+            android:fontFamily="@font/lobster"
+            android:text="Remove  Books"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
 
     </RelativeLayout>
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigationM"
+    <RelativeLayout
+        android:id="@+id/rellay2YourBooks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/navigation" />
+        android:layout_below="@+id/rellay1YourBooks"
+        android:layout_centerHorizontal="true">
+
+
+
+
+            <TextView
+                android:id="@+id/txtYourBooks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lobster"
+                android:text="Your Books"
+
+                android:textColor="@color/white"
+                android:textSize="30sp" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rellay3YourBooks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/rellay2YourBooks"
+        >
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/navigationM">
+
+            <ListView
+                android:id="@+id/lstBooks"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:listSelector="@drawable/my_selector">
+
+            </ListView>
+
+
+        </LinearLayout>
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigationM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:background="?android:attr/windowBackground"
+            app:menu="@menu/navigation" />
+
+
+
+    </RelativeLayout>
+
+
+
+
+
 
 
 </RelativeLayout>
