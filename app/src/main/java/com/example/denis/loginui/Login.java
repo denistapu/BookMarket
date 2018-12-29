@@ -100,16 +100,22 @@ public class Login extends AppCompatActivity {
         loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
         loginPrefsEditor = loginPreferences.edit();
         session = new SessionManager(this);
+        if(session.isLoggedIn()){
+            tMain = new Intent(Login.this, MainActivity.class);
+            startActivity(tMain);
+            finish();
+        }
 
         user= (EditText) findViewById(R.id.edtUser);
         password= (EditText) findViewById(R.id.edtPass);
-
+        remember = (CheckBox) findViewById(R.id.chbRemember);
         saveLogin = loginPreferences.getBoolean("saveLogin", false);
-       /* if (saveLogin == true) {
+        if (saveLogin == true) {
             user.setText(loginPreferences.getString("username", ""));
             password.setText(loginPreferences.getString("password", ""));
             remember.setChecked(true);
-        }*/
+        }
+
 
         attempts = 5;
 
@@ -155,7 +161,7 @@ public class Login extends AppCompatActivity {
                 else
                     params = "username="+userStr+"&password="+passwordStr;
                 RequestQueue mQueue = Volley.newRequestQueue(Login.this);
-                String url = "http:/localhost/AppAndroid/LoginSystem/api.php?request=login&"+params;
+                String url = "http:/192.168.1.119/AppAndroid/LoginSystem/api.php?request=login&"+params;
 
                 JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                         new Response.Listener<JSONObject>() {
