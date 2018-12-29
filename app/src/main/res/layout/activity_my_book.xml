@@ -128,6 +128,69 @@
                         />
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lobster"
+                        android:text="Price"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="22sp" />
+
+                    <EditText
+                        android:id="@+id/edtPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/et_bg"
+                        android:fontFamily="sans-serif-light"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:gravity="center"
+                        android:drawableLeft="@drawable/ic_price"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lobster"
+                        android:text="Authors"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="22sp" />
+
+                    <EditText
+                        android:id="@+id/edtAuthors"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/et_bg"
+                        android:fontFamily="sans-serif-light"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:gravity="center"
+                        android:drawableLeft="@drawable/ic_authors"
+                        />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

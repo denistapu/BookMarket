@@ -25,6 +25,8 @@ public class MyBook extends AppCompatActivity {
     EditText isbn;
     EditText amount;
     EditText desc;
+    EditText price;
+    EditText authors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +46,16 @@ public class MyBook extends AppCompatActivity {
         isbn= (EditText) findViewById(R.id.edtISBN);
         amount= (EditText) findViewById(R.id.edtAmount);
         desc= (EditText) findViewById(R.id.edtDescription);
+        price= (EditText) findViewById(R.id.edtPrice);
+        authors= (EditText) findViewById(R.id.edtAuthors);
 
         title.setText(tStart.getStringExtra("Title"));
         publisher.setText(tStart.getStringExtra("Publisher"));
         isbn.setText(tStart.getStringExtra("ISBN"));
         amount.setText(tStart.getStringExtra("Amount"));
         desc.setText(tStart.getStringExtra("Description"));
+        price.setText(tStart.getStringExtra("Price"));
+        authors.setText(tStart.getStringExtra("Authors"));
 
 
 
@@ -61,13 +67,22 @@ public class MyBook extends AppCompatActivity {
                 String isbnStr = isbn.getText().toString();
                 String amountStr = amount.getText().toString();
                 String descStr = desc.getText().toString();
+                String priceStr = price.getText().toString();
+                String authorsStr = authors.getText().toString();
 
                 int amountInt = -1;
+                double priceDb = -1;
 
                 try{
                     amountInt = Integer.parseInt(amountStr);
                 }catch(Exception e){
                     amountInt= -1;
+                }
+
+                try{
+                    priceDb = Double.parseDouble(priceStr);
+                }catch(Exception e){
+                    priceDb= -1;
                 }
 
 
@@ -82,6 +97,12 @@ public class MyBook extends AppCompatActivity {
                     isNewBook = false;
                 }
 
+                if(!authorsStr.equals(tStart.getStringExtra("Authors"))){
+                    isModified=true;
+                }else{
+                    isNewBook = false;
+                }
+
                 if(!isbnStr.equals(tStart.getStringExtra("ISBN")) && is_Valid_ISBN(isbnStr)){
                     isModified=true;
                 }else{
@@ -89,6 +110,12 @@ public class MyBook extends AppCompatActivity {
                 }
 
                 if(!amountStr.equals(tStart.getStringExtra("Amount")) && amountInt>=1){
+                    isModified=true;
+                }else{
+                    isNewBook = false;
+                }
+
+                if(!priceStr.equals(tStart.getStringExtra("Price")) && priceDb>=0){
                     isModified=true;
                 }else{
                     isNewBook = false;

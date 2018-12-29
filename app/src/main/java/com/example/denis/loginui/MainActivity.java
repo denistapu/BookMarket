@@ -117,6 +117,8 @@ public class MainActivity extends AppCompatActivity {
                 tMyBooks.putExtra("ISBN", "");
                 tMyBooks.putExtra("Amount", "");
                 tMyBooks.putExtra("Description", "");
+                tMyBooks.putExtra("Pice", "");
+                tMyBooks.putExtra("Authors", "");
 
                 startActivity(tMyBooks);
 
@@ -163,6 +165,8 @@ public class MainActivity extends AppCompatActivity {
                     tMyBooks.putExtra("ISBN", "");
                     tMyBooks.putExtra("Amount", "");
                     tMyBooks.putExtra("Description", "");
+                    tMyBooks.putExtra("Pice", "");
+                    tMyBooks.putExtra("Authors", "");
                     */
 
                     startActivity(tMyBooks);
