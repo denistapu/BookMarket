@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     Button add;
     Button remove;
 
-    public ArrayAdapter adapterBooks;
+    ArrayAdapter adapterBooks;
 
     List <Integer> removeList;
 
