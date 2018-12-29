@@ -130,7 +130,8 @@ public class MainActivity extends AppCompatActivity {
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                removeDialog().show();
+                if(removeList.size()>0)
+                    removeDialog().show();
             }
         });
 
