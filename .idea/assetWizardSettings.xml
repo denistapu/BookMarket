@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/E:/Work%20programms/AndroidStudio/plugins/android/lib/android.jar!/images/material_design_icons/social/ic_person_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/E:/Work%20programms/AndroidStudio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_receipt_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,7 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_person" />
+                            <entry key="color" value="ffffff" />
+                            <entry key="outputName" value="ic_isbn" />
                             <entry key="sourceFile" value="C:\Users\Denis\Downloads\setup.svg" />
                           </map>
                         </option>
