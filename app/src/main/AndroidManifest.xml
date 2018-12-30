@@ -27,7 +27,9 @@
         <activity android:name=".Chat" />
         <activity android:name=".Account" />
         <activity android:name=".Search" />
-        <activity android:name=".MyBook"></activity>
+        <activity android:name=".MyBook" />
+        <activity android:name=".ChangePassword" />
+        <activity android:name=".UserSettings"></activity>
     </application>
 
 </manifest>

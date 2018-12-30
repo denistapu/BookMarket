@@ -27,19 +27,19 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "Books" ;
     public static final int ACTIVITY_NUM = 0 ;
 
+    Boolean isRemoving;
+
     Intent tStart;
     Intent tMyBooks;
 
     BottomNavigationView bottomNav;
 
-    Boolean isRemoving;
-
-    ArrayList bookList;
+    Button add;
+    Button remove;
 
     ListView books;
 
-    Button add;
-    Button remove;
+    ArrayList bookList;
 
     ArrayAdapter adapterBooks;
 

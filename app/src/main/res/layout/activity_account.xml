@@ -8,31 +8,140 @@
     tools:context=".MainActivity">
 
     <RelativeLayout
+        android:id="@+id/rellay1Account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp">
 
-        <ImageView
-            android:id="@+id/imgView_profilePic"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginBottom="400dp"
-            android:layout_marginRight="200dp"
-            app:srcCompat="@drawable/ic_setup" />
+        <LinearLayout
+            android:id="@+id/linlay1Acc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+            android:layout_marginBottom="10dp"
+            >
+
+        <TextView
+            android:id="@+id/txtAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:fontFamily="@font/lobster"
+            android:text="Account Settings"
+            android:textAlignment="center"
+            android:layout_alignParentTop="@+id/imgView_setup"
+            android:textColor="@color/white"
+            android:textSize="40sp"
+            android:layout_gravity="center"
+            />
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginBottom="10dp"
+            android:id="@+id/linlay2Acc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/linlay1Acc">
+
+            <Button
+                android:id="@+id/btnUserSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_bg"
+                android:fontFamily="@font/lobster"
+                android:paddingLeft="70dp"
+                android:paddingRight="70dp"
+                android:text="User Settings"
+                android:textAllCaps="false"
+                android:layout_marginLeft="30sp"
+                android:textColor="@color/white"
+                android:drawableRight="@drawable/ic_person"
+                android:drawablePadding="15dp"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginBottom="10dp"
+            android:id="@+id/linlay3Acc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/linlay2Acc">
+
+            <Button
+                android:id="@+id/btnChangePass"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_bg"
+                android:fontFamily="@font/lobster"
+                android:paddingLeft="70dp"
+                android:paddingRight="70dp"
+                android:text="Change Password"
+                android:textAllCaps="false"
+                android:layout_marginLeft="30sp"
+                android:textColor="@color/white"
+                android:drawableRight="@drawable/ic_lock"
+                android:drawablePadding="15dp"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginBottom="10dp"
+            android:id="@+id/linlay4Acc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/linlay3Acc">
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_bg"
+                android:fontFamily="@font/lobster"
+                android:paddingLeft="70dp"
+                android:paddingRight="70dp"
+                android:text="Logout"
+                android:textAllCaps="false"
+                android:layout_marginLeft="30sp"
+                android:textColor="@color/white"
+                android:drawableRight="@drawable/ic_person"
+                android:drawablePadding="15dp"
+                android:textSize="15sp" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigationA"
+    <RelativeLayout
+        android:id="@+id/rellay2Account"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/navigation" />
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/rellay1Account"
+        >
+
+
+
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/navigationA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:background="?android:attr/windowBackground"
+            app:menu="@menu/navigation" />
+
+
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

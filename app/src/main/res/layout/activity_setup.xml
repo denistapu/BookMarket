@@ -208,7 +208,7 @@
                         android:textAllCaps="false"
                         android:layout_marginLeft="30sp"
                         android:textColor="@color/white"
-                        android:drawableRight="@drawable/ic_go"
+                        android:drawableRight="@drawable/ic_date"
                         android:drawablePadding="15dp"
                         android:textSize="15sp" />
 
