@@ -184,7 +184,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="Error, you must use only letters"
+                    android:text="Error, you must use only letters for Nama, Surname and City."
                     android:textAllCaps="false"
                     android:visibility="invisible"
                     android:textColor="@color/red"

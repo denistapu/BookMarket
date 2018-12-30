@@ -20,6 +20,7 @@ public class Account extends AppCompatActivity {
     Intent tStart;
     Intent tLogin;
     Intent tChangePsw;
+    Intent tUserSet;
 
     BottomNavigationView bottomNav;
 
@@ -78,6 +79,21 @@ public class Account extends AppCompatActivity {
         userSet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                tUserSet = new Intent(Account.this, UserSettings.class);
+
+                /*nei rispettivi valori va messo il valore dal DB
+                tUserSet.putExtra("ProfilePicture","");
+                tUserSet.putExtra("Email","");
+                tUserSet.putExtra("Username","");
+                tUserSet.putExtra("Name","");
+                tUserSet.putExtra("Surname","");
+                tUserSet.putExtra("City","");
+                tUserSet.putExtra("BirthDay","");
+                tUserSet.putExtra("Gender","");
+                */
+
+                startActivity(tUserSet);
 
             }
         });

@@ -75,6 +75,8 @@ public class MyBook extends AppCompatActivity {
                 int amountInt = -1;
                 double priceDb = -1;
 
+//-------------------------------------------------------------------------------------------------------------------------
+
                 try{
                     amountInt = Integer.parseInt(amountStr);
                 }catch(Exception e){
@@ -87,47 +89,56 @@ public class MyBook extends AppCompatActivity {
                     priceDb= -1;
                 }
 
+//-------------------------------------------------------------------------------------------------------------------------
+
 
                 if(!titleStr.equals(tStart.getStringExtra("Title")) && !titleStr.equals("")){
                     isModified=true;
                     isNewBook = true;
                 }
+//-------------------------------------------------------------------------------------------------------------------------
 
                 if(!publisherStr.equals(tStart.getStringExtra("Publisher"))){
                     isModified=true;
                 }else{
                     isNewBook = false;
                 }
+//-------------------------------------------------------------------------------------------------------------------------
 
                 if(!authorsStr.equals(tStart.getStringExtra("Authors"))){
                     isModified=true;
                 }else{
                     isNewBook = false;
                 }
+//-------------------------------------------------------------------------------------------------------------------------
 
                 if(!isbnStr.equals(tStart.getStringExtra("ISBN")) && is_Valid_ISBN(isbnStr)){
                     isModified=true;
                 }else{
                     isNewBook = false;
                 }
+//-------------------------------------------------------------------------------------------------------------------------
 
                 if(!amountStr.equals(tStart.getStringExtra("Amount")) && amountInt>=1){
                     isModified=true;
                 }else{
                     isNewBook = false;
                 }
+//-------------------------------------------------------------------------------------------------------------------------
 
                 if(!priceStr.equals(tStart.getStringExtra("Price")) && priceDb>=0){
                     isModified=true;
                 }else{
                     isNewBook = false;
                 }
+//-------------------------------------------------------------------------------------------------------------------------
 
                 if(!descStr.equals(tStart.getStringExtra("Descriprion"))){
                     isModified=true;
                 }else{
                     isNewBook = false;
                 }
+//-------------------------------------------------------------------------------------------------------------------------
 
                 if((isModified && !tStart.getStringExtra("Title").equals("")) || isNewBook){
                     //salva sul DB i dati del libro
@@ -135,8 +146,8 @@ public class MyBook extends AppCompatActivity {
                     finish();
                 }
 
+//-------------------------------------------------------------------------------------------------------------------------
 
-                isModified=false;
                 isNewBook = false;
             }
         });
