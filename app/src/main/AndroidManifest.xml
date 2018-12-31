@@ -29,7 +29,9 @@
         <activity android:name=".Search" />
         <activity android:name=".MyBook" />
         <activity android:name=".ChangePassword" />
-        <activity android:name=".UserSettings"></activity>
+        <activity android:name=".UserSettings" />
+        <activity android:name=".ShowBook" />
+        <activity android:name=".ShowUser"></activity>
     </application>
 
 </manifest>

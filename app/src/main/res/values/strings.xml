@@ -7,6 +7,19 @@
         <item>Female</item>
         <item>Other</item>
     </string-array>
+
+    <string-array name="orderBooks">
+        <item>x</item>
+        <item>y</item>
+        <item>z</item>
+    </string-array>
+
+    <string-array name="orderUsers">
+        <item>j</item>
+        <item>f</item>
+        <item>k</item>
+    </string-array>
+
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
