@@ -210,10 +210,18 @@ public class Search extends AppCompatActivity {
                 if(searchType){
                     tBook = new Intent(Search.this, ShowBook.class);
                     /*negli extra devo mettere tutti i dettagli del libro presi dal DB
-                    tBook.putExtra("");
-                    tBook.putExtra("");
-                    tBook.putExtra("");
-                    tBook.putExtra("");
+
+                    RICORDARSI DI METTERE ANCHE LO USERNAME DEL PROPRIETARIO
+
+                    tBook.putExtra("Username","");
+                    tBook.putExtra("Title","");
+                    tBook.putExtra("Publisher","");
+                    tBook.putExtra("ISBN","");
+                    tBook.putExtra("Amount","");
+                    tBook.putExtra("Description","");
+                    tBook.putExtra("Price","");
+                    tBook.putExtra("Authors","");
+
                     */
 
                     startActivity(tBook);
@@ -222,10 +230,15 @@ public class Search extends AppCompatActivity {
 
                     tUser = new Intent(Search.this, ShowUser.class);
                     /*negli extra devo mettere tutti i dettagli dell'utente presi dal DB
-                    tBook.putExtra("");
-                    tBook.putExtra("");
-                    tBook.putExtra("");
-                    tBook.putExtra("");
+
+
+                    tBook.putExtra("Username","");
+                    tBook.putExtra("FullName","");
+                    tBook.putExtra("ProfilePic","");
+                    tBook.putExtra("Books", "");
+
+                    cosi oppure gli metto l'ID e poi nell'altra activity
+                    gli prendo i libri il nome completo e lo username in base a quello (penso sia meglio così)
                     */
 
                     startActivity(tUser);
