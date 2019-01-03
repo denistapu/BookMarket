@@ -23,6 +23,8 @@ import android.widget.TextView;
 import java.io.IOException;
 import java.util.Calendar;
 
+import static com.example.denis.loginui.CheckInput.is_Valid_Name;
+
 public class Setup extends AppCompatActivity {
 
     Boolean success;
@@ -201,38 +203,7 @@ public class Setup extends AppCompatActivity {
         }
     }
 
-    //controllo se username è valido
-    private static boolean is_Valid_Name(String x) {
-
-        if (x.length() == 0) return false;
-
-        boolean notSpecial= true ;
-        boolean notNumber= true;
-
-        int i=0;
-
-        while(notSpecial && notNumber && i < x.length()) {
-
-            char ch = x.charAt(i);
-
-            if (is_Special(ch)) notSpecial=false;
-            if(is_Numeric(ch)) notNumber=false;
-            i++;
-        }
 
 
-        return (notSpecial && notNumber);
-    }
 
-    //controllo se è un numero
-    private static boolean is_Numeric(char ch) {
-
-        return (ch >= '0' && ch <= '9');
-    }
-
-    //controllo se è un carattere speciale
-    private static boolean is_Special(char ch){
-        String aux = Character.toString(ch);
-        return (aux.matches("[^A-Za-z0-9 ]"));
-    }
 }

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/grad_bg_main"
+    tools:context=".ShowUser">
+
+
+
+    <RelativeLayout
+        android:id="@+id/rellay1ShowUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        >
+
+
+
+
+            <ImageView
+                android:id="@+id/userPicShowUser"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_setup"
+
+                android:clickable="false"
+                />
+
+
+
+
+
+            <TextView
+
+                android:id="@+id/txtUsernameShowUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lobster"
+                android:text="Username"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/userPicShowUser"
+                android:textAllCaps="false"
+                android:textStyle="bold|italic"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:textSize="27dp" />
+
+
+
+
+            <TextView
+                android:id="@+id/txtFullNameShowUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/userPicShowUser"
+                android:fontFamily="@font/lobster"
+                android:text="Full Name"
+                android:textAllCaps="false"
+                android:textStyle="bold|italic"
+                android:textColor="@color/white"
+                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/txtUsernameShowUser"
+                android:textAlignment="center"
+                android:layout_marginTop="10dp"
+                android:textSize="27dp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rellay2ShowUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/rellay1ShowUser"
+
+        >
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnBackShowUser"
+            >
+
+            <ListView
+                android:id="@+id/lstSearchShowUser"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:listSelector="@drawable/my_selector"
+                android:textAlignment="center"
+                android:textColor="@color/white">
+
+            </ListView>
+
+
+        </LinearLayout>
+
+
+
+        <Button
+            android:id="@+id/btnBackShowUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:fontFamily="@font/lobster"
+            android:text="Back"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:layout_alignParentBottom="true"
+            android:drawableLeft="@drawable/ic_back"/>
+
+
+
+        <Button
+            android:id="@+id/btnContactOwnerU"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@color/transparent"
+            android:fontFamily="@font/lobster"
+            android:text="Contact  Owner  "
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:layout_alignParentBottom="true"
+            android:drawableRight="@drawable/ic_go"
+            />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

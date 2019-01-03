@@ -15,9 +15,11 @@ import android.widget.TextView;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Signup extends AppCompatActivity {
+import static com.example.denis.loginui.CheckInput.DRAWABLE_RIGHT;
+import static com.example.denis.loginui.CheckInput.is_Valid_Password;
+import static com.example.denis.loginui.CheckInput.is_Valid_Usrrname;
 
-    public static final int PASSWORD_LENGTH = 8;
+public class Signup extends AppCompatActivity {
 
     Intent tStart;
     Intent tForgot;
@@ -138,10 +140,6 @@ public class Signup extends AppCompatActivity {
         pass.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                final int DRAWABLE_LEFT = 0;
-                final int DRAWABLE_TOP = 1;
-                final int DRAWABLE_RIGHT = 2;
-                final int DRAWABLE_BOTTOM = 3;
 
                 if(event.getAction() == MotionEvent.ACTION_UP) {
                     if(event.getRawX() >= (pass.getRight() - pass.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
@@ -169,10 +167,6 @@ public class Signup extends AppCompatActivity {
         cPass.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                final int DRAWABLE_LEFT = 0;
-                final int DRAWABLE_TOP = 1;
-                final int DRAWABLE_RIGHT = 2;
-                final int DRAWABLE_BOTTOM = 3;
 
                 if(event.getAction() == MotionEvent.ACTION_UP) {
                     if(event.getRawX() >= (cPass.getRight() - cPass.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
@@ -199,69 +193,4 @@ public class Signup extends AppCompatActivity {
 
     }
 
-    //controllo se username è valido
-    private static boolean is_Valid_Usrrname(String username) {
-
-        if (username.length() == 0) return false;
-
-        boolean notSpecial= true ;
-
-        int i=0;
-
-        while(notSpecial && i < username.length()) {
-
-            char ch = username.charAt(i);
-
-            if (is_Special(ch)) notSpecial=false;
-
-            i++;
-        }
-
-
-        return (notSpecial);
-    }
-
-
-    //controllo se password è valida
-    private static boolean is_Valid_Password(String password) {
-
-        if (password.length() < PASSWORD_LENGTH) return false;
-
-        int charCount = 0;
-        int numCount = 0;
-
-        int i=0;
-
-        while ((charCount == 0 || numCount <2) && i < password.length()) {
-
-            char ch = password.charAt(i);
-
-            if (is_Numeric(ch)) numCount++;
-            else if (is_Letter(ch)) charCount++;
-
-            i++;
-
-        }
-
-        return (charCount >= 1 && numCount >= 2);
-    }
-
-
-
-    //controllo se è lettera in maiuscolo
-    private static boolean is_Letter(char ch) {
-        return (ch >= 'A' && ch <= 'Z');
-    }
-
-    //controllo se è un numero
-    private static boolean is_Numeric(char ch) {
-
-        return (ch >= '0' && ch <= '9');
-    }
-
-    //controllo se è un carattere speciale
-    private static boolean is_Special(char ch){
-        String aux = Character.toString(ch);
-        return (aux.matches("[^A-Za-z0-9 ]"));
-    }
 }

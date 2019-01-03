@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/grad_bg_main"
-    tools:context=".MyBook">
+    tools:context=".ShowBook">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -19,17 +19,49 @@
 
 
         <RelativeLayout
-            android:id="@+id/rellay1MyBook"
+            android:id="@+id/rellay1ShowBook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="visible">
 
             <LinearLayout
-                android:id="@+id/linlay1MyBook"
+                android:id="@+id/linlay1ShowBook"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lobster"
+                        android:text="Owner"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="22sp" />
+
+                    <TextView
+                        android:id="@+id/txtOwner"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/et_bg"
+                        android:fontFamily="sans-serif-light"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:gravity="center"
+                        android:drawableLeft="@drawable/ic_user"
+                        />
+
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -46,8 +78,8 @@
                         android:textColor="@color/white"
                         android:textSize="22sp" />
 
-                    <EditText
-                        android:id="@+id/edtTitle"
+                    <TextView
+                        android:id="@+id/txtTitle"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
@@ -78,8 +110,8 @@
                         android:textColor="@color/white"
                         android:textSize="22sp" />
 
-                    <EditText
-                        android:id="@+id/edtPublishingHouse"
+                    <TextView
+                        android:id="@+id/txtPublishingHouse"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
@@ -110,8 +142,8 @@
                         android:textColor="@color/white"
                         android:textSize="22sp" />
 
-                    <EditText
-                        android:id="@+id/edtISBN"
+                    <TextView
+                        android:id="@+id/txtISBN"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
@@ -141,8 +173,8 @@
                         android:textColor="@color/white"
                         android:textSize="22sp" />
 
-                    <EditText
-                        android:id="@+id/edtPrice"
+                    <TextView
+                        android:id="@+id/txtPrice"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
@@ -173,8 +205,8 @@
                         android:textColor="@color/white"
                         android:textSize="22sp" />
 
-                    <EditText
-                        android:id="@+id/edtAuthors"
+                    <TextView
+                        android:id="@+id/txtAuthors"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
@@ -205,8 +237,8 @@
                         android:textColor="@color/white"
                         android:textSize="22sp" />
 
-                    <EditText
-                        android:id="@+id/edtAmount"
+                    <TextView
+                        android:id="@+id/txtAmount"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
@@ -237,8 +269,8 @@
                         android:textColor="@color/white"
                         android:textSize="22sp" />
 
-                    <EditText
-                        android:id="@+id/edtDescription"
+                    <TextView
+                        android:id="@+id/txtDescription"
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:layout_marginTop="5dp"
@@ -264,7 +296,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rellay2MyBook"
+        android:id="@+id/rellay2ShowBook"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -273,7 +305,7 @@
         android:visibility="visible">
 
         <Button
-            android:id="@+id/btnBackMyBook"
+            android:id="@+id/btnBackShowBook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
@@ -285,17 +317,17 @@
             android:drawableLeft="@drawable/ic_back"/>
 
         <Button
-            android:id="@+id/btnSaveMyBook"
+            android:id="@+id/btnContactOwnerB"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:background="@color/transparent"
             android:fontFamily="@font/lobster"
-            android:text="Save"
+            android:text="Contact  Owner  "
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="20dp"
-            android:drawableRight="@drawable/ic_save"/>
+            android:drawableRight="@drawable/ic_go"/>
 
     </RelativeLayout>
 

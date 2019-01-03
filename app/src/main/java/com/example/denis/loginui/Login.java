@@ -57,6 +57,7 @@ public class Login extends AppCompatActivity {
     TextView error;
     TextView loginText;
 
+    Intent tStart;
     Intent tMain;
     Intent tSetup;
     Intent tSignup;
@@ -99,7 +100,9 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
+        //dovrebbe prendere l'intent dal logout
+        tStart= getIntent();
+        //se contiene l'extra Logout = Yes bisogna togliere le preferences
 
         loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
         loginPrefsEditor = loginPreferences.edit();

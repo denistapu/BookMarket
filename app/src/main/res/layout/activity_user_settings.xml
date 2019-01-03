@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/grad_bg_main"
-    tools:context=".MyBook">
+    tools:context=".UserSettings">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -15,17 +15,28 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp">
 
+        <ImageView
+            android:id="@+id/userPic"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_setup"
+            android:layout_centerHorizontal="true"
+            android:clickable="false"
+            />
 
 
 
         <RelativeLayout
-            android:id="@+id/rellay1MyBook"
+            android:id="@+id/rellay1UserSet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible">
+            android:visibility="visible"
+            android:layout_below="@+id/userPic">
 
             <LinearLayout
-                android:id="@+id/linlay1MyBook"
+                android:id="@+id/linlay1UserSet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -41,13 +52,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lobster"
-                        android:text="Title"
+                        android:text="Email"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
                         android:textSize="22sp" />
 
                     <EditText
-                        android:id="@+id/edtTitle"
+                        android:id="@+id/edtEmailU"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
@@ -58,7 +69,124 @@
                         android:textColor="@color/white"
                         android:textSize="15sp"
                         android:gravity="center"
-                        android:drawableLeft="@drawable/ic_title"
+                        android:drawableLeft="@drawable/ic_mail"
+                        />
+
+                    <TextView
+                        android:id="@+id/txtErrorEmailU"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:text="Invalid or already existing Email"
+                        android:textAllCaps="false"
+                        android:visibility="invisible"
+                        android:textColor="@color/red"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lobster"
+                        android:text="Username"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="22sp" />
+
+                    <EditText
+                        android:id="@+id/edtUsernameU"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/et_bg"
+                        android:fontFamily="sans-serif-light"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:gravity="center"
+                        android:drawableLeft="@drawable/ic_user"
+                        />
+
+                    <TextView
+                        android:id="@+id/txtErrorUsernameU"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:text="Invalid (can't use special characters) or already existing Username"
+                        android:textAllCaps="false"
+                        android:visibility="invisible"
+                        android:textColor="@color/red"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lobster"
+                        android:text="Name"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="22sp" />
+
+                    <EditText
+                        android:id="@+id/edtNameU"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/et_bg"
+                        android:fontFamily="sans-serif-light"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:gravity="center"
+                        android:drawableLeft="@drawable/ic_user"
+                        />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lobster"
+                        android:text="Surname"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="22sp" />
+
+                    <EditText
+                        android:id="@+id/edtSurnameU"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/et_bg"
+                        android:fontFamily="sans-serif-light"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:gravity="center"
+                        android:drawableLeft="@drawable/ic_user"
                         />
 
                 </LinearLayout>
@@ -73,13 +201,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lobster"
-                        android:text="Publishing House"
+                        android:text="City"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
                         android:textSize="22sp" />
 
                     <EditText
-                        android:id="@+id/edtPublishingHouse"
+                        android:id="@+id/edtCityU"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
@@ -93,6 +221,17 @@
                         android:drawableLeft="@drawable/ic_city"
                         />
 
+                    <TextView
+                        android:id="@+id/txtErrorU"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-light"
+                        android:text="Error, you must use only letters for Nama, Surname and City."
+                        android:textAllCaps="false"
+                        android:visibility="invisible"
+                        android:textColor="@color/red"
+                        android:textSize="12sp" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -101,156 +240,43 @@
                     android:orientation="vertical"
                     android:layout_marginBottom="10dp">
 
-                    <TextView
+                    <Button
+                        android:id="@+id/btnDateU"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/lobster"
-                        android:text="ISBN"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="22sp" />
-
-                    <EditText
-                        android:id="@+id/edtISBN"
-                        android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/et_bg"
-                        android:fontFamily="sans-serif-light"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
+                        android:background="@drawable/btn_bg"
+                        android:fontFamily="@font/lobster"
+                        android:paddingLeft="70dp"
+                        android:paddingRight="70dp"
+                        android:text="Birth Day"
+                        android:textAllCaps="false"
+                        android:layout_marginLeft="30sp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
-                        android:gravity="center"
-                        android:drawableLeft="@drawable/ic_isbn"
-                        />
+                        android:drawableRight="@drawable/ic_date"
+                        android:drawablePadding="15dp"
+                        android:textSize="15sp" />
+
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_marginBottom="10dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/lobster"
-                        android:text="Price"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="22sp" />
-
-                    <EditText
-                        android:id="@+id/edtPrice"
-                        android:layout_width="match_parent"
+                    <Spinner
+                        android:id="@+id/spnGenderU"
+                        android:layout_width="200dp"
                         android:layout_height="40dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/et_bg"
-                        android:fontFamily="sans-serif-light"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:textColor="@color/white"
-                        android:textSize="15sp"
-                        android:gravity="center"
-                        android:drawableLeft="@drawable/ic_price"
-                        />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_bg"
                         android:fontFamily="@font/lobster"
-                        android:text="Authors"
+                        android:text="Gender"
                         android:textAllCaps="false"
+                        android:layout_marginLeft="50sp"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
-
-                    <EditText
-                        android:id="@+id/edtAuthors"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/et_bg"
-                        android:fontFamily="sans-serif-light"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:textColor="@color/white"
-                        android:textSize="15sp"
-                        android:gravity="center"
-                        android:drawableLeft="@drawable/ic_authors"
-                        />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/lobster"
-                        android:text="Amount"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="22sp" />
-
-                    <EditText
-                        android:id="@+id/edtAmount"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/et_bg"
-                        android:fontFamily="sans-serif-light"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:textColor="@color/white"
-                        android:textSize="15sp"
-                        android:gravity="center"
-                        android:drawableLeft="@drawable/ic_amount"
-                        />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/lobster"
-                        android:text="Description"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="22sp" />
-
-                    <EditText
-                        android:id="@+id/edtDescription"
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/et_bg"
-                        android:fontFamily="sans-serif-light"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:textColor="@color/white"
-                        android:textSize="15sp"
-                        android:gravity="center"
-                        android:drawableLeft="@drawable/ic_description"
-                        />
+                        android:drawablePadding="15dp"
+                        android:textSize="15sp" />
 
                 </LinearLayout>
 
@@ -264,7 +290,7 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rellay2MyBook"
+        android:id="@+id/rellay2UserSet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -273,7 +299,7 @@
         android:visibility="visible">
 
         <Button
-            android:id="@+id/btnBackMyBook"
+            android:id="@+id/btnBackUserSet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/transparent"
@@ -285,7 +311,7 @@
             android:drawableLeft="@drawable/ic_back"/>
 
         <Button
-            android:id="@+id/btnSaveMyBook"
+            android:id="@+id/btnSaveUserSet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

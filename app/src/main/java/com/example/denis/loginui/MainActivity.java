@@ -27,19 +27,19 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "Books" ;
     public static final int ACTIVITY_NUM = 0 ;
 
+    Boolean isRemoving;
+
     Intent tStart;
     Intent tMyBooks;
 
     BottomNavigationView bottomNav;
 
-    Boolean isRemoving;
-
-    ArrayList bookList;
+    Button add;
+    Button remove;
 
     ListView books;
 
-    Button add;
-    Button remove;
+    ArrayList bookList;
 
     ArrayAdapter adapterBooks;
 
@@ -117,6 +117,8 @@ public class MainActivity extends AppCompatActivity {
                 tMyBooks.putExtra("ISBN", "");
                 tMyBooks.putExtra("Amount", "");
                 tMyBooks.putExtra("Description", "");
+                tMyBooks.putExtra("Pice", "");
+                tMyBooks.putExtra("Authors", "");
 
                 startActivity(tMyBooks);
 
@@ -128,7 +130,8 @@ public class MainActivity extends AppCompatActivity {
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                removeDialog().show();
+                if(removeList.size()>0)
+                    removeDialog().show();
             }
         });
 
@@ -163,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
                     tMyBooks.putExtra("ISBN", "");
                     tMyBooks.putExtra("Amount", "");
                     tMyBooks.putExtra("Description", "");
+                    tMyBooks.putExtra("Pice", "");
+                    tMyBooks.putExtra("Authors", "");
                     */
 
                     startActivity(tMyBooks);
