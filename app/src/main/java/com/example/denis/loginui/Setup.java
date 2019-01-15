@@ -78,12 +78,12 @@ public class Setup extends AppCompatActivity {
 
         tStart = getIntent();
 
-        rellay1 = (RelativeLayout) findViewById(R.id.rellay1);
-        rellay2 = (RelativeLayout) findViewById(R.id.rellay2);
+        rellay1 = (RelativeLayout) findViewById(R.id.rellay1Setup);
+        rellay2 = (RelativeLayout) findViewById(R.id.rellaySetup);
 
         hStart.postDelayed(rStart, 1700);
 
-        imgLogo = (ImageView) findViewById(R.id.imgView_logo);
+        imgLogo = (ImageView) findViewById(R.id.imgView_setup);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_setup);
         RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
         imgLogo.setImageDrawable(roundedBitmapDrawable);
@@ -164,7 +164,7 @@ public class Setup extends AppCompatActivity {
                         android.R.style.Theme_Material_Light_DarkActionBar,
                         datePicker,
                         year,month,day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 dialog.show();
             }
         });
