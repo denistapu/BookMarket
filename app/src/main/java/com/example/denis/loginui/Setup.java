@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -75,12 +76,13 @@ public class Setup extends AppCompatActivity {
 
         tStart = getIntent();
 
-        rellay1 = (RelativeLayout) findViewById(R.id.rellay1);
-        rellay2 = (RelativeLayout) findViewById(R.id.rellay2);
+        rellay1 = (RelativeLayout) findViewById(R.id.rellaySetup);
+        rellay2 = (RelativeLayout) findViewById(R.id.rellay1Setup);
+        Log.d("testgx8", Boolean.toString(rellay1!=null));
 
         hStart.postDelayed(rStart, 1700);
 
-        imgLogo = (ImageView) findViewById(R.id.imgView_logo);
+        imgLogo = (ImageView) findViewById(R.id.imgView_setup);
 
         gender = (Spinner) findViewById(R.id.spnGender);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Setup.this,

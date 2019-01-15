@@ -108,9 +108,16 @@ public class Login extends AppCompatActivity {
         loginPrefsEditor = loginPreferences.edit();
         session = new SessionManager(this);
         if(session.isLoggedIn()){
-            tMain = new Intent(Login.this, MainActivity.class);
-            startActivity(tMain);
-            finish();
+            if(!session.getUser().isSetup()){
+                Log.d("GX8", "lol");
+                tSetup = new Intent(Login.this, Setup.class);
+                startActivity(tSetup);
+                finish();
+            } else {
+                tMain = new Intent(Login.this, MainActivity.class);
+                startActivity(tMain);
+                finish();
+            }
         }
 
         user= (EditText) findViewById(R.id.edtUser);
@@ -199,7 +206,7 @@ public class Login extends AppCompatActivity {
                                             loginPrefsEditor.clear();
                                             loginPrefsEditor.apply();
                                         }
-                                        if(session.isLoggedIn())
+                                       // if(session.isLoggedIn())
                                         if(!session.getUser().isSetup()){
                                             tSetup = new Intent(Login.this, Setup.class);
                                             startActivity(tSetup);
