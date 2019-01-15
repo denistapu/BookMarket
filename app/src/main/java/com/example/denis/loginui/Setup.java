@@ -160,7 +160,7 @@ public class Setup extends AppCompatActivity {
                         android.R.style.Theme_Material_Light_DarkActionBar,
                         datePicker,
                         year,month,day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 dialog.show();
             }
         });
