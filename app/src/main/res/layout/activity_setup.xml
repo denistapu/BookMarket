@@ -32,13 +32,11 @@
             android:textSize="26sp" />
 
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <ImageView
             android:id="@+id/imgView_setup"
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:srcCompat="@drawable/ic_setup"
-            app:civ_border_width="2dp"
-            app:civ_border_color="#FF000000"
             android:scaleType="fitCenter"
             android:clickable="false"
             android:layout_centerHorizontal="true"/>
