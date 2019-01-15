@@ -78,22 +78,19 @@ public class Setup extends AppCompatActivity {
 
         tStart = getIntent();
 
-        rellay1 = (RelativeLayout) findViewById(R.id.rellay1Setup);
-        rellay2 = (RelativeLayout) findViewById(R.id.rellaySetup);
+        rellay1 = (RelativeLayout) findViewById(R.id.rellay1);
+        rellay2 = (RelativeLayout) findViewById(R.id.rellay2);
 
         hStart.postDelayed(rStart, 1700);
 
-        imgLogo = (ImageView) findViewById(R.id.imgView_setup);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_setup);
-        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
-        imgLogo.setImageDrawable(roundedBitmapDrawable);
+        imgLogo = (ImageView) findViewById(R.id.imgView_logo);
 
         gender = (Spinner) findViewById(R.id.spnGender);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Setup.this,
                 R.array.gender, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gender.setAdapter(adapter);
-        gender.setSelection(1);
+        gender.setSelection(0);
 
 
         start = (Button) findViewById(R.id.btnStart);
@@ -164,7 +161,7 @@ public class Setup extends AppCompatActivity {
                         android.R.style.Theme_Material_Light_DarkActionBar,
                         datePicker,
                         year,month,day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
         });
@@ -201,8 +198,7 @@ public class Setup extends AppCompatActivity {
             Uri uri = data.getData();
             try{
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
-                imgLogo.setImageDrawable(roundedBitmapDrawable);
+                imgLogo.setImageBitmap(bitmap);
             }
             catch (IOException e){
                 e.printStackTrace();
