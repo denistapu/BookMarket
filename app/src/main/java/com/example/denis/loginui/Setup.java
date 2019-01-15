@@ -89,7 +89,7 @@ public class Setup extends AppCompatActivity {
                 R.array.gender, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gender.setAdapter(adapter);
-        gender.setSelection(0);
+        gender.setSelection(1);
 
 
         start = (Button) findViewById(R.id.btnStart);
@@ -157,7 +157,7 @@ public class Setup extends AppCompatActivity {
 
                 DatePickerDialog dialog = new DatePickerDialog(
                         Setup.this,
-                        android.R.style.Theme_DeviceDefault_Light_DarkActionBar,
+                        android.R.style.Theme_Material_Light_DarkActionBar,
                         datePicker,
                         year,month,day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));

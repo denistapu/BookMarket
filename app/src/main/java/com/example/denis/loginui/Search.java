@@ -82,7 +82,7 @@ public class Search extends AppCompatActivity {
         adapterBooks.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapterUsers.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         order.setAdapter(adapterBooks);
-        //order.setSelection(0);
+        order.setSelection(1);
 
 
         books.setOnClickListener(new View.OnClickListener() {
