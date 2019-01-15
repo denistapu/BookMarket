@@ -84,9 +84,6 @@ public class Setup extends AppCompatActivity {
         hStart.postDelayed(rStart, 1700);
 
         imgLogo = (ImageView) findViewById(R.id.imgView_logo);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_setup);
-        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
-        imgLogo.setImageDrawable(roundedBitmapDrawable);
 
         gender = (Spinner) findViewById(R.id.spnGender);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Setup.this,
@@ -201,8 +198,7 @@ public class Setup extends AppCompatActivity {
             Uri uri = data.getData();
             try{
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
-                imgLogo.setImageDrawable(roundedBitmapDrawable);
+                imgLogo.setImageBitmap(bitmap);
             }
             catch (IOException e){
                 e.printStackTrace();
