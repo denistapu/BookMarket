@@ -222,6 +222,7 @@
                         android:textAllCaps="false"
                         android:layout_marginLeft="50sp"
                         android:textColor="@color/white"
+                        android:textAlignment="center"
                         android:drawablePadding="15dp"
                         android:textSize="15sp" />
 
