@@ -12,6 +12,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,7 +47,7 @@ public class Signup extends AppCompatActivity {
     Boolean successful;
     Boolean showPass;
     Boolean showConfPsw;
-
+    RequestsManager requests;
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +70,7 @@ public class Signup extends AppCompatActivity {
         login= (Button) findViewById(R.id.btnLoginS);
         signup= (Button) findViewById(R.id.btnSignupS);
         forgot = (Button) findViewById(R.id.btnForgotS);
-
+        requests = new RequestsManager(this);
         showPass=false;
         showConfPsw=false;
 
@@ -115,8 +120,26 @@ public class Signup extends AppCompatActivity {
 
                 //se tutto va bene attivo textview successfully e caricon nel DB i dati
                 if(successful){
-                    successfulMsg.setVisibility(View.VISIBLE);
+
                     //carica dati su DB
+                    HashMap<String,String> args = new HashMap<String,String>();
+                    args.put("username", usernameStr);
+                    args.put("email",emailStr);
+                    args.put("password",passStr);
+                    requests.execRequest("signup", args, new Response.Listener<JSONObject>(){
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                if (response.getString("status").equals("OK")) {
+                                    successfulMsg.setVisibility(View.VISIBLE);
+                                } else {
+                                    //try again, problema con il db
+                                }
+                            } catch (Exception e) {
+
+                            }
+                        }
+                    } );
                 }
             }
         });

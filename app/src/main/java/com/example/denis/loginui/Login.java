@@ -32,6 +32,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -67,7 +69,7 @@ public class Login extends AppCompatActivity {
     SharedPreferences.Editor loginPrefsEditor;
     SessionManager session;
     Boolean saveLogin;
-
+    RequestsManager requests;
 
     Handler hStart = new Handler();
     Runnable rStart = new Runnable() {
@@ -106,9 +108,16 @@ public class Login extends AppCompatActivity {
         loginPrefsEditor = loginPreferences.edit();
         session = new SessionManager(this);
         if(session.isLoggedIn()){
-            tMain = new Intent(Login.this, MainActivity.class);
-            startActivity(tMain);
-            finish();
+            if(!session.getUser().isSetup()){
+                Log.d("GX8", "lol");
+                tSetup = new Intent(Login.this, Setup.class);
+                startActivity(tSetup);
+                finish();
+            } else {
+                tMain = new Intent(Login.this, MainActivity.class);
+                startActivity(tMain);
+                finish();
+            }
         }
 
         user= (EditText) findViewById(R.id.edtUser);
@@ -121,7 +130,7 @@ public class Login extends AppCompatActivity {
             remember.setChecked(true);
         }
 
-
+        requests = new RequestsManager(this);
         attempts = 5;
 
         showPass=false;
@@ -152,7 +161,7 @@ public class Login extends AppCompatActivity {
                 final String passwordStr = password.getText().toString();
 
                 String email = null;
-                String params = null;
+                Map<String,String> params = new HashMap<String,String>();
 
                 Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
                 Matcher matcher = pattern.matcher(userStr);
@@ -161,14 +170,15 @@ public class Login extends AppCompatActivity {
 
 
                 //controllo nel DB se user e password sono giusti
-                if(email!=null)
-                    params = "email="+email+"&password="+passwordStr;
-                else
-                    params = "username="+userStr+"&password="+passwordStr;
-                RequestQueue mQueue = Volley.newRequestQueue(Login.this);
-                String url = "http:/192.168.1.119/AppAndroid/LoginSystem/api.php?request=login&"+params;
-
-                JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                if(email!=null) {
+                    params.put("email", email);
+                    params.put("password", passwordStr);
+                }
+                else{
+                    params.put("username", userStr);
+                    params.put("password", passwordStr);
+                }
+               requests.execRequest("login",params,
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
@@ -196,7 +206,7 @@ public class Login extends AppCompatActivity {
                                             loginPrefsEditor.clear();
                                             loginPrefsEditor.apply();
                                         }
-                                        if(session.isLoggedIn())
+                                       // if(session.isLoggedIn())
                                         if(!session.getUser().isSetup()){
                                             tSetup = new Intent(Login.this, Setup.class);
                                             startActivity(tSetup);
@@ -212,14 +222,8 @@ public class Login extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                             }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                    }
                 });
 
-                mQueue.add(request);
 
 
 
