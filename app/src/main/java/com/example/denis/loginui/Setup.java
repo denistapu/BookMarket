@@ -3,14 +3,16 @@ package com.example.denis.loginui;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.provider.MediaStore;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -76,13 +78,15 @@ public class Setup extends AppCompatActivity {
 
         tStart = getIntent();
 
-        rellay1 = (RelativeLayout) findViewById(R.id.rellaySetup);
-        rellay2 = (RelativeLayout) findViewById(R.id.rellay1Setup);
-        Log.d("testgx8", Boolean.toString(rellay1!=null));
+        rellay1 = (RelativeLayout) findViewById(R.id.rellay1);
+        rellay2 = (RelativeLayout) findViewById(R.id.rellay2);
 
         hStart.postDelayed(rStart, 1700);
 
-        imgLogo = (ImageView) findViewById(R.id.imgView_setup);
+        imgLogo = (ImageView) findViewById(R.id.imgView_logo);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_setup);
+        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+        imgLogo.setImageDrawable(roundedBitmapDrawable);
 
         gender = (Spinner) findViewById(R.id.spnGender);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Setup.this,
@@ -160,7 +164,7 @@ public class Setup extends AppCompatActivity {
                         android.R.style.Theme_Material_Light_DarkActionBar,
                         datePicker,
                         year,month,day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
         });
@@ -197,7 +201,8 @@ public class Setup extends AppCompatActivity {
             Uri uri = data.getData();
             try{
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
-                imgLogo.setImageBitmap(bitmap);
+                RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+                imgLogo.setImageDrawable(roundedBitmapDrawable);
             }
             catch (IOException e){
                 e.printStackTrace();
