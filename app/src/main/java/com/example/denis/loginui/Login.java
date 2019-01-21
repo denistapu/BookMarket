@@ -109,7 +109,6 @@ public class Login extends AppCompatActivity {
         session = new SessionManager(this);
         if(session.isLoggedIn()){
             if(!session.getUser().isSetup()){
-                Log.d("GX8", "lol");
                 tSetup = new Intent(Login.this, Setup.class);
                 startActivity(tSetup);
                 finish();
@@ -281,5 +280,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
+
     }
+    
 }

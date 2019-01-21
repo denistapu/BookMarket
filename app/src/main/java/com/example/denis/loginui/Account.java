@@ -21,6 +21,7 @@ public class Account extends AppCompatActivity {
     Intent tLogin;
     Intent tChangePsw;
     Intent tUserSet;
+    SessionManager session;
 
     BottomNavigationView bottomNav;
 
@@ -39,7 +40,8 @@ public class Account extends AppCompatActivity {
                 DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         tLogin = new Intent(Account.this, Login.class);
-                        tLogin.putExtra("Logout", "Yes");
+                        session.logout();
+                        //tLogin.putExtra("Logout", "Yes");
                         startActivity(tLogin);
                         //poi sul login bisogna togliere in qualche modo le preferences fatte col remember me
                         finish();
@@ -64,7 +66,8 @@ public class Account extends AppCompatActivity {
 
         tStart = getIntent();
 
-        bottomNav = (BottomNavigationView) findViewById(R.id.navigationM);
+        session = new SessionManager(this);
+        bottomNav = (BottomNavigationView) findViewById(R.id.navigationA);
 
         BottomViewHelper.enableNavigation(Account.this, bottomNav);
 

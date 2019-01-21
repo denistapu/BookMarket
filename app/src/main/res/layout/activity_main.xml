@@ -69,11 +69,9 @@
         android:id="@+id/rellay3YourBooks"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
         android:layout_below="@+id/rellay2YourBooks"
-        >
-
-
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
 
 
         <LinearLayout
@@ -85,9 +83,9 @@
                 android:id="@+id/lstBooks"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:listSelector="@drawable/my_selector"
                 android:textAlignment="center"
-                android:textColor="@color/white"
-                android:listSelector="@drawable/my_selector">
+                android:textColor="#FFFFFF">
 
             </ListView>
 
@@ -103,7 +101,6 @@
             android:layout_marginEnd="0dp"
             android:background="?android:attr/windowBackground"
             app:menu="@menu/navigation" />
-
 
 
     </RelativeLayout>

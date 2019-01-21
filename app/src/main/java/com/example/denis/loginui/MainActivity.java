@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,12 +18,25 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Response;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements RequestsManager2.RequestCallBack{
 
     public static final String TAG = "Books" ;
     public static final int ACTIVITY_NUM = 0 ;
@@ -39,11 +53,16 @@ public class MainActivity extends AppCompatActivity {
 
     ListView books;
 
-    ArrayList bookList;
+    ArrayList<String> bookList ;
 
     ArrayAdapter adapterBooks;
 
     List <Integer> removeList;
+    ArrayList<Book> booksData;
+
+   // RequestsManager requests;
+   RequestsManager2 requests;
+    SessionManager session;
 
     private Dialog removeDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -81,7 +100,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        requests = new RequestsManager2(this);
+        session = new SessionManager(this);
         tStart=getIntent();
         tMyBooks = new Intent(MainActivity.this, MyBook.class);
 
@@ -98,12 +118,29 @@ public class MainActivity extends AppCompatActivity {
         menuItem.setChecked(true);
 
         books = (ListView) findViewById(R.id.lstBooks);
+        bookList = new ArrayList<String>();
+        booksData = new ArrayList<Book>();
+       /* bookList.add("Test1");
+        bookList.add("Test2");
+        bookList.add("Test3");
+        bookList.add("Test4");
+        bookList.add("Test4");
+        bookList.add("Test4");
+        bookList.add("Test4");
+        bookList.add("Test4");*/
+
+        //inserisco i dati dal database all'ArrayList bookList che poi setto sull'adapter
+        HashMap<String,String> args = new HashMap<String,String>();
+        args.put("request", "getBooks");
+        args.put("owner", session.getUser().getUsername());
+        requests.setParams(args);
+        requests.execute();
+        adapterBooks = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,bookList);
+
 
         books.setAdapter(adapterBooks);
 
-        //inserisco i dati dal database all'ArrayList bookList che poi setto sull'adapter
-
-        adapterBooks.notifyDataSetChanged();
+        books.setVisibility(View.VISIBLE);
 
         add = (Button) findViewById(R.id.btnAddBook);
         remove = (Button) findViewById(R.id.btnRemoveBooks);
@@ -158,17 +195,17 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
 
-                    /*
-                    qua negli extra va messo in ciascun campo il corrispettivo preso dal DB
 
-                    tMyBooks.putExtra("Title", "");
-                    tMyBooks.putExtra("Publisher", "");
-                    tMyBooks.putExtra("ISBN", "");
-                    tMyBooks.putExtra("Amount", "");
-                    tMyBooks.putExtra("Description", "");
-                    tMyBooks.putExtra("Pice", "");
-                    tMyBooks.putExtra("Authors", "");
-                    */
+
+
+                    tMyBooks.putExtra("Title", booksData.get(position).getTitolo());
+                    tMyBooks.putExtra("Publisher", booksData.get(position).getCasaed());
+                    tMyBooks.putExtra("ISBN", booksData.get(position).getISBN());
+                    tMyBooks.putExtra("Amount", booksData.get(position).getQuantita());
+                    tMyBooks.putExtra("Description", booksData.get(position).getDescrizione());
+                    tMyBooks.putExtra("Price", booksData.get(position).getPrezzo());
+                    tMyBooks.putExtra("Authors", booksData.get(position).getAutore());
+
 
                     startActivity(tMyBooks);
 
@@ -223,5 +260,34 @@ public class MainActivity extends AppCompatActivity {
             return listView.getChildAt(childIndex);
         }
     }
+    public void onResultReceived(JSONObject result) {
+        try {
+            if (result.getString("status").equals("OK")) {
+                JSONArray data = result.getJSONArray("data");
+
+
+                for(int i = 0; i<data.getJSONArray(0).length(); i++){
+                    Book b = new Book();
+                    b.JsonToBook(data.getJSONArray(0).getJSONObject(i));
+                    booksData.add(b);
+                }
+
+
+
+                for (Book b : booksData){
+                    bookList.add(b.getTitolo());
+                }
+
+                adapterBooks.notifyDataSetChanged();
+
+            } else {
+                //try again, problema con il db
+                Log.d("datagx8", "jdjewid");
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
 
 }

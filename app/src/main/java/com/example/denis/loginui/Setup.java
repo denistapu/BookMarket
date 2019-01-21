@@ -78,12 +78,12 @@ public class Setup extends AppCompatActivity {
 
         tStart = getIntent();
 
-        rellay1 = (RelativeLayout) findViewById(R.id.rellay1);
-        rellay2 = (RelativeLayout) findViewById(R.id.rellay2);
+        rellay1 = (RelativeLayout) findViewById(R.id.rellaySetup);
+        rellay2 = (RelativeLayout) findViewById(R.id.rellay1Setup);
 
         hStart.postDelayed(rStart, 1700);
 
-        imgLogo = (ImageView) findViewById(R.id.imgView_logo);
+        imgLogo = (ImageView) findViewById(R.id.imgView_setup);
 
         gender = (Spinner) findViewById(R.id.spnGender);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Setup.this,
