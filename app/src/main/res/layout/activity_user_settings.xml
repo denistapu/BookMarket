@@ -56,7 +56,7 @@
                         android:text="Email"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <EditText
                         android:id="@+id/edtEmailU"
@@ -68,7 +68,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_mail"
                         />
@@ -82,7 +82,7 @@
                         android:textAllCaps="false"
                         android:visibility="invisible"
                         android:textColor="@color/red"
-                        android:textSize="10sp" />
+                        android:textSize="10dp" />
 
                 </LinearLayout>
 
@@ -99,7 +99,7 @@
                         android:text="Username"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <EditText
                         android:id="@+id/edtUsernameU"
@@ -111,7 +111,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_user"
                         />
@@ -121,11 +121,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-light"
-                        android:text="Invalid (can't use special characters) or already existing Username"
+                        android:text="Invalid (can't use dpecial characters) or already existing Username"
                         android:textAllCaps="false"
                         android:visibility="invisible"
                         android:textColor="@color/red"
-                        android:textSize="10sp" />
+                        android:textSize="10dp" />
 
                 </LinearLayout>
 
@@ -142,7 +142,7 @@
                         android:text="Name"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <EditText
                         android:id="@+id/edtNameU"
@@ -154,7 +154,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_user"
                         />
@@ -173,7 +173,7 @@
                         android:text="Surname"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <EditText
                         android:id="@+id/edtSurnameU"
@@ -185,7 +185,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_user"
                         />
@@ -205,7 +205,7 @@
                         android:text="City"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <EditText
                         android:id="@+id/edtCityU"
@@ -217,7 +217,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_city"
                         />
@@ -231,7 +231,7 @@
                         android:textAllCaps="false"
                         android:visibility="invisible"
                         android:textColor="@color/red"
-                        android:textSize="12sp" />
+                        android:textSize="12dp" />
 
                 </LinearLayout>
 
@@ -251,11 +251,11 @@
                         android:paddingRight="70dp"
                         android:text="Birth Day"
                         android:textAllCaps="false"
-                        android:layout_marginLeft="30sp"
+                        android:layout_marginLeft="30dp"
                         android:textColor="@color/white"
                         android:drawableRight="@drawable/ic_date"
                         android:drawablePadding="15dp"
-                        android:textSize="15sp" />
+                        android:textSize="15dp" />
 
 
                 </LinearLayout>
@@ -274,10 +274,10 @@
                         android:fontFamily="@font/lobster"
                         android:text="Gender"
                         android:textAllCaps="false"
-                        android:layout_marginLeft="50sp"
+                        android:layout_marginLeft="50dp"
                         android:textColor="@color/white"
                         android:drawablePadding="15dp"
-                        android:textSize="15sp" />
+                        android:textSize="15dp" />
 
                 </LinearLayout>
 

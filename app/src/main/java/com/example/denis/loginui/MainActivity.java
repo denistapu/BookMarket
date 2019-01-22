@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements RequestsManager2.
     SessionManager session;
 
     private Dialog removeDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.LightDialogTheme);
         builder.setTitle("Remove");
         builder.setMessage("Are you sure to remove those book?");
         builder.setCancelable(false);

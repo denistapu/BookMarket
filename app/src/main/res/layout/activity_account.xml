@@ -5,23 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/grad_bg_main"
-    tools:context=".Account">
+    tools:context=".Account"
+    >
 
-    <RelativeLayout
-        android:id="@+id/rellay1Account"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp">
-
-        <LinearLayout
-            android:id="@+id/linlay1Acc"
+    <LinearLayout
+        android:id="@+id/linlay1Acc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-            android:layout_marginBottom="10dp"
-            >
+        android:layout_marginBottom="10dp"
+
+        >
 
         <TextView
             android:id="@+id/txtAccount"
@@ -31,13 +25,26 @@
             android:fontFamily="@font/lobster"
             android:text="Account Settings"
             android:textAlignment="center"
-            android:layout_alignParentTop="@+id/imgView_setup"
+            android:layout_alignParentTop="@+id/rellay1Account"
             android:textColor="@color/white"
             android:textSize="40sp"
             android:layout_gravity="center"
+
             />
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rellay1Account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+
+        >
+
+
 
         <LinearLayout
             android:layout_marginBottom="10dp"
@@ -45,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_below="@+id/linlay1Acc">
+            >
 
             <Button
                 android:id="@+id/btnUserSettings"

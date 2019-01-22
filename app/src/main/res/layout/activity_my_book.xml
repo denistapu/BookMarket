@@ -35,6 +35,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="italic"
+                        android:text="* are required"
+                        android:textAllCaps="false"
+                        android:textColor="@color/green"
+                        android:textSize="30dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
                     android:layout_marginBottom="10dp">
 
                     <TextView
@@ -44,7 +62,7 @@
                         android:text="Title"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <EditText
                         android:id="@+id/edtTitle"
@@ -56,9 +74,10 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_title"
+                        android:drawableRight="@drawable/ic_asterisk"
                         />
 
                 </LinearLayout>
@@ -76,7 +95,7 @@
                         android:text="Publishing House"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <EditText
                         android:id="@+id/edtPublishingHouse"
@@ -88,7 +107,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_city"
                         />
@@ -108,7 +127,7 @@
                         android:text="ISBN"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <EditText
                         android:id="@+id/edtISBN"
@@ -120,9 +139,10 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_isbn"
+                        android:drawableRight="@drawable/ic_asterisk"
                         />
 
                 </LinearLayout>
@@ -139,7 +159,7 @@
                         android:text="Price"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <EditText
                         android:id="@+id/edtPrice"
@@ -151,9 +171,10 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_price"
+                        android:drawableRight="@drawable/ic_asterisk"
                         />
 
                 </LinearLayout>
@@ -171,7 +192,7 @@
                         android:text="Authors"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <EditText
                         android:id="@+id/edtAuthors"
@@ -183,7 +204,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_authors"
                         />
@@ -203,7 +224,7 @@
                         android:text="Amount"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <EditText
                         android:id="@+id/edtAmount"
@@ -215,7 +236,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_amount"
                         />
@@ -235,7 +256,7 @@
                         android:text="Description"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <EditText
                         android:id="@+id/edtDescription"
@@ -247,7 +268,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_description"
                         />

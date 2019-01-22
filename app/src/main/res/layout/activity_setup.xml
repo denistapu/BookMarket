@@ -28,7 +28,7 @@
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/black"
-            android:textSize="26sp"
+            android:textSize="26dp"
             android:textStyle="bold|italic"
             android:visibility="gone" />
 
@@ -55,7 +55,7 @@
             android:text="Let's setup your account..."
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="40sp" />
+            android:textSize="40dp" />
 
 
         <RelativeLayout
@@ -73,7 +73,7 @@
                 android:fontFamily="@font/lobster"
                 android:text="Insert your data:"
                 android:textColor="@color/white"
-                android:textSize="30sp" />
+                android:textSize="30dp" />
 
             <LinearLayout
                 android:id="@+id/linlay1Setup"
@@ -95,7 +95,7 @@
                         android:text="Name"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="30sp" />
+                        android:textSize="30dp" />
 
                     <EditText
                         android:id="@+id/edtName"
@@ -109,7 +109,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:textSize="15dp" />
 
                 </LinearLayout>
 
@@ -126,7 +126,7 @@
                         android:text="Surname"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="30sp" />
+                        android:textSize="30dp" />
 
                     <EditText
                         android:id="@+id/edtSurname"
@@ -140,7 +140,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:textSize="15dp" />
 
                 </LinearLayout>
 
@@ -157,7 +157,7 @@
                         android:text="City"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="30sp" />
+                        android:textSize="30dp" />
 
                     <EditText
                         android:id="@+id/edtCity"
@@ -171,7 +171,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:textSize="15dp" />
 
                 </LinearLayout>
 
@@ -181,10 +181,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
-                    android:text="Error, you must use only letters for Nama, Surname and City."
+                    android:text="Error, you must use only letters for Name, Surname and City."
                     android:textAllCaps="false"
                     android:textColor="@color/red"
-                    android:textSize="12sp"
+                    android:textSize="12dp"
                     android:visibility="invisible" />
 
                 <LinearLayout
@@ -197,7 +197,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
                         android:layout_below="@+id/linlay1Setup"
-                        android:layout_marginLeft="30sp"
+                        android:layout_marginLeft="30dp"
                         android:background="@drawable/btn_bg"
                         android:drawableRight="@drawable/ic_date"
                         android:drawablePadding="15dp"
@@ -207,14 +207,14 @@
                         android:text="Birth Day"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:textSize="15dp" />
 
                     <Spinner
                         android:id="@+id/spnGender"
                         android:layout_width="200dp"
                         android:layout_height="40dp"
                         android:layout_below="@+id/linlay1Setup"
-                        android:layout_marginLeft="50sp"
+                        android:layout_marginLeft="50dp"
                         android:layout_marginTop="20dp"
                         android:background="@drawable/spn_bg"
                         android:drawablePadding="15dp"
@@ -223,7 +223,7 @@
                         android:textAlignment="center"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="15sp" />
+                        android:textSize="15dp" />
 
                 </LinearLayout>
 
@@ -246,7 +246,7 @@
                 android:text="Start"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="16dp" />
 
         </RelativeLayout>
 

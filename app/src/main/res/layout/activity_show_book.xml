@@ -44,7 +44,7 @@
                         android:text="Owner"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <TextView
                         android:id="@+id/txtOwner"
@@ -56,7 +56,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_user"
                         />
@@ -76,7 +76,7 @@
                         android:text="Title"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <TextView
                         android:id="@+id/txtTitle"
@@ -88,7 +88,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_title"
                         />
@@ -108,7 +108,7 @@
                         android:text="Publishing House"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <TextView
                         android:id="@+id/txtPublishingHouse"
@@ -120,7 +120,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_city"
                         />
@@ -140,7 +140,7 @@
                         android:text="ISBN"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <TextView
                         android:id="@+id/txtISBN"
@@ -152,7 +152,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_isbn"
                         />
@@ -171,7 +171,7 @@
                         android:text="Price"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <TextView
                         android:id="@+id/txtPrice"
@@ -183,7 +183,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_price"
                         />
@@ -203,7 +203,7 @@
                         android:text="Authors"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <TextView
                         android:id="@+id/txtAuthors"
@@ -215,7 +215,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_authors"
                         />
@@ -235,7 +235,7 @@
                         android:text="Amount"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <TextView
                         android:id="@+id/txtAmount"
@@ -247,7 +247,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_amount"
                         />
@@ -267,7 +267,7 @@
                         android:text="Description"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="22sp" />
+                        android:textSize="22dp" />
 
                     <TextView
                         android:id="@+id/txtDescription"
@@ -279,7 +279,7 @@
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15sp"
+                        android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_description"
                         />

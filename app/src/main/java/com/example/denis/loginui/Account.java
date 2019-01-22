@@ -31,7 +31,7 @@ public class Account extends AppCompatActivity {
 
 
     private Dialog logoutDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.LightDialogTheme);
         builder.setTitle("Logout");
         builder.setMessage("Are you sure to logout?");
         builder.setCancelable(false);
