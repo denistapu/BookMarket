@@ -201,9 +201,9 @@ public class MainActivity extends AppCompatActivity implements RequestsManager2.
                     tMyBooks.putExtra("Title", booksData.get(position).getTitolo());
                     tMyBooks.putExtra("Publisher", booksData.get(position).getCasaed());
                     tMyBooks.putExtra("ISBN", booksData.get(position).getISBN());
-                    tMyBooks.putExtra("Amount", booksData.get(position).getQuantita());
+                    tMyBooks.putExtra("Amount", Integer.toString(booksData.get(position).getQuantita()));
                     tMyBooks.putExtra("Description", booksData.get(position).getDescrizione());
-                    tMyBooks.putExtra("Price", booksData.get(position).getPrezzo());
+                    tMyBooks.putExtra("Price", Float.toString(booksData.get(position).getPrezzo()));
                     tMyBooks.putExtra("Authors", booksData.get(position).getAutore());
 
 
