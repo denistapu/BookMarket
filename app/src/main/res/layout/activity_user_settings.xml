@@ -28,13 +28,17 @@
             android:clickable="true"
             android:layout_centerHorizontal="true"/>
 
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/userPic">
 
         <RelativeLayout
             android:id="@+id/rellay1UserSet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="visible"
-            android:layout_below="@+id/userPic">
+            >
 
             <LinearLayout
                 android:id="@+id/linlay1UserSet"
@@ -245,7 +249,7 @@
                         android:id="@+id/btnDateU"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:background="@drawable/btn_bg"
+                        android:background="@drawable/btn_bg_old"
                         android:fontFamily="@font/lobster"
                         android:paddingLeft="70dp"
                         android:paddingRight="70dp"
@@ -287,6 +291,8 @@
 
 
         </RelativeLayout>
+
+        </ScrollView>
 
     </RelativeLayout>
 

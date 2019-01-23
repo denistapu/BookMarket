@@ -257,7 +257,7 @@
                     android:layout_below="@+id/linlay1Signup"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="50dp"
-                    android:background="@drawable/btn_bg"
+                    android:background="@drawable/btn_bg_old"
                     android:fontFamily="@font/lobster"
                     android:paddingLeft="70dp"
                     android:paddingRight="70dp"
