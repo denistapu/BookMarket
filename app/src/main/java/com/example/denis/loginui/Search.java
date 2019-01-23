@@ -79,10 +79,8 @@ public class Search extends AppCompatActivity {
                 R.array.orderBooks, android.R.layout.simple_spinner_item);
         final ArrayAdapter<CharSequence> adapterUsers = ArrayAdapter.createFromResource(Search.this,
                 R.array.orderUsers, android.R.layout.simple_spinner_item);
-        adapterBooks.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapterUsers.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         order.setAdapter(adapterBooks);
-        order.setSelection(1);
+        order.setSelection(0);
 
 
         books.setOnClickListener(new View.OnClickListener() {

@@ -56,7 +56,7 @@
 
             <Button
                 android:id="@+id/btnUserSettings"
-                android:layout_width="280dp"
+                android:layout_width="230dp"
                 android:layout_height="40dp"
                 android:background="@drawable/btn_bg_old"
                 android:fontFamily="@font/lobster"
@@ -83,7 +83,7 @@
 
             <Button
                 android:id="@+id/btnChangePass"
-                android:layout_width="280dp"
+                android:layout_width="230dp"
                 android:layout_height="40dp"
                 android:background="@drawable/btn_bg_old"
                 android:fontFamily="@font/lobster"
@@ -110,7 +110,7 @@
 
             <Button
                 android:id="@+id/btnLogout"
-                android:layout_width="280dp"
+                android:layout_width="230dp"
                 android:layout_height="40dp"
                 android:background="@drawable/btn_bg_old"
                 android:fontFamily="@font/lobster"
