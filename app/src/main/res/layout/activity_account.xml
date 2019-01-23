@@ -56,13 +56,14 @@
 
             <Button
                 android:id="@+id/btnUserSettings"
-                android:layout_width="wrap_content"
+                android:layout_width="280dp"
                 android:layout_height="40dp"
-                android:background="@drawable/btn_bg"
+                android:background="@drawable/btn_bg_old"
                 android:fontFamily="@font/lobster"
                 android:paddingLeft="70dp"
                 android:paddingRight="70dp"
                 android:text="User Settings"
+                android:textAlignment="center"
                 android:textAllCaps="false"
                 android:layout_marginLeft="30sp"
                 android:textColor="@color/white"
@@ -82,9 +83,9 @@
 
             <Button
                 android:id="@+id/btnChangePass"
-                android:layout_width="wrap_content"
+                android:layout_width="280dp"
                 android:layout_height="40dp"
-                android:background="@drawable/btn_bg"
+                android:background="@drawable/btn_bg_old"
                 android:fontFamily="@font/lobster"
                 android:paddingLeft="70dp"
                 android:paddingRight="70dp"
@@ -93,6 +94,7 @@
                 android:layout_marginLeft="30sp"
                 android:textColor="@color/white"
                 android:drawableRight="@drawable/ic_lock"
+                android:textAlignment="center"
                 android:drawablePadding="15dp"
                 android:textSize="15sp" />
 
@@ -108,9 +110,9 @@
 
             <Button
                 android:id="@+id/btnLogout"
-                android:layout_width="wrap_content"
+                android:layout_width="280dp"
                 android:layout_height="40dp"
-                android:background="@drawable/btn_bg"
+                android:background="@drawable/btn_bg_old"
                 android:fontFamily="@font/lobster"
                 android:paddingLeft="70dp"
                 android:paddingRight="70dp"
@@ -118,8 +120,9 @@
                 android:textAllCaps="false"
                 android:layout_marginLeft="30sp"
                 android:textColor="@color/white"
-                android:drawableRight="@drawable/ic_person"
+                android:drawableRight="@drawable/ic_logout"
                 android:drawablePadding="15dp"
+                android:textAlignment="center"
                 android:textSize="15sp" />
 
         </LinearLayout>
