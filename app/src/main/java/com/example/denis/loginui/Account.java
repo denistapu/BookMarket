@@ -105,6 +105,7 @@ public class Account extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 tChangePsw = new Intent(Account.this, ChangePassword.class);
+                startActivity(tChangePsw);
             }
         });
 

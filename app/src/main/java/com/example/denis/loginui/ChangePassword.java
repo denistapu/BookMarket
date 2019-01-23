@@ -33,7 +33,7 @@ public class ChangePassword extends AppCompatActivity {
     EditText oldP;
     EditText newP;
     EditText confP;
-
+    RequestsManager requests;
     TextView errorOld;
     TextView errorNew;
     TextView errorConfN;
@@ -47,7 +47,6 @@ public class ChangePassword extends AppCompatActivity {
         builder.setPositiveButton("Yes", new
                 DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //salva i dati sul DB
                         Toast.makeText(getApplicationContext(),"Password saved correctly!", Toast.LENGTH_SHORT).show();
                         finish();
                     }
@@ -81,7 +80,7 @@ public class ChangePassword extends AppCompatActivity {
         errorOld = (TextView) findViewById(R.id.txtErrorOldPassword);
         errorNew = (TextView) findViewById(R.id.txtErrorNewPassword);
         errorConfN = (TextView) findViewById(R.id.txtErrorConfirmNewPassword);
-
+        requests = new RequestsManager(this);
         showOldPass=false;
         showNewPass=false;
         showConfPsw=false;

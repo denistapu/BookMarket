@@ -31,7 +31,7 @@ public class UserSettings extends AppCompatActivity {
 
     Boolean isModified;
 
-    Intent tStart;
+    //Intent tStart;
 
     int REQUEST_CODE = 1;
 
@@ -40,7 +40,7 @@ public class UserSettings extends AppCompatActivity {
     Button back;
     Button save;
     Button birthDay;
-
+    SessionManager session;
 
     EditText email;
     EditText username;
@@ -61,8 +61,8 @@ public class UserSettings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_settings);
 
-        tStart = getIntent();
-
+       // tStart = getIntent();
+        session = new SessionManager(this);
         isModified= false;
 
         imgLogo = (ImageView) findViewById(R.id.userPic);
@@ -77,7 +77,7 @@ public class UserSettings extends AppCompatActivity {
 
         save = (Button) findViewById(R.id.btnSaveUserSet);
         back = (Button) findViewById(R.id.btnBackUserSet);
-        birthDay = (Button) findViewById(R.id.btnDate);
+        birthDay = (Button) findViewById(R.id.btnDateU);
 
         email = (EditText) findViewById(R.id.edtEmailU);
         username = (EditText) findViewById(R.id.edtUsernameU);
@@ -90,16 +90,23 @@ public class UserSettings extends AppCompatActivity {
         error = (TextView) findViewById(R.id.txtErrorU);
 
 
-        email.setText(tStart.getStringExtra("Email"));
+       /* email.setText(tStart.getStringExtra("Email"));
         username.setText(tStart.getStringExtra("Username"));
         name.setText(tStart.getStringExtra("Name"));
         surname.setText(tStart.getStringExtra("Surname"));
         city.setText(tStart.getStringExtra("City"));
         birthDay.setText(tStart.getStringExtra("BirthDay"));
-        gender.setSelection(Integer.parseInt(tStart.getStringExtra("BirthDay")));
+        gender.setSelection(Integer.parseInt(tStart.getStringExtra("Gender")));
         /*trovare un modo per far prendere all'imageView la foto tramite quello che gli passo nell'Extra
         imgLogo.setImageBitmap(tStart.getStringExtra("ProfilePicture"));
         */
+       email.setText(session.getUser().getEmail());
+       username.setText(session.getUser().getUsername());
+       name.setText(session.getUser().getName());
+       surname.setText(session.getUser().getSurname());
+      // city.setText(session.getUser().getCity());
+      // birthDay.setText(session.getUser().getBday());
+      //  gender.setSelection(session.getUser().getGender());
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,7 +131,7 @@ public class UserSettings extends AppCompatActivity {
                 if(!matcher.matches() /* oppure se gia in uso */){
                     errorEmail.setVisibility(View.VISIBLE);
 
-                }else if(!emailStr.equals(tStart.getStringExtra("Email"))){
+                }else if(!emailStr.equals(emailStr)){
                     isModified=true;
                 }
 
@@ -132,7 +139,7 @@ public class UserSettings extends AppCompatActivity {
 
                 if(!is_Valid_Usrrname(usernameStr)/*oppure username gia un uso*/){
                     errorUsername.setVisibility(View.VISIBLE);
-                }else if(!usernameStr.equals(tStart.getStringExtra("Username"))){
+                }else if(!usernameStr.equals(usernameStr)){
                     isModified = true;
                 }
 
@@ -142,7 +149,7 @@ public class UserSettings extends AppCompatActivity {
                 if(!is_Valid_Name(nameStr)){
 
                     error.setVisibility(View.VISIBLE);
-                }else if(!nameStr.equals(tStart.getStringExtra("Name"))){
+                }else if(!nameStr.equals(nameStr)){
                     isModified = true;
                 }
 
@@ -151,7 +158,7 @@ public class UserSettings extends AppCompatActivity {
                 if(!is_Valid_Name(surnameStr)){
 
                     error.setVisibility(View.VISIBLE);
-                }else if(!surnameStr.equals(tStart.getStringExtra("Surname"))){
+                }else if(!surnameStr.equals(surnameStr)){
                     isModified = true;
 
                 }
@@ -161,19 +168,19 @@ public class UserSettings extends AppCompatActivity {
                 if(!is_Valid_Name(cityStr)){
 
                     error.setVisibility(View.VISIBLE);
-                }else if(!cityStr.equals(tStart.getStringExtra("City"))){
+                }else if(!cityStr.equals(cityStr)){
                     isModified = true;
                 }
 
 //-------------------------------------------------------------------------------------------------------------------------
 
-               if(!genderStr.equals(tStart.getStringExtra("Gender"))){
+               if(!genderStr.equals(genderStr)){
                     isModified = true;
                 }
 
 //-------------------------------------------------------------------------------------------------------------------------
 
-                if(!birthStr.equals(tStart.getStringExtra("BirthDay"))){
+                if(!birthStr.equals(birthStr)){
                     isModified = true;
                 }
 

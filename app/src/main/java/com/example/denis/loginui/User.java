@@ -11,6 +11,8 @@ public class User {
     private String hashedPassword;
     private String email;
     private String phone;
+    private byte[] picture;
+
 
     public boolean isSetup() {
         return setup;
@@ -22,13 +24,14 @@ public class User {
 
     private boolean setup;
 
-    public User(int id, String username, String name, String surname, String hashedPassword, String email){
+    public User(int id, String username, String name, String surname, String hashedPassword, String email, byte[] picture){
         this.ID = id;
         this.username = username;
         this.name = name;
         this.surname = surname;
         this.hashedPassword = hashedPassword;
         this.email = email;
+        this.picture = picture;
     }
     public User(JSONObject json){
         try {
@@ -38,6 +41,7 @@ public class User {
             this.email =json.getString("Email");
             this.surname = json.getString("LastName");
             this.setup = (json.getInt("Setup")==1);
+            this.picture = json.getString("Picture").getBytes();
         } catch (JSONException e) {
             e.printStackTrace();
         }
