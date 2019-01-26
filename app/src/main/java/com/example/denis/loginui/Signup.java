@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.android.volley.Response;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -126,9 +127,15 @@ public class Signup extends AppCompatActivity {
                     args.put("username", usernameStr);
                     args.put("email",emailStr);
                     args.put("password",passStr);
-                    requests.execRequest("signup", args, new Response.Listener<JSONObject>(){
+                    requests.execRequest("signup", args, new Response.Listener<String>(){
                         @Override
-                        public void onResponse(JSONObject response) {
+                        public void onResponse(String res) {
+                            JSONObject response = null;
+                            try {
+                                response = new JSONObject(res);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                             try {
                                 if (response.getString("status").equals("OK")) {
                                     successfulMsg.setVisibility(View.VISIBLE);

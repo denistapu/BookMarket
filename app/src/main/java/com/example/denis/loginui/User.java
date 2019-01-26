@@ -1,7 +1,14 @@
 package com.example.denis.loginui;
 
+import android.util.Log;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class User {
     private int ID;
@@ -12,9 +19,14 @@ public class User {
     private String email;
     private String phone;
     private byte[] picture;
+    private String city;
+    private String gender;
+
+    private Date bdate;
+    private String auth;
 
 
-    public boolean isSetup() {
+    protected boolean isSetup() {
         return setup;
     }
 
@@ -24,7 +36,7 @@ public class User {
 
     private boolean setup;
 
-    public User(int id, String username, String name, String surname, String hashedPassword, String email, byte[] picture){
+    public User(int id, String username, String name, String surname, String hashedPassword, String email, byte[] picture, String city, String auth){
         this.ID = id;
         this.username = username;
         this.name = name;
@@ -32,6 +44,8 @@ public class User {
         this.hashedPassword = hashedPassword;
         this.email = email;
         this.picture = picture;
+        this.city = city;
+        this.auth = auth;
     }
     public User(JSONObject json){
         try {
@@ -41,9 +55,24 @@ public class User {
             this.email =json.getString("Email");
             this.surname = json.getString("LastName");
             this.setup = (json.getInt("Setup")==1);
-            this.picture = json.getString("Picture").getBytes();
-        } catch (JSONException e) {
-            e.printStackTrace();
+            Log.d("gx9",json.toString());
+            this.auth = json.getString("Dcane");
+            this.city = json.getString("Citta");
+            this.gender = json.getString("sesso");
+            try {
+                this.bdate = new SimpleDateFormat("yyyy/MM/dd",Locale.getDefault()).parse(json.getString("DataNascita").replace("-", "/"));
+                Log.d("gx9",this.bdate.toString());
+            } catch (ParseException e) {
+                Log.d("gx9", json.getString("DataNascita"));
+            }
+            //this.bdate =json.getString("DataNascita");
+
+
+
+
+            //this.picture = json.getString("Picture").getBytes();
+        } catch (JSONException  e) {
+            Log.d("gx9", "merda");
         }
     }
     public int getID() {
@@ -101,6 +130,39 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Date getBdate() {
+        return bdate;
+    }
+
+    public void setBdate(Date bdate) {
+        this.bdate = bdate;
+    }
+
+    public String getAuth() {
+        return auth;
+    }
+
+    public void setAuth(String auth) {
+        this.auth = auth;
+    }
+
    /* public void JSONtoUser(JSONObject json){
         try {
             this.ID = Integer.parseInt(json.getString("id"));

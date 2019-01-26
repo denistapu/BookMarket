@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,8 +20,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,6 +50,7 @@ public class UserSettings extends AppCompatActivity {
     Button save;
     Button birthDay;
     SessionManager session;
+    RequestsManager requests;
 
     EditText email;
     EditText username;
@@ -63,6 +73,7 @@ public class UserSettings extends AppCompatActivity {
 
        // tStart = getIntent();
         session = new SessionManager(this);
+        requests = new RequestsManager(this);
         isModified= false;
 
         imgLogo = (ImageView) findViewById(R.id.userPic);
@@ -104,9 +115,10 @@ public class UserSettings extends AppCompatActivity {
        username.setText(session.getUser().getUsername());
        name.setText(session.getUser().getName());
        surname.setText(session.getUser().getSurname());
-      // city.setText(session.getUser().getCity());
-      // birthDay.setText(session.getUser().getBday());
-      //  gender.setSelection(session.getUser().getGender());
+       city.setText(session.getUser().getCity());
+       birthDay.setText(new SimpleDateFormat("dd/MM/yyyy").format(session.getUser().getBdate()));
+       //birthDay.set*/
+       gender.setSelection((session.getUser().getGender().equals('M') ? 0 : 1));
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,65 +136,71 @@ public class UserSettings extends AppCompatActivity {
                 String birthStr = birthDay.getText().toString();
 
                 //devo trovare un modo per prendere anche la foto profilo
-
+                Log.d("gx8", "test");
 //-------------------------------------------------------------------------------------------------------------------------
                 Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
                 Matcher matcher = pattern.matcher(emailStr);
-                if(!matcher.matches() /* oppure se gia in uso */){
+                if(!matcher.matches() /* oppure se gia in uso */) {
                     errorEmail.setVisibility(View.VISIBLE);
+                }else{
 
-                }else if(!emailStr.equals(emailStr)){
+              //  }else if(!emailStr.equals(emailStr)){
                     isModified=true;
                 }
 
 //-------------------------------------------------------------------------------------------------------------------------
 
-                if(!is_Valid_Usrrname(usernameStr)/*oppure username gia un uso*/){
+                if(!is_Valid_Usrrname(usernameStr)/*oppure username gia un uso*/) {
                     errorUsername.setVisibility(View.VISIBLE);
-                }else if(!usernameStr.equals(usernameStr)){
+                    // }else if(!usernameStr.equals(usernameStr)){
+                }else{
                     isModified = true;
                 }
 
 
 //-------------------------------------------------------------------------------------------------------------------------
 
-                if(!is_Valid_Name(nameStr)){
+                if(!is_Valid_Name(nameStr)) {
 
                     error.setVisibility(View.VISIBLE);
-                }else if(!nameStr.equals(nameStr)){
+                    // }else if(!nameStr.equals(nameStr)){
+                }else{
                     isModified = true;
                 }
 
 //-------------------------------------------------------------------------------------------------------------------------
 
-                if(!is_Valid_Name(surnameStr)){
+                if(!is_Valid_Name(surnameStr)) {
 
                     error.setVisibility(View.VISIBLE);
-                }else if(!surnameStr.equals(surnameStr)){
+                    //  }else if(!surnameStr.equals(surnameStr)){
+                }else{
                     isModified = true;
 
                 }
 
 //-------------------------------------------------------------------------------------------------------------------------
 
-                if(!is_Valid_Name(cityStr)){
+
+                if(!is_Valid_Name(cityStr)) {
 
                     error.setVisibility(View.VISIBLE);
-                }else if(!cityStr.equals(cityStr)){
+                }else{
+               // }else if(!cityStr.equals(cityStr)){
                     isModified = true;
                 }
 
 //-------------------------------------------------------------------------------------------------------------------------
 
-               if(!genderStr.equals(genderStr)){
+              /* if(!genderStr.equals(genderStr)){
                     isModified = true;
-                }
+                }*/
 
 //-------------------------------------------------------------------------------------------------------------------------
 
-                if(!birthStr.equals(birthStr)){
+              /*  if(!birthStr.equals(birthStr)){
                     isModified = true;
-                }
+                }*/
 
 //-------------------------------------------------------------------------------------------------------------------------
 
@@ -191,9 +209,44 @@ public class UserSettings extends AppCompatActivity {
 
 
                 if(isModified){
+                    Log.d("gx8", "test2");
+                    HashMap<String,String> params = new HashMap<String,String>();
+                    params.put("id", Integer.toString(session.getUser().getID()));
+                    Log.d("gx8", Integer.toString(session.getUser().getID()));
+                    params.put("email", emailStr);
+                    params.put("username",usernameStr);
+                    params.put("nome", nameStr);
+                    params.put("cognome", surnameStr);
+                    params.put("DataNascita",new SimpleDateFormat("yyyy/MM/dd").format(birthStr).toString());
+                    Log.d("gx8", new SimpleDateFormat("yyyy/MM/dd").format(birthStr).toString());
+                    params.put("Sesso",genderStr);
+                    params.put("Citta",cityStr);
+                    params.put("auth", session.getUser().getAuth());
+                    Log.d("gx8", session.getUser().getAuth());
                     //salva sul DB i dati del account
-                    Toast.makeText(getApplicationContext(),"User settings saved correctly!", Toast.LENGTH_SHORT).show();
-                    finish();
+                    requests.execRequest("edit", params, new Response.Listener<String>(){
+                        @Override
+                        public void onResponse(String res) {
+                            Log.d("gx8", "lmfao "+res);
+                            JSONObject response = null;
+                            try {
+                                response = new JSONObject(res);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            try {
+                                if (!response.getString("status").equals("OK"))
+                                    Toast.makeText(getApplicationContext(),"Couldn't update your settings, try again", Toast.LENGTH_SHORT).show();
+                                else {
+                                    Toast.makeText(getApplicationContext(),"User settings saved correctly!", Toast.LENGTH_SHORT).show();
+                                   // finish();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+
                 }
 
 
@@ -211,6 +264,7 @@ public class UserSettings extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Calendar calendar = Calendar.getInstance();
+                calendar.setTime(session.getUser().getBdate());
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
                 int month=calendar.get(Calendar.MONTH);
                 int year= calendar.get(Calendar.YEAR);
@@ -261,5 +315,7 @@ public class UserSettings extends AppCompatActivity {
             }
         }
     }
+
+
 
 }

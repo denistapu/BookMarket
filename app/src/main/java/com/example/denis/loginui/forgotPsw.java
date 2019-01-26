@@ -75,9 +75,15 @@ public class forgotPsw extends AppCompatActivity {
                         params.put("username", username);
                     else
                         params.put("email", emailStr);
-                    requests.execRequest("forgotpsw",params,  new Response.Listener<JSONObject>() {
+                    requests.execRequest("forgotpsw",params,  new Response.Listener<String>() {
                         @Override
-                        public void onResponse(JSONObject response) {
+                        public void onResponse(String res) {
+                            JSONObject response = null;
+                            try {
+                                response = new JSONObject(res);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                             try {
                                 if(!response.getString("status").equals("OK"))
                                     errorEmail.setVisibility(View.VISIBLE);

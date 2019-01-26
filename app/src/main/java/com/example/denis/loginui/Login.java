@@ -178,9 +178,15 @@ public class Login extends AppCompatActivity {
                     params.put("password", passwordStr);
                 }
                requests.execRequest("login",params,
-                        new Response.Listener<JSONObject>() {
+                        new Response.Listener<String>() {
                             @Override
-                            public void onResponse(JSONObject response) {
+                            public void onResponse(String res) {
+                                JSONObject response = null;
+                                try {
+                                    response = new JSONObject(res);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                                 try {
                                     if(!response.getString("status").equals("OK")) {
                                         attempts--;
@@ -195,6 +201,7 @@ public class Login extends AppCompatActivity {
 
                                         JSONArray arr = response.getJSONArray("data");
                                         JSONObject data = arr.getJSONObject(0);
+                                        Log.d("gx8", data.getString("Dcane"));
                                         session.createSession(new User(data));
                                         if(remember.isChecked()){
                                             loginPrefsEditor.putBoolean("saveLogin", true);

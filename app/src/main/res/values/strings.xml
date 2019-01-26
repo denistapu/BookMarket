@@ -9,9 +9,10 @@
     </string-array>
 
     <string-array name="orderBooks">
-        <item>x</item>
-        <item>y</item>
-        <item>z</item>
+        <item>Title</item>
+        <item>Author</item>
+        <item>ISBN</item>
+        <item>Publisher</item>
     </string-array>
 
     <string-array name="orderUsers">

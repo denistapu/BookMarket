@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements RequestsManager2.
     ArrayList<Book> booksData;
 
    // RequestsManager requests;
-   RequestsManager2 requests;
+   RequestsManager requests;
     SessionManager session;
 
     private Dialog removeDialog() {
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements RequestsManager2.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        requests = new RequestsManager2(this);
+        requests = new RequestsManager(this);
         session = new SessionManager(this);
         tStart=getIntent();
         tMyBooks = new Intent(MainActivity.this, MyBook.class);
@@ -118,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements RequestsManager2.
         menuItem.setChecked(true);
 
         books = (ListView) findViewById(R.id.lstBooks);
-        bookList = new ArrayList<String>();
         booksData = new ArrayList<Book>();
        /* bookList.add("Test1");
         bookList.add("Test2");
@@ -133,9 +132,41 @@ public class MainActivity extends AppCompatActivity implements RequestsManager2.
         HashMap<String,String> args = new HashMap<String,String>();
         args.put("request", "getBooks");
         args.put("owner", session.getUser().getUsername());
-        requests.setParams(args);
-        requests.execute();
-        adapterBooks = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,bookList);
+        adapterBooks = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1);
+        //requests.setParams(args);
+        requests.execRequest("selectBooks", args, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String res) {
+                JSONObject response = null;
+                try {
+                    response = new JSONObject(res);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (response.getString("status").equals("OK")) {
+                        JSONArray data =response.getJSONArray("data");
+
+
+                        for(int i = 0; i<data.length(); i++){
+                            Book b = new Book();
+                            b.JsonToBook(data.getJSONObject(i));
+                            booksData.add(b);
+                            adapterBooks.add(b.getTitolo());
+                        }
+
+
+                        //adapterBooks.notifyDataSetChanged();
+
+                    } else {
+                        //try again, problema con il db
+                    }
+                } catch (Exception e) {
+
+                }
+            }});
+
 
 
         books.setAdapter(adapterBooks);

@@ -57,7 +57,7 @@ public class Search extends AppCompatActivity {
 
         searchType = true;
 
-        bottomNav = (BottomNavigationView) findViewById(R.id.navigationM);
+        bottomNav = (BottomNavigationView) findViewById(R.id.navigationS);
 
         BottomViewHelper.enableNavigation(Search.this, bottomNav);
 

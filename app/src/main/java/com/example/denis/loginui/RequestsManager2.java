@@ -38,7 +38,8 @@ public class RequestsManager2 extends AsyncTask<Void, Void, JSONObject>{
         try {
 
             //open connection to the server
-            String reqUrl = "http://transfertk.ddns.net:8063/api/Api.php?request="+params.get("request");
+          //  String reqUrl = "http://transfertk.ddns.net:8063/api/Api.php?request="+params.get("request");
+            String reqUrl = "http://192.168.1.119/AppAndroid/LoginSystem/api.php?request="+params.get("request");
             for(Map.Entry<String,String> entry : params.entrySet())
                 reqUrl += "&"+entry.getKey()+"="+entry.getValue();
             url = new URL(reqUrl);
