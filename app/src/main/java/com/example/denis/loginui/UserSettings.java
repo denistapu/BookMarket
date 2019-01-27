@@ -69,10 +69,9 @@ public class UserSettings extends AppCompatActivity {
 
         gender = (Spinner) findViewById(R.id.spnGenderU);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(UserSettings.this,
-                R.array.gender, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                R.array.gender, R.layout.simple_spinner_item);
         gender.setAdapter(adapter);
-        gender.setSelection(1);
+        gender.setSelection(0);
 
 
         save = (Button) findViewById(R.id.btnSaveUserSet);

@@ -8,15 +8,15 @@
         <item>Other</item>
     </string-array>
 
-    <string-array name="orderBooks">
-        <item>x</item>
-        <item>y</item>
+    <string-array name="typeBooks">
+        <item>ISBN</item>
+        <item>Title</item>
         <item>z</item>
     </string-array>
 
-    <string-array name="orderUsers">
-        <item>j</item>
-        <item>f</item>
+    <string-array name="typeUsers">
+        <item>Name and Surname</item>
+        <item>Username</item>
         <item>k</item>
     </string-array>
 
