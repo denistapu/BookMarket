@@ -31,7 +31,8 @@
         <ScrollView
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_below="@+id/userPic">
+            android:layout_below="@+id/userPic"
+            android:layout_above="@+id/rellay2UserSet">
 
         <RelativeLayout
             android:id="@+id/rellay1UserSet"
@@ -275,13 +276,8 @@
                         android:layout_width="200dp"
                         android:layout_height="40dp"
                         android:background="@drawable/spn_bg"
-                        android:fontFamily="@font/lobster"
-                        android:text="Gender"
-                        android:textAllCaps="false"
-                        android:layout_marginLeft="50dp"
-                        android:textColor="@color/white"
-                        android:drawablePadding="15dp"
-                        android:textSize="15dp" />
+                        android:layout_gravity="center"
+                        android:drawablePadding="15dp" />
 
                 </LinearLayout>
 
@@ -294,42 +290,44 @@
 
         </ScrollView>
 
+        <RelativeLayout
+            android:id="@+id/rellay2UserSet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:visibility="visible">
+
+            <Button
+                android:id="@+id/btnBackUserSet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:fontFamily="@font/lobster"
+                android:text="Back"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:drawableLeft="@drawable/ic_back"/>
+
+            <Button
+                android:id="@+id/btnSaveUserSet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@color/transparent"
+                android:fontFamily="@font/lobster"
+                android:text="Save"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:drawableRight="@drawable/ic_save"/>
+
+        </RelativeLayout>
+
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/rellay2UserSet"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:visibility="visible">
 
-        <Button
-            android:id="@+id/btnBackUserSet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            android:fontFamily="@font/lobster"
-            android:text="Back"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:drawableLeft="@drawable/ic_back"/>
-
-        <Button
-            android:id="@+id/btnSaveUserSet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:background="@color/transparent"
-            android:fontFamily="@font/lobster"
-            android:text="Save"
-            android:textAllCaps="true"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:drawableRight="@drawable/ic_save"/>
-
-    </RelativeLayout>
 
 </RelativeLayout>

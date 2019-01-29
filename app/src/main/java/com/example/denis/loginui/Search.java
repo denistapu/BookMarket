@@ -3,6 +3,7 @@ package com.example.denis.loginui;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -106,8 +107,8 @@ public class Search extends AppCompatActivity {
                 if(!searchType){
                     String infoStr = info.getText().toString();
 
-                    books.setTextColor(Color.BLACK);
-                    users.setTextColor(Color.WHITE);
+                    books.setTextColor(ResourcesCompat.getColor(getResources(), R.color.orange, null));
+                    users.setTextColor(ResourcesCompat.getColor(getResources(), R.color.white, null));
                     type.setAdapter(adapterBooks);
                     info.setHint(type.getSelectedItem().toString());
 
@@ -129,12 +130,12 @@ public class Search extends AppCompatActivity {
                 if(searchType){
                     String infoStr = info.getText().toString();
 
-                    books.setTextColor(Color.WHITE);
-                    users.setTextColor(Color.BLACK);
+                    books.setTextColor(ResourcesCompat.getColor(getResources(), R.color.white, null));
+                    users.setTextColor(ResourcesCompat.getColor(getResources(), R.color.orange, null));
                     type.setAdapter(adapterUsers);
                     info.setHint(type.getSelectedItem().toString());
 
-                    searchType = true;
+                    searchType = false;
 
                     if(infoStr.length()>0){
                         //fare di nuovo ricerca con quello che cè su infoStr però su users
