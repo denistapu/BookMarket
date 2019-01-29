@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +18,14 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.android.volley.Response;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static com.example.denis.loginui.CheckInput.is_Valid_ISBN;
@@ -42,9 +50,11 @@ public class Search extends AppCompatActivity {
     EditText info;
 
     Spinner type;
-
+    String result;
     ListView infoView;
-
+    RequestsManager requests;
+    List<Book> booksList;
+    List<User> usersList;
     ArrayList infoList;
 
     ArrayAdapter adapterInfo;
@@ -55,9 +65,10 @@ public class Search extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         tStart = getIntent();
-
+        requests = new RequestsManager(this);
         searchType = true;
-
+        booksList = new ArrayList<Book>();
+        usersList = new ArrayList<User>();
         bottomNav = (BottomNavigationView) findViewById(R.id.navigationS);
 
         BottomViewHelper.enableNavigation(Search.this, bottomNav);
@@ -67,7 +78,12 @@ public class Search extends AppCompatActivity {
         menuItem.setChecked(true);
 
         infoView = (ListView) findViewById(R.id.lstSearch);
-
+        adapterInfo = new ArrayAdapter(this, android.R.layout.simple_list_item_1){
+            @Override
+            public boolean isEnabled(int position){
+                return ((adapterInfo.getItem(position).equals("No results found")) ? false : true);
+            }
+        };
         infoView.setAdapter(adapterInfo);
 
         users = (Button) findViewById(R.id.btnUserSearch);
@@ -137,7 +153,8 @@ public class Search extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Search.Search(info, type, searchType, infoView);
+                adapterInfo.clear();
+                Search(info, type, searchType, infoView);
 
             }
 
@@ -151,7 +168,7 @@ public class Search extends AppCompatActivity {
         type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Search.Search(info, type, searchType, infoView);
+                Search(info, type, searchType, infoView);
             }
 
             @Override
@@ -165,21 +182,16 @@ public class Search extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(searchType){
                     tBook = new Intent(Search.this, ShowBook.class);
-                    /*negli extra devo mettere tutti i dettagli del libro presi dal DB
-
-                    RICORDARSI DI METTERE ANCHE LO USERNAME DEL PROPRIETARIO
-
-                    tBook.putExtra("Username","");
-                    tBook.putExtra("Title","");
-                    tBook.putExtra("Publisher","");
-                    tBook.putExtra("ISBN","");
-                    tBook.putExtra("Amount","");
-                    tBook.putExtra("Description","");
-                    tBook.putExtra("Price","");
-                    tBook.putExtra("Authors","");
-
-                    */
-
+                    tBook.putExtra("id", Integer.toString(booksList.get(position).getID()));
+                    //Log.d("gx8",booksList.get(position).getID());
+                    tBook.putExtra("Title", booksList.get(position).getTitolo());
+                    tBook.putExtra("Publisher", booksList.get(position).getCasaed());
+                    tBook.putExtra("ISBN", booksList.get(position).getISBN());
+                    tBook.putExtra("Amount", Integer.toString(booksList.get(position).getQuantita()));
+                    tBook.putExtra("Description", booksList.get(position).getDescrizione());
+                    tBook.putExtra("Price", Float.toString(booksList.get(position).getPrezzo()));
+                    tBook.putExtra("Authors", booksList.get(position).getAutore());
+                    tBook.putExtra("Proprietario", booksList.get(position).getProprietario());
                     startActivity(tBook);
 
                 }else{
@@ -200,16 +212,19 @@ public class Search extends AppCompatActivity {
                     startActivity(tUser);
                 }
             }
+
+
         });
 
     }
 
 
-    private static void Search(EditText info, Spinner type, boolean searchType, ListView listView){
+    private  void Search(EditText info, Spinner type, boolean searchType, ListView listView){
         String infoStr = info.getText().toString();
         String typeStr = type.getSelectedItem().toString();
-
-
+        result = null;
+        HashMap<String,String> params = new HashMap<String,String>();
+        booksList.clear();
         //se la ricerca non trova nulla deve dare come output la stringa No Result Found che mette da sola sulla ListView
 
         //ricerche (bisogna anche displayarle sulla listView:
@@ -218,18 +233,29 @@ public class Search extends AppCompatActivity {
         if(searchType){                     //se devo cercare per libro
             if(typeStr.equals("ISBN")){
                 if(is_Valid_ISBN(infoStr)){
-                    //faccio ricerca su ISBN
+
+                    params.put("ISBN", infoStr);
+                    requests.execRequest("selectBooks", params, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String res){
+                            displayBooks(res);
+                        }
+                    });
                 }else{
-                    //dico che non ho trovato nulla
+                    if(adapterInfo.getPosition("No results found")==-1)
+                        adapterInfo.add("No results found");
                 }
-            }else if(typeStr.equals("Titolo")){
+            }else if(typeStr.equals("Title")){
                 //faccio ricerca su titolo
                 //se non trova nulla glielo dico
+                params.put("Titolo", infoStr);
+                requests.execRequest("selectBooks", params, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String res){
+                        displayBooks(res);
+                    }
+                });
             }
-
-            //posso fare altri else if se ci sono altri type per cui cercare (non so tipo case editrice ecc.)
-
-            //se la ricerca non trova nulla deve dare come output la stringa No Result Found che mette da sola sulla ListView
 
         }else{              //se devo cercare per utente
 
@@ -238,7 +264,8 @@ public class Search extends AppCompatActivity {
                 if(is_Valid_Name(infoStr)){
                     //faccio ricerca su nome e cognome
                 }else{
-                    //dico che non ho trovato nulla
+                    if(adapterInfo.getPosition("No results found")==-1)
+                        adapterInfo.add("No results found");
                 }
             }else if(typeStr.equals("Username")){
                 //faccio ricerca su utente
@@ -247,5 +274,25 @@ public class Search extends AppCompatActivity {
 
         }
     }
+    public void displayBooks(String result){
+            try {
+                JSONObject response = new JSONObject(result);
+                if (!response.getString("status").equals("OK")) {
+                    if(adapterInfo.getPosition("No results found")==-1)
+                        adapterInfo.add("No results found");
 
-}
+                } else {
+                    JSONArray data = response.getJSONArray("data");
+                    for (int i = 0; i < data.length(); i++) {
+                        adapterInfo.add(data.getJSONObject(i));
+                        booksList.add(new Book(data.getJSONObject(i)));
+                    }
+                }
+                adapterInfo.notifyDataSetChanged();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+

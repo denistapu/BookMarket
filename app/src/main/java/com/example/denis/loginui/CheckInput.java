@@ -77,30 +77,65 @@ public class CheckInput {
 
     public static boolean is_Valid_ISBN(String isbn){
 
-        int n = isbn.length();
-        if (n != 10)
-            return false;
-
-
-        int sum = 0;
-        for (int i = 0; i < 9; i++)
+        if ( isbn == null )
         {
-            int digit = isbn.charAt(i) - '0';
-            if (0 > digit || 9 < digit)
-                return false;
-            sum += (digit * (10 - i));
+            return false;
         }
 
+        //remove any hyphens
+        isbn = isbn.replaceAll( "-", "" );
 
-        char last = isbn.charAt(9);
-        if (last != 'X' && (last < '0' ||
-                last > '9'))
-            return false;
+        //must be a 13 digit ISBN
+        if ( isbn.length() == 13 )
+        {
+            try
+            {
+                int tot = 0;
+                for ( int i = 0; i < 12; i++ )
+                {
+                    int digit = Integer.parseInt( isbn.substring( i, i + 1 ) );
+                    tot += (i % 2 == 0) ? digit * 1 : digit * 3;
+                }
+
+                //checksum must be 0-9. If calculated as 10 then = 0
+                int checksum = 10 - (tot % 10);
+                if ( checksum == 10 )
+                {
+                    checksum = 0;
+                }
+
+                return checksum == Integer.parseInt( isbn.substring( 12 ) );
+            }
+            catch ( NumberFormatException nfe )
+            {
+                //to catch invalid ISBNs that have non-numeric characters in them
+                return false;
+            }
+        }
+        if ( isbn.length() == 10 ) {
+            try {
+                int tot = 0;
+                for (int i = 0; i < 9; i++) {
+                    int digit = Integer.parseInt(isbn.substring(i, i + 1));
+                    tot += ((10 - i) * digit);
+                }
+
+                String checksum = Integer.toString((11 - (tot % 11)) % 11);
+                if ("10".equals(checksum)) {
+                    checksum = "X";
+                }
+
+                return checksum.equals(isbn.substring(9));
+            } catch (NumberFormatException nfe) {
+                //to catch invalid ISBNs that have non-numeric characters in them
+                return false;
+            }
+        }
+        return false;
 
 
-        sum += ((last == 'X') ? 10 : (last - '0'));
 
-        return (sum % 11 == 0);
+
 
     }
 

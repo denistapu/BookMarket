@@ -1,6 +1,7 @@
 package com.example.denis.loginui;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -23,21 +24,20 @@ public class RequestsManager {
     final String URL = "http://192.168.1.119/AppAndroid/LoginSystem/api.php";
     RequestQueue mQueue;
     JsonObjectRequest request;
+    Context context;
 
     public RequestsManager(Context _context){
+        context = _context;
         mQueue = Volley.newRequestQueue(_context);
     }
 
     public void execRequest(String type, Map<String,String> params, Response.Listener<String> response){
         params.put("request",type);
         final Map<String,String> dParams = params;
-       // String reqUrl = URL+ "?request="+type;
-        /*for(Map.Entry<String,String> entry : params.entrySet())
-            reqUrl += "&"+entry.getKey()+"="+entry.getValue();*/
         StringRequest request = new StringRequest(Request.Method.POST, URL,response, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
+                Toast.makeText(context, "No internet connection", Toast.LENGTH_SHORT).show();
             }
         }){
             protected Map<String, String> getParams() {

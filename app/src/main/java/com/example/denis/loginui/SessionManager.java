@@ -17,10 +17,8 @@ public class SessionManager {
         editor = pref.edit();
     }
     public void createSession(User user){
-      //  Log.d("KAPPA", user.getAuth());
         Gson gson = new Gson();
         String json = gson.toJson(user);
-        Log.d("KAPPA",json);
         editor.putBoolean("isLogged", true);
         editor.putString("User", json);
         editor.apply();

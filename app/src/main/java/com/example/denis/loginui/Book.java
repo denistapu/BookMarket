@@ -14,6 +14,9 @@ public class Book {
     private int Proprietario;
 
 
+    private String Condizione;
+
+
     private int quantita;
     public Book(){
 
@@ -29,6 +32,23 @@ public class Book {
         ISBN = isbn;
         Proprietario = proprietario;
         this.quantita = quantita;
+    }
+    public Book(JSONObject json){
+        try {
+            this.setAutore(json.getString("Autore"));
+            this.setCasaed(json.getString("CasaEd"));
+            this.setTitolo(json.getString("Titolo"));
+            this.setDescrizione(json.getString("Descrizione"));
+            this.setID(json.getInt("id"));
+            this.setISBN(json.getString("ISBN"));
+            this.setPrezzo(Float.parseFloat(json.getString("Prezzo")));
+            this.setProprietario(json.getInt("Proprietario"));
+            this.setQuantita(json.getInt("Quantita"));
+            this.setCondizione(json.getString("Condizione"));
+        }catch(JSONException e){
+
+
+        }
     }
 
     public int getID() {
@@ -102,6 +122,14 @@ public class Book {
     public void setQuantita(int quantita) {
         this.quantita = quantita;
     }
+    public String getCondizione() {
+        return Condizione;
+    }
+
+    public void setCondizione(String condizione) {
+        Condizione = condizione;
+    }
+
 
     public  void JsonToBook(JSONObject json){
         try {
@@ -114,6 +142,7 @@ public class Book {
             this.setPrezzo(Float.parseFloat(json.getString("Prezzo")));
             this.setProprietario(json.getInt("Proprietario"));
             this.setQuantita(json.getInt("Quantita"));
+            this.setCondizione(json.getString("Condizione"));
         }catch(JSONException e){
 
 

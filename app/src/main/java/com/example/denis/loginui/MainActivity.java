@@ -36,7 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class MainActivity extends AppCompatActivity implements RequestsManager2.RequestCallBack{
+public class MainActivity extends AppCompatActivity{
 
     public static final String TAG = "Books" ;
     public static final int ACTIVITY_NUM = 0 ;
@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements RequestsManager2.
                 }
                 try {
                     if (response.getString("status").equals("OK")) {
+                        Log.d("aa", res);
                         JSONArray data =response.getJSONArray("data");
 
 
@@ -153,6 +154,7 @@ public class MainActivity extends AppCompatActivity implements RequestsManager2.
                             Book b = new Book();
                             b.JsonToBook(data.getJSONObject(i));
                             booksData.add(b);
+                            Log.d("aa",b.getCondizione());
                             adapterBooks.add(b.getTitolo());
                         }
 
@@ -180,13 +182,7 @@ public class MainActivity extends AppCompatActivity implements RequestsManager2.
             @Override
             public void onClick(View v) {
 
-                tMyBooks.putExtra("Title", "");
-                tMyBooks.putExtra("Publisher", "");
-                tMyBooks.putExtra("ISBN", "");
-                tMyBooks.putExtra("Amount", "");
-                tMyBooks.putExtra("Description", "");
-                tMyBooks.putExtra("Pice", "");
-                tMyBooks.putExtra("Authors", "");
+               tMyBooks.putExtra("isNew", true);
 
                 startActivity(tMyBooks);
 
@@ -228,7 +224,8 @@ public class MainActivity extends AppCompatActivity implements RequestsManager2.
 
 
 
-
+                    tMyBooks.putExtra("id", Integer.toString(booksData.get(position).getID()));
+                    //Log.d("gx8",booksData.get(position).getID());
                     tMyBooks.putExtra("Title", booksData.get(position).getTitolo());
                     tMyBooks.putExtra("Publisher", booksData.get(position).getCasaed());
                     tMyBooks.putExtra("ISBN", booksData.get(position).getISBN());
@@ -291,34 +288,7 @@ public class MainActivity extends AppCompatActivity implements RequestsManager2.
             return listView.getChildAt(childIndex);
         }
     }
-    public void onResultReceived(JSONObject result) {
-        try {
-            if (result.getString("status").equals("OK")) {
-                JSONArray data = result.getJSONArray("data");
-
-
-                for(int i = 0; i<data.getJSONArray(0).length(); i++){
-                    Book b = new Book();
-                    b.JsonToBook(data.getJSONArray(0).getJSONObject(i));
-                    booksData.add(b);
-                }
+       }
 
 
 
-                for (Book b : booksData){
-                    bookList.add(b.getTitolo());
-                }
-
-                adapterBooks.notifyDataSetChanged();
-
-            } else {
-                //try again, problema con il db
-                Log.d("datagx8", "jdjewid");
-            }
-        } catch (Exception e) {
-
-        }
-    }
-
-
-}
