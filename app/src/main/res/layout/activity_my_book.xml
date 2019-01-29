@@ -9,6 +9,7 @@
     tools:context=".MyBook">
 
     <LinearLayout
+        android:id="@+id/required"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -29,7 +30,8 @@
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@+id/rellay2MyBook">
+        android:layout_above="@+id/rellay2MyBook"
+        android:layout_below="@id/required">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -39,12 +41,12 @@
         android:layout_marginRight="40dp">
 
 
-
-
         <RelativeLayout
             android:id="@+id/rellay1MyBook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:visibility="visible">
 
             <LinearLayout
@@ -55,12 +57,11 @@
                 android:orientation="vertical">
 
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -77,23 +78,22 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/et_bg"
+                        android:drawableLeft="@drawable/ic_title"
+                        android:drawableRight="@drawable/ic_asteriks"
                         android:fontFamily="sans-serif-light"
+                        android:gravity="center"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15dp"
-                        android:gravity="center"
-                        android:drawableLeft="@drawable/ic_title"
-                        android:drawableRight="@drawable/ic_asteriks"
-                        />
+                        android:textSize="15dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -110,22 +110,22 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/et_bg"
+                        android:drawableLeft="@drawable/ic_isbn"
+                        android:drawableRight="@drawable/ic_asteriks"
                         android:fontFamily="sans-serif-light"
+                        android:gravity="center"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15dp"
-                        android:gravity="center"
-                        android:drawableLeft="@drawable/ic_isbn"
-                        android:drawableRight="@drawable/ic_asteriks"
-                        />
+                        android:textSize="15dp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -142,23 +142,22 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/et_bg"
+                        android:drawableLeft="@drawable/ic_price"
+                        android:drawableRight="@drawable/ic_asteriks"
                         android:fontFamily="sans-serif-light"
+                        android:gravity="center"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15dp"
-                        android:gravity="center"
-                        android:drawableLeft="@drawable/ic_price"
-                        android:drawableRight="@drawable/ic_asteriks"
-                        />
+                        android:textSize="15dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -175,24 +174,22 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/et_bg"
+                        android:drawableLeft="@drawable/ic_city"
                         android:fontFamily="sans-serif-light"
+                        android:gravity="center"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15dp"
-                        android:gravity="center"
-                        android:drawableLeft="@drawable/ic_city"
-                        />
+                        android:textSize="15dp" />
 
                 </LinearLayout>
-
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -209,22 +206,21 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/et_bg"
+                        android:drawableLeft="@drawable/ic_authors"
                         android:fontFamily="sans-serif-light"
+                        android:gravity="center"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15dp"
-                        android:gravity="center"
-                        android:drawableLeft="@drawable/ic_authors"
-                        />
+                        android:textSize="15dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -241,22 +237,21 @@
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/et_bg"
+                        android:drawableLeft="@drawable/ic_amount"
                         android:fontFamily="sans-serif-light"
+                        android:gravity="center"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15dp"
-                        android:gravity="center"
-                        android:drawableLeft="@drawable/ic_amount"
-                        />
+                        android:textSize="15dp" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="10dp">
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -273,17 +268,15 @@
                         android:layout_height="150dp"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/et_bg"
+                        android:drawableLeft="@drawable/ic_description"
                         android:fontFamily="sans-serif-light"
+                        android:gravity="center"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
                         android:textColor="@color/white"
-                        android:textSize="15dp"
-                        android:gravity="center"
-                        android:drawableLeft="@drawable/ic_description"
-                        />
+                        android:textSize="15dp" />
 
                 </LinearLayout>
-
 
 
             </LinearLayout>

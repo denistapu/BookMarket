@@ -234,12 +234,8 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="20dp"
                         android:background="@drawable/spn_bg"
-                        android:drawablePadding="15dp"
-                        android:fontFamily="@font/lobster"
-                        android:textAlignment="center"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="15dp" />
+                        android:drawablePadding="15dp" />
+
 
                 </LinearLayout>
 
