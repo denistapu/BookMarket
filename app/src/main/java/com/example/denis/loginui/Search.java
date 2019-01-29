@@ -18,6 +18,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.denis.loginui.CheckInput.is_Valid_ISBN;
 import static com.example.denis.loginui.CheckInput.is_Valid_Name;
@@ -40,7 +41,7 @@ public class Search extends AppCompatActivity {
 
     EditText info;
 
-    Spinner order;
+    Spinner type;
 
     ListView infoView;
 
@@ -74,13 +75,13 @@ public class Search extends AppCompatActivity {
 
         info = (EditText) findViewById(R.id.edtInfo);
 
-        order = (Spinner) findViewById(R.id.spnOrder);
+        type = (Spinner) findViewById(R.id.spnType);
         final ArrayAdapter<CharSequence> adapterBooks = ArrayAdapter.createFromResource(Search.this,
-                R.array.orderBooks, android.R.layout.simple_spinner_item);
+                R.array.typeBooks, R.layout.simple_spinner_item);
         final ArrayAdapter<CharSequence> adapterUsers = ArrayAdapter.createFromResource(Search.this,
-                R.array.orderUsers, android.R.layout.simple_spinner_item);
-        order.setAdapter(adapterBooks);
-        order.setSelection(0);
+                R.array.typeUsers, R.layout.simple_spinner_item);
+        type.setAdapter(adapterBooks);
+        type.setSelection(0);
 
 
         books.setOnClickListener(new View.OnClickListener() {
@@ -91,8 +92,8 @@ public class Search extends AppCompatActivity {
 
                     books.setTextColor(Color.BLACK);
                     users.setTextColor(Color.WHITE);
-                    order.setAdapter(adapterBooks);
-                    info.setHint("asdasdasdasddasduh19234h1heu1h289eh1289he1892he18h2e981h2e9h12"); // <------ cambiare
+                    type.setAdapter(adapterBooks);
+                    info.setHint(type.getSelectedItem().toString());
 
                     searchType = true;
 
@@ -114,8 +115,8 @@ public class Search extends AppCompatActivity {
 
                     books.setTextColor(Color.WHITE);
                     users.setTextColor(Color.BLACK);
-                    order.setAdapter(adapterUsers);
-                    info.setHint("dfgfjjgjhgjh19234h1heu1h289e5345dfdfgfghh2e981h2e9h12"); // <------ cambiare
+                    type.setAdapter(adapterUsers);
+                    info.setHint(type.getSelectedItem().toString());
 
                     searchType = true;
 
@@ -136,34 +137,7 @@ public class Search extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                String infoStr = info.getText().toString();
-                String orderStr = order.getSelectedItem().toString();
-                if(orderStr.equals("Order By")){
-                    orderStr = order.getItemAtPosition(0).toString();
-                }
-
-                //se la ricerca non trova nulla deve dare come output la stringa No Result Found che mette da sola sulla ListView
-
-                //ricerche (bisogna anche displayarle sulla listView:
-
-                //ricordarsi di includere l'ordine in base a quello che c'è in orderStr
-
-                if(searchType){
-                    if(is_Valid_ISBN(infoStr)){
-                        //faccio ricerca direttamente su ISBN
-                    }else{
-                        //faccio ricerca sul titolo o su altro che ora non ricordo
-                    }
-                    //se la ricerca non trova nulla deve dare come output la stringa No Result Found che mette da sola sulla ListView
-                }else{
-                    if(is_Valid_Name(infoStr)){
-                        //faccio ricerca su nome e cognome
-                    }else {
-                        //faccio ricerca sul username
-                    }
-                }
-
-
+                Search.Search(info, type, searchType, infoView);
 
             }
 
@@ -173,27 +147,11 @@ public class Search extends AppCompatActivity {
             }
         });
 
-        //quando cambia l'item selezionato su order, rifaccio la ricerca e li displayo in base al nuovo ordine
-        order.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        //quando cambia l'item selezionato su type, rifaccio la ricerca e li displayo in base al nuovo tipo che vuole cercare
+        type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String infoStr = info.getText().toString();
-                String orderStr = order.getSelectedItem().toString();
-
-                if(searchType){
-                    if(is_Valid_ISBN(infoStr)){
-                        //faccio ricerca direttamente su ISBN
-                    }else{
-                        //faccio ricerca sul titolo o su altro che ora non ricordo
-                    }
-                    //se la ricerca non trova nulla deve dare come output la stringa No Result Found che mette da sola sulla ListView
-                }else{
-                    if(is_Valid_Name(infoStr)){
-                        //faccio ricerca su nome e cognome
-                    }else {
-                        //faccio ricerca sul username
-                    }
-                }
+                Search.Search(info, type, searchType, infoView);
             }
 
             @Override
@@ -245,4 +203,49 @@ public class Search extends AppCompatActivity {
         });
 
     }
+
+
+    private static void Search(EditText info, Spinner type, boolean searchType, ListView listView){
+        String infoStr = info.getText().toString();
+        String typeStr = type.getSelectedItem().toString();
+
+
+        //se la ricerca non trova nulla deve dare come output la stringa No Result Found che mette da sola sulla ListView
+
+        //ricerche (bisogna anche displayarle sulla listView:
+
+
+        if(searchType){                     //se devo cercare per libro
+            if(typeStr.equals("ISBN")){
+                if(is_Valid_ISBN(infoStr)){
+                    //faccio ricerca su ISBN
+                }else{
+                    //dico che non ho trovato nulla
+                }
+            }else if(typeStr.equals("Titolo")){
+                //faccio ricerca su titolo
+                //se non trova nulla glielo dico
+            }
+
+            //posso fare altri else if se ci sono altri type per cui cercare (non so tipo case editrice ecc.)
+
+            //se la ricerca non trova nulla deve dare come output la stringa No Result Found che mette da sola sulla ListView
+
+        }else{              //se devo cercare per utente
+
+
+            if(typeStr.equals("Nome e Cognome")){
+                if(is_Valid_Name(infoStr)){
+                    //faccio ricerca su nome e cognome
+                }else{
+                    //dico che non ho trovato nulla
+                }
+            }else if(typeStr.equals("Username")){
+                //faccio ricerca su utente
+                //se non trova nulla glielo dico
+            }
+
+        }
+    }
+
 }
