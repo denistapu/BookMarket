@@ -10,13 +10,16 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +46,9 @@ public class Search extends AppCompatActivity {
     EditText info;
 
     Spinner type;
+    Spinner order;
+
+    LinearLayout linearLayoutOrder;
 
     ListView infoView;
 
@@ -67,6 +73,8 @@ public class Search extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
 
+        linearLayoutOrder= (LinearLayout) findViewById(R.id.linlayOrder);
+
         infoView = (ListView) findViewById(R.id.lstSearch);
 
         infoView.setAdapter(adapterInfo);
@@ -84,6 +92,11 @@ public class Search extends AppCompatActivity {
         type.setAdapter(adapterBooks);
         type.setSelection(0);
 
+        order = (Spinner) findViewById(R.id.spnOrder);
+        ArrayAdapter<CharSequence> adapterOrder = ArrayAdapter.createFromResource(Search.this,
+                R.array.orderBooks, R.layout.simple_spinner_item);
+        order.setAdapter(adapterOrder);
+        order.setSelection(0);
 
         books.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +107,10 @@ public class Search extends AppCompatActivity {
                     books.setTextColor(ResourcesCompat.getColor(getResources(), R.color.orange, null));
                     users.setTextColor(ResourcesCompat.getColor(getResources(), R.color.white, null));
                     type.setAdapter(adapterBooks);
+                    type.setSelection(0);
                     info.setHint(type.getSelectedItem().toString());
+
+                    linearLayoutOrder.setVisibility(View.VISIBLE);
 
                     searchType = true;
 
@@ -117,7 +133,10 @@ public class Search extends AppCompatActivity {
                     books.setTextColor(ResourcesCompat.getColor(getResources(), R.color.white, null));
                     users.setTextColor(ResourcesCompat.getColor(getResources(), R.color.orange, null));
                     type.setAdapter(adapterUsers);
+                    type.setSelection(0);
                     info.setHint(type.getSelectedItem().toString());
+
+                    linearLayoutOrder.setVisibility(View.GONE);
 
                     searchType = false;
 
@@ -129,6 +148,16 @@ public class Search extends AppCompatActivity {
             }
         });
 
+
+        order.setOnTouchListener(new View.OnTouchListener(){
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                
+                return false;
+            }
+
+        });
 
         info.addTextChangedListener(new TextWatcher() {
             @Override

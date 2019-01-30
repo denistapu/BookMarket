@@ -15,6 +15,8 @@ public class ShowBook extends AppCompatActivity {
     Button back;
     Button contact;
 
+
+
     TextView owner;
     TextView title;
     TextView publisher;
@@ -23,6 +25,7 @@ public class ShowBook extends AppCompatActivity {
     TextView desc;
     TextView price;
     TextView authors;
+    TextView condition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class ShowBook extends AppCompatActivity {
         desc= (TextView) findViewById(R.id.txtDescription);
         price= (TextView) findViewById(R.id.txtPrice);
         authors= (TextView) findViewById(R.id.txtAuthors);
+        condition= (TextView) findViewById(R.id.txtCondition);
 
         owner.setText(tStart.getStringExtra("Username"));
         title.setText(tStart.getStringExtra("Title"));
@@ -51,6 +55,7 @@ public class ShowBook extends AppCompatActivity {
         desc.setText(tStart.getStringExtra("Description"));
         price.setText(tStart.getStringExtra("Price"));
         authors.setText(tStart.getStringExtra("Authors"));
+        condition.setText(tStart.getStringExtra("Condition"));
 
         contact.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -233,6 +233,7 @@
                         android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="20dp"
+                        android:textColor="@color/black"
                         android:background="@drawable/spn_bg"
                         android:drawablePadding="15dp" />
 

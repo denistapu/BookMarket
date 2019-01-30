@@ -12,11 +12,6 @@
         android:title="Search" />
 
     <item
-        android:id="@+id/chats"
-        android:icon="@drawable/ic_chat"
-        android:title="Chats" />
-
-    <item
         android:id="@+id/account"
         android:icon="@drawable/ic_person"
         android:title="Account" />

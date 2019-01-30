@@ -15,7 +15,7 @@ import android.widget.Button;
 public class Account extends AppCompatActivity {
 
     public static final String TAG = "Account" ;
-    public static final int ACTIVITY_NUM = 3 ;
+    public static final int ACTIVITY_NUM = 2 ;
 
     Intent tStart;
     Intent tLogin;

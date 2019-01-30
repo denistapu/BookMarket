@@ -256,11 +256,11 @@
                         android:paddingRight="70dp"
                         android:text="Birth Day"
                         android:textAllCaps="false"
-                        android:layout_marginLeft="30dp"
                         android:textColor="@color/white"
                         android:drawableRight="@drawable/ic_date"
                         android:drawablePadding="15dp"
-                        android:textSize="15dp" />
+                        android:textSize="15dp"
+                        android:layout_gravity="center"/>
 
 
                 </LinearLayout>
@@ -275,8 +275,9 @@
                         android:id="@+id/spnGenderU"
                         android:layout_width="200dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/spn_bg"
                         android:layout_gravity="center"
+                        android:background="@drawable/spn_bg"
+                        android:textColor="@color/black"
                         android:drawablePadding="15dp" />
 
                 </LinearLayout>

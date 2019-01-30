@@ -30,14 +30,8 @@ public class BottomViewHelper {
                         ((Activity) context).finish();
                         break;
 
-                    case R.id.chats:
-                        Intent intent3 = new Intent(context, Chat.class);//ACTIVITY_NUM = 2
-                        context.startActivity(intent3);
-                        ((Activity) context).finish();
-                        break;
-
                     case R.id.account:
-                        Intent intent4 = new Intent(context, Account.class);//ACTIVITY_NUM = 3
+                        Intent intent4 = new Intent(context, Account.class);//ACTIVITY_NUM = 2
                         context.startActivity(intent4);
                         ((Activity) context).finish();
                         break;

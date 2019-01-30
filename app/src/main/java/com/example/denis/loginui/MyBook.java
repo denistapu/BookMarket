@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import static com.example.denis.loginui.CheckInput.is_Valid_ISBN;
@@ -21,6 +23,8 @@ public class MyBook extends AppCompatActivity {
 
     Button back;
     Button save;
+
+    Spinner condition;
 
     EditText title;
     EditText publisher;
@@ -43,6 +47,12 @@ public class MyBook extends AppCompatActivity {
         back= (Button) findViewById(R.id.btnBackMyBook);
         save= (Button) findViewById(R.id.btnSaveMyBook);
 
+        condition = (Spinner) findViewById(R.id.spnConditionMyBook);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(MyBook.this,
+                R.array.bookCondition, R.layout.simple_spinner_item);
+        condition.setAdapter(adapter);
+        condition.setSelection(0);
+
         title= (EditText) findViewById(R.id.edtTitle);
         publisher= (EditText) findViewById(R.id.edtPublishingHouse);
         isbn= (EditText) findViewById(R.id.edtISBN);
@@ -58,6 +68,8 @@ public class MyBook extends AppCompatActivity {
         desc.setText(tStart.getStringExtra("Description"));
         price.setText(tStart.getStringExtra("Price"));
         authors.setText(tStart.getStringExtra("Authors"));
+        ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)condition.getAdapter();
+        condition.setSelection(array_spinner.getPosition(tStart.getStringExtra("Condition")));
 
 
 
@@ -71,6 +83,7 @@ public class MyBook extends AppCompatActivity {
                 String descStr = desc.getText().toString();
                 String priceStr = price.getText().toString();
                 String authorsStr = authors.getText().toString();
+                String conditionStr = condition.getSelectedItem().toString();
 
                 int amountInt = -1;
                 double priceDb = -1;
@@ -137,6 +150,12 @@ public class MyBook extends AppCompatActivity {
                     isModified=true;
                 }else{
                     isNewBook = false;
+                }
+//-------------------------------------------------------------------------------------------------------------------------
+
+
+                if(!conditionStr.equals(tStart.getStringExtra("Condition"))){
+                    isModified=true;
                 }
 //-------------------------------------------------------------------------------------------------------------------------
 
