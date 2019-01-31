@@ -199,10 +199,10 @@ public class Login extends AppCompatActivity {
                                         error.setVisibility(View.VISIBLE);
                                     }else{
 
-                                        JSONArray arr = response.getJSONArray("data");
-                                        JSONObject data = arr.getJSONObject(0);
-                                        Log.d("gx8", data.getString("Dcane"));
-                                        session.createSession(new User(data));
+                                        JSONObject arr = response.getJSONObject("data");
+                                        //JSONObject data = arr.getJSONObject(0);
+                                        Log.d("gx8", arr.getString("Dcane"));
+                                        session.createSession(new User(arr));
                                         if(remember.isChecked()){
                                             loginPrefsEditor.putBoolean("saveLogin", true);
                                             loginPrefsEditor.putString("username", userStr);

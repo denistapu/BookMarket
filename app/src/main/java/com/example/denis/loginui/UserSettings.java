@@ -26,6 +26,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -208,6 +210,7 @@ public class UserSettings extends AppCompatActivity {
 
 
                 if(isModified){
+                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
                     Log.d("gx8", "test2");
                     HashMap<String,String> params = new HashMap<String,String>();
                     params.put("id", Integer.toString(session.getUser().getID()));
@@ -216,8 +219,13 @@ public class UserSettings extends AppCompatActivity {
                     params.put("username",usernameStr);
                     params.put("nome", nameStr);
                     params.put("cognome", surnameStr);
-                    params.put("DataNascita",new SimpleDateFormat("yyyy/MM/dd").format(birthStr).toString());
-                    Log.d("gx8", new SimpleDateFormat("yyyy/MM/dd").format(birthStr).toString());
+                    try {
+                        params.put("DataNascita",df.format(df.parse(birthStr)));
+                        Log.d("gx8", df.format(df.parse(birthStr)));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    // Log.d("gx8", new SimpleDateFormat("yyyy-MM-dd").format(birthStr));
                     params.put("Sesso",genderStr);
                     params.put("Citta",cityStr);
                     params.put("auth", session.getUser().getAuth());
@@ -231,12 +239,16 @@ public class UserSettings extends AppCompatActivity {
                             try {
                                 response = new JSONObject(res);
                             } catch (JSONException e) {
-                                e.printStackTrace();
+                               Log.d("gx8", "NANANANA");
                             }
                             try {
-                                if (!response.getString("status").equals("OK"))
-                                    Toast.makeText(getApplicationContext(),"Couldn't update your settings, try again", Toast.LENGTH_SHORT).show();
+                                if (!response.getString("status").equals("OK")) {
+                                    Log.d("gx8", "test3");
+                                    Toast.makeText(getApplicationContext(), "Couldn't update your settings, try again", Toast.LENGTH_SHORT).show();
+
+                                }
                                 else {
+
                                     Toast.makeText(getApplicationContext(),"User settings saved correctly!", Toast.LENGTH_SHORT).show();
                                    // finish();
                                 }
@@ -273,7 +285,7 @@ public class UserSettings extends AppCompatActivity {
                         android.R.style.Theme_Material_Light_DarkActionBar,
                         datePicker,
                         year,month,day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 dialog.show();
             }
         });
@@ -299,7 +311,7 @@ public class UserSettings extends AppCompatActivity {
         });
     }
 
-    @Override
+   /* @Override
     protected void onActivityResult(int requestCode, int resultCode,Intent data){
         super.onActivityResult(requestCode,resultCode,data);
 
@@ -313,7 +325,7 @@ public class UserSettings extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 
 
 

@@ -21,7 +21,7 @@ public class RequestsManager {
 
 
     //final String URL = "http://transfertk.ddns.net:8063/api/Api.php";
-    final String URL = "http://192.168.1.119/AppAndroid/LoginSystem/api.php";
+    final String URL = "http://bookmarket.x10.mx/api/Api.php";
     RequestQueue mQueue;
     JsonObjectRequest request;
     Context context;
