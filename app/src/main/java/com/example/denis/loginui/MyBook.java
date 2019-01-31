@@ -10,7 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
 import com.android.volley.Response;
 
 import org.json.JSONException;
@@ -26,7 +27,7 @@ public class MyBook extends AppCompatActivity {
     Boolean isNewBook;
 
     Intent tStart;
-
+    Spinner condition;
     Button back;
     Button save;
 
@@ -52,6 +53,11 @@ public class MyBook extends AppCompatActivity {
 
         back= (Button) findViewById(R.id.btnBackMyBook);
         save= (Button) findViewById(R.id.btnSaveMyBook);
+        condition = (Spinner) findViewById(R.id.spnConditionMyBook);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(MyBook.this,
+                R.array.bookCondition, R.layout.simple_spinner_item);
+        condition.setAdapter(adapter);
+        condition.setSelection(0);
         requests = new RequestsManager(this);
         session = new SessionManager(this);
         title= (EditText) findViewById(R.id.edtTitle);
@@ -69,6 +75,8 @@ public class MyBook extends AppCompatActivity {
             desc.setText(tStart.getStringExtra("Description"));
             price.setText(tStart.getStringExtra("Price"));
             authors.setText(tStart.getStringExtra("Authors"));
+            ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)condition.getAdapter();
+            condition.setSelection(array_spinner.getPosition(tStart.getStringExtra("Condition")));
         } else
             isNewBook = true;
 
@@ -84,6 +92,8 @@ public class MyBook extends AppCompatActivity {
                 String descStr = desc.getText().toString();
                 String priceStr = price.getText().toString();
                 String authorsStr = authors.getText().toString();
+                String conditionStr = condition.getSelectedItem().toString();
+
 
                 int amountInt = -1;
                 double priceDb = -1;
@@ -111,6 +121,9 @@ public class MyBook extends AppCompatActivity {
 //-------------------------------------------------------------------------------------------------------------------------
 
                     if(!publisherStr.equals(tStart.getStringExtra("Publisher"))){
+                        isModified=true;
+                    }
+                    if(!conditionStr.equals(tStart.getStringExtra("Condition"))){
                         isModified=true;
                     }
 //-------------------------------------------------------------------------------------------------------------------------

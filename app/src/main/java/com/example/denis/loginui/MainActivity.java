@@ -74,11 +74,14 @@ public class MainActivity extends AppCompatActivity{
                 DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         for(int i =0; i<removeList.size(); i++){
-                            bookList.remove(removeList.get(i));
+                            Log.d("gx8", booksData.get(removeList.get(i)).getTitolo());
+                            booksData.remove(removeList.get(i));
                             getViewByPosition(removeList.get(i), books).setSelected(false);
+                            adapterBooks.remove(adapterBooks.getItem(removeList.get(i)));
                             //devo cancellarlo dal DB
                         }
-                        adapterBooks.notifyDataSetChanged();
+
+                       // adapterBooks.notifyDataSetChanged();
                         removeList.clear();
                         isRemoving=false;
                         add.setEnabled(true);

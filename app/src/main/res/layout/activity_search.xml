@@ -80,7 +80,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linlayCondition"
+            android:id="@+id/linlayOrder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/linlayType"
@@ -111,7 +111,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/linlayCondition"
+            android:layout_below="@+id/linlayOrder"
             android:layout_marginTop="20dp">
 
         <EditText

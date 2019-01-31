@@ -100,7 +100,7 @@ public class ShowUser extends AppCompatActivity {
                     tBook.putExtra("Description",bookList.get(position).getDescrizione());
                     tBook.putExtra("Price",Float.toString(bookList.get(position).getPrezzo()));
                     tBook.putExtra("Authors",bookList.get(position).getAutore());
-
+                    tBook.putExtra("Condition", bookList.get(position).getCondizione());
 
 
                 startActivity(tBook);

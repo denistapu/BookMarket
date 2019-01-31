@@ -19,9 +19,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.android.volley.Response;
-import com.jakewharton.rxbinding.widget.RxTextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,9 +31,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+import android.widget.LinearLayout;
+import android.view.MotionEvent;
 
-import rx.Subscription;
 
 import static com.example.denis.loginui.CheckInput.is_Valid_ISBN;
 import static com.example.denis.loginui.CheckInput.is_Valid_Name;
@@ -57,6 +57,8 @@ public class Search extends AppCompatActivity {
     EditText info;
 
     Spinner type;
+    Spinner order;
+    LinearLayout linearLayoutOrder;
     String result;
     ListView infoView;
     RequestsManager requests;
@@ -95,6 +97,8 @@ public class Search extends AppCompatActivity {
         Menu menu = bottomNav.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
+        linearLayoutOrder= (LinearLayout) findViewById(R.id.linlayOrder);
+
 
         infoView = (ListView) findViewById(R.id.lstSearch);
         adapterInfo = new ArrayAdapter(this, android.R.layout.simple_list_item_1){
@@ -117,7 +121,11 @@ public class Search extends AppCompatActivity {
                 R.array.typeUsers, R.layout.simple_spinner_item);
         type.setAdapter(adapterBooks);
         type.setSelection(0);
-
+        order = (Spinner) findViewById(R.id.spnOrder);
+        ArrayAdapter<CharSequence> adapterOrder = ArrayAdapter.createFromResource(Search.this,
+                R.array.orderBooks, R.layout.simple_spinner_item);
+        order.setAdapter(adapterOrder);
+        order.setSelection(0);
 
         books.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,8 +136,9 @@ public class Search extends AppCompatActivity {
                     books.setTextColor(ResourcesCompat.getColor(getResources(), R.color.orange, null));
                     users.setTextColor(ResourcesCompat.getColor(getResources(), R.color.white, null));
                     type.setAdapter(adapterBooks);
+                    type.setSelection(0);
                     info.setHint(type.getSelectedItem().toString());
-
+                    linearLayoutOrder.setVisibility(View.VISIBLE);
                     searchType = true;
 
                     if(infoStr.length()>0){
@@ -151,8 +160,9 @@ public class Search extends AppCompatActivity {
                     books.setTextColor(ResourcesCompat.getColor(getResources(), R.color.white, null));
                     users.setTextColor(ResourcesCompat.getColor(getResources(), R.color.orange, null));
                     type.setAdapter(adapterUsers);
+                    type.setSelection(0);
                     info.setHint(type.getSelectedItem().toString());
-
+                    linearLayoutOrder.setVisibility(View.GONE);
                     searchType = false;
 
                     if(infoStr.length()>0){
@@ -182,13 +192,24 @@ public class Search extends AppCompatActivity {
                     handler.postDelayed(input_finish_checker, delay);
             }
         });
+        order.setOnTouchListener(new View.OnTouchListener(){
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                return false;
+            }
+
+        });
 
         //quando cambia l'item selezionato su type, rifaccio la ricerca e li displayo in base al nuovo tipo che vuole cercare
         type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if(++check > 1)
+                if(++check > 1) {
+                    adapterInfo.clear();
                     Search(info, type, searchType, infoView);
+                }
             }
 
             @Override
@@ -213,6 +234,7 @@ public class Search extends AppCompatActivity {
                     tBook.putExtra("Price", Float.toString(booksList.get(keys.get(position)).getPrezzo()));
                     tBook.putExtra("Authors", booksList.get(keys.get(position)).getAutore());
                     tBook.putExtra("Proprietario", booksList.get(keys.get(position)).getProprietario());
+                    tBook.putExtra("Condition", booksList.get(keys.get(position)).getCondizione());
                     tBook.putExtra("Username", keys.get(position));
                     startActivity(tBook);
 
