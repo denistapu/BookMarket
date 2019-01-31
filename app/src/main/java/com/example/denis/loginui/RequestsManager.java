@@ -1,6 +1,7 @@
 package com.example.denis.loginui;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -37,7 +38,18 @@ public class RequestsManager {
         StringRequest request = new StringRequest(Request.Method.POST, URL,response, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, "No internet connection", Toast.LENGTH_SHORT).show();
+                Log.d("gx8", "Failed with error msg:\t" + error.getMessage());
+                Log.d("gx8", "Error StackTrace: \t" + error.getStackTrace());
+                // edited here
+                try {
+                    byte[] htmlBodyBytes = error.networkResponse.data;
+                    Log.e("gx8", new String(htmlBodyBytes), error);
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
+                if (error.getMessage() == null){
+                    //createUser();
+                }
             }
         }){
             protected Map<String, String> getParams() {

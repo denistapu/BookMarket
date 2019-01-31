@@ -61,8 +61,9 @@ public class MainActivity extends AppCompatActivity{
     ArrayList<Book> booksData;
 
    // RequestsManager requests;
-   RequestsManager requests;
+     RequestsManager requests;
     SessionManager session;
+    int selected;
 
     private Dialog removeDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.LightDialogTheme);
@@ -75,10 +76,34 @@ public class MainActivity extends AppCompatActivity{
                     public void onClick(DialogInterface dialog, int id) {
                         for(int i =0; i<removeList.size(); i++){
                             Log.d("gx8", booksData.get(removeList.get(i)).getTitolo());
+                            HashMap<String,String> params = new HashMap<String,String>();
+                            params.put("username", session.getUser().getUsername());
+                            params.put("auth", session.getUser().getAuth());
+                            params.put("bookID", Integer.toString(booksData.get(removeList.get(i)).getID()));
                             booksData.remove(removeList.get(i));
                             getViewByPosition(removeList.get(i), books).setSelected(false);
                             adapterBooks.remove(adapterBooks.getItem(removeList.get(i)));
-                            //devo cancellarlo dal DB
+
+                            requests.execRequest("removeBook", params,new Response.Listener<String>() {
+
+                                @Override
+                                public void onResponse(String res) {
+                                    JSONObject response = null;
+                                    try {
+                                        response = new JSONObject(res);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                    try {
+                                        if (response.getString("status").equals("OK")) {
+                                            Toast.makeText(MainActivity.this, "Book removed", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(MainActivity.this, "Couldn't remove the book", Toast.LENGTH_SHORT).show();
+                                        }
+
+                                        }catch(JSONException e){
+                                    }
+                                }});
                         }
 
                        // adapterBooks.notifyDataSetChanged();
@@ -92,6 +117,11 @@ public class MainActivity extends AppCompatActivity{
                 DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
+                        getViewByPosition(selected,books).setSelected(false);
+                        adapterBooks.notifyDataSetChanged();
+                        removeList.clear();
+                        isRemoving=false;
+                        add.setEnabled(true);
                     }
                 });
 
@@ -103,6 +133,7 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        selected = -1;
         requests = new RequestsManager(this);
         session = new SessionManager(this);
         tStart=getIntent();
@@ -184,7 +215,15 @@ public class MainActivity extends AppCompatActivity{
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                tMyBooks.putExtra("id", "");
+                //Log.d("gx8","LMAO: "+Integer.toString(booksData.get(position).getID()));
+                tMyBooks.putExtra("Title", "");
+                tMyBooks.putExtra("Publisher", "");
+                tMyBooks.putExtra("ISBN", "");
+                tMyBooks.putExtra("Amount", "");
+                tMyBooks.putExtra("Description", "");
+                tMyBooks.putExtra("Price","");
+                tMyBooks.putExtra("Authors", "");
                tMyBooks.putExtra("isNew", true);
 
                 startActivity(tMyBooks);
@@ -220,6 +259,7 @@ public class MainActivity extends AppCompatActivity{
                     }else{
                         removeList.add(i);
                         view.setSelected(true);
+                        selected = position;
                     }
 
                 }
@@ -228,7 +268,7 @@ public class MainActivity extends AppCompatActivity{
 
 
                     tMyBooks.putExtra("id", Integer.toString(booksData.get(position).getID()));
-                    //Log.d("gx8",booksData.get(position).getID());
+                    Log.d("gx8","LMAO: "+Integer.toString(booksData.get(position).getID()));
                     tMyBooks.putExtra("Title", booksData.get(position).getTitolo());
                     tMyBooks.putExtra("Publisher", booksData.get(position).getCasaed());
                     tMyBooks.putExtra("ISBN", booksData.get(position).getISBN());
@@ -236,7 +276,7 @@ public class MainActivity extends AppCompatActivity{
                     tMyBooks.putExtra("Description", booksData.get(position).getDescrizione());
                     tMyBooks.putExtra("Price", Float.toString(booksData.get(position).getPrezzo()));
                     tMyBooks.putExtra("Authors", booksData.get(position).getAutore());
-
+                    tMyBooks.putExtra("isNew", false);
 
                     startActivity(tMyBooks);
 
@@ -259,6 +299,7 @@ public class MainActivity extends AppCompatActivity{
                 add.setEnabled(false);
 
                 view.setSelected(true);
+                selected = position;
 
                 return true;
             }

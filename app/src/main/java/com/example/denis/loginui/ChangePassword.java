@@ -15,6 +15,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
 import static com.example.denis.loginui.CheckInput.DRAWABLE_RIGHT;
 import static com.example.denis.loginui.CheckInput.is_Valid_Password;
 
@@ -34,12 +41,13 @@ public class ChangePassword extends AppCompatActivity {
     EditText newP;
     EditText confP;
     RequestsManager requests;
+    SessionManager session;
     TextView errorOld;
     TextView errorNew;
     TextView errorConfN;
 
     private Dialog changeDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.LightDialogTheme);
         builder.setTitle("Change Password");
         builder.setMessage("Are you sure to change passowrd?");
         builder.setCancelable(false);
@@ -47,8 +55,32 @@ public class ChangePassword extends AppCompatActivity {
         builder.setPositiveButton("Yes", new
                 DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(getApplicationContext(),"Password saved correctly!", Toast.LENGTH_SHORT).show();
-                        finish();
+                        HashMap<String,String> params = new HashMap<String,String>();
+                        params.put("username", session.getUser().getUsername());
+                        params.put("oldpassword", oldP.getText().toString());
+                        params.put("newpassword", newP.getText().toString());
+                        requests.execRequest("changePassword", params, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String res) {
+                                        JSONObject response = null;
+                                        try {
+                                            response = new JSONObject(res);
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        try {
+                                            if (response.getString("status").equals("OK")) {
+                                                Toast.makeText(getApplicationContext(),"Password saved correctly!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(getApplicationContext(),"Wrong password!", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }catch(JSONException e){
+
+                                        }
+                                    }
+                                }
+                        );
+                        dialog.dismiss();
                     }
                 });
 
@@ -71,7 +103,7 @@ public class ChangePassword extends AppCompatActivity {
         tStart = getIntent();
 
         back = (Button) findViewById(R.id.btnBackChangePsw);
-        change = (Button) findViewById(R.id.btnBackChangePsw);
+        change = (Button) findViewById(R.id.btnChangePsw);
 
         oldP = (EditText) findViewById(R.id.edtOldP);
         newP = (EditText) findViewById(R.id.edtNewP);
@@ -81,6 +113,7 @@ public class ChangePassword extends AppCompatActivity {
         errorNew = (TextView) findViewById(R.id.txtErrorNewPassword);
         errorConfN = (TextView) findViewById(R.id.txtErrorConfirmNewPassword);
         requests = new RequestsManager(this);
+        session = new SessionManager(this);
         showOldPass=false;
         showNewPass=false;
         showConfPsw=false;

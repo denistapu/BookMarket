@@ -17,7 +17,9 @@ import com.android.volley.Response;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import static com.example.denis.loginui.CheckInput.is_Valid_ISBN;
 
@@ -67,21 +69,42 @@ public class MyBook extends AppCompatActivity {
         desc= (EditText) findViewById(R.id.edtDescription);
         price= (EditText) findViewById(R.id.edtPrice);
         authors= (EditText) findViewById(R.id.edtAuthors);
-        if(!tStart.hasExtra("isNew")) {
-            title.setText(tStart.getStringExtra("Title"));
-            publisher.setText(tStart.getStringExtra("Publisher"));
-            isbn.setText(tStart.getStringExtra("ISBN"));
-            amount.setText(tStart.getStringExtra("Amount"));
-            desc.setText(tStart.getStringExtra("Description"));
-            price.setText(tStart.getStringExtra("Price"));
-            authors.setText(tStart.getStringExtra("Authors"));
-            ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)condition.getAdapter();
-            condition.setSelection(array_spinner.getPosition(tStart.getStringExtra("Condition")));
-        } else
-            isNewBook = true;
 
 
 
+        isNewBook = tStart.getBooleanExtra("isNew", false);
+        title.setText(tStart.getStringExtra("Title"));
+        publisher.setText(tStart.getStringExtra("Publisher"));
+        isbn.setText(tStart.getStringExtra("ISBN"));
+        amount.setText(tStart.getStringExtra("Amount"));
+        desc.setText(tStart.getStringExtra("Description"));
+        price.setText(tStart.getStringExtra("Price"));
+        authors.setText(tStart.getStringExtra("Authors"));
+        ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)condition.getAdapter();
+        condition.setSelection(array_spinner.getPosition(tStart.getStringExtra("Condition")));
+        EditText[] etexts = new EditText[] {title,  isbn, price, publisher,amount, desc,  authors};
+        Log.d("gx8", "1: "+isModified.toString());
+            TextWatcher tw = new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    isModified = true;
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+            };
+
+            for(EditText t : etexts){
+                t.addTextChangedListener(tw);
+            }
+        Log.d("gx8", "2: "+isModified.toString());
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,7 +116,7 @@ public class MyBook extends AppCompatActivity {
                 String priceStr = price.getText().toString();
                 String authorsStr = authors.getText().toString();
                 String conditionStr = condition.getSelectedItem().toString();
-
+                Log.d("gx8", "3: "+isNewBook.toString());
 
                 int amountInt = -1;
                 double priceDb = -1;
@@ -112,50 +135,11 @@ public class MyBook extends AppCompatActivity {
                     priceDb= -1;
                 }
 
+                if(!conditionStr.equals(tStart.getStringExtra("Condition")) && !isNewBook)
+                    isModified = true;
 //-------------------------------------------------------------------------------------------------------------------------
-
-                if(!isNewBook){
-                    if(!titleStr.equals(tStart.getStringExtra("Title")) && !titleStr.equals("")){
-                        isModified=true;
-                    }
-//-------------------------------------------------------------------------------------------------------------------------
-
-                    if(!publisherStr.equals(tStart.getStringExtra("Publisher"))){
-                        isModified=true;
-                    }
-                    if(!conditionStr.equals(tStart.getStringExtra("Condition"))){
-                        isModified=true;
-                    }
-//-------------------------------------------------------------------------------------------------------------------------
-
-                    if(!authorsStr.equals(tStart.getStringExtra("Authors"))){
-                        isModified=true;
-                    }
-//-------------------------------------------------------------------------------------------------------------------------
-
-                    if(!isbnStr.equals(tStart.getStringExtra("ISBN")) && is_Valid_ISBN(isbnStr)){
-                        isModified=true;
-                    }
-//-------------------------------------------------------------------------------------------------------------------------
-
-                    if(!amountStr.equals(tStart.getStringExtra("Amount")) && amountInt>=1){
-                        isModified=true;
-                    }
-//-------------------------------------------------------------------------------------------------------------------------
-
-                    if(!priceStr.equals(tStart.getStringExtra("Price")) && priceDb>=0){
-                        isModified=true;
-                    }
-//-------------------------------------------------------------------------------------------------------------------------
-
-                    if(!descStr.equals(tStart.getStringExtra("Descriprion"))){
-                        isModified=true;
-                    }
-                }
-               /* */
-//-------------------------------------------------------------------------------------------------------------------------
-
-                if((isModified && !tStart.getStringExtra("Title").equals("")) || isNewBook){
+                Log.d("gx8", "LMAO IM IN ");
+                if((isModified || isNewBook) && editTextsNotEmpty(Arrays.copyOfRange(etexts,0,2)) ){
                     //salva sul DB i dati del libro
                     Log.d("gx8", isModified.toString());
                         HashMap<String,String> params = new HashMap<String,String>();
@@ -167,8 +151,35 @@ public class MyBook extends AppCompatActivity {
                         params.put("Descrizione",descStr);
                         params.put("CasaEd", publisherStr);
                         params.put("Autore",authorsStr);
+                        params.put("Condizione", conditionStr);
 
-                    if(isModified){
+                    if(isNewBook){
+                        Log.d("gx8", "Fake love");
+                        params.put("ownerAuth", session.getUser().getAuth());
+                        params.put("ownerID", Integer.toString(session.getUser().getID()));
+                        requests.execRequest("editBook", params,  new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String res){
+                                Log.d("gx8", res);
+                                JSONObject response = null;
+                                try {
+                                    response = new JSONObject(res);
+                                    if(!response.getString("status").equals("OK")) {
+                                        Toast.makeText(getApplicationContext(),"Something went wrong. Try again", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(),"Book added correctly!", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+                            }
+                        });
+
+                    } else  {
+                        Log.d("gx8", "sossa");
                         params.put("ID", tStart.getStringExtra("id"));
                         params.put("ownerHash", session.getUser().getAuth());
                         requests.execRequest("editBook", params,  new Response.Listener<String>() {
@@ -191,33 +202,12 @@ public class MyBook extends AppCompatActivity {
 
                             }
                         });
-                    } else  {
-                        params.put("ownerAuth", session.getUser().getAuth());
-                        params.put("ownerID", Integer.toString(session.getUser().getID()));
-                        requests.execRequest("addBook", params,  new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String res){
-                                Log.d("gx8", res);
-                                JSONObject response = null;
-                                try {
-                                    response = new JSONObject(res);
-                                    if(!response.getString("status").equals("OK")) {
-                                        Toast.makeText(getApplicationContext(),"Something went wrong. Try again", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(),"Book added correctly!", Toast.LENGTH_SHORT).show();
-                                        finish();
-                                    }
 
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-
-                            }
-                        });
                     }
 
 
-                }
+                } else
+                    Toast.makeText(getApplicationContext(), "One or more of the require fields are empty!", Toast.LENGTH_SHORT).show();
 
 //-------------------------------------------------------------------------------------------------------------------------
 
@@ -233,6 +223,12 @@ public class MyBook extends AppCompatActivity {
         });
 
     }
-
+    public boolean editTextsNotEmpty(EditText[] et){
+        for(EditText t: et){
+            if(t.getText().toString().isEmpty())
+                return false;
+        }
+        return true;
+    }
 
 }
