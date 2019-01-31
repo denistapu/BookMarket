@@ -88,6 +88,7 @@ public class Setup extends AppCompatActivity {
         gender = (Spinner) findViewById(R.id.spnGender);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(Setup.this,
                 R.array.gender, R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gender.setAdapter(adapter);
         gender.setSelection(0);
 

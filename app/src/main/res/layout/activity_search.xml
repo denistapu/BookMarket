@@ -159,7 +159,7 @@
                 android:layout_height="match_parent"
                 android:textAlignment="center"
                 android:textColor="@color/white"
-                android:listSelector="@drawable/my_selector">
+                android:background="@drawable/normal">
 
             </ListView>
 

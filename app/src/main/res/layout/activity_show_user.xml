@@ -11,7 +11,7 @@
 
     <RelativeLayout
         android:id="@+id/rellay1ShowUser"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
@@ -37,7 +37,7 @@
             <TextView
 
                 android:id="@+id/txtUsernameShowUser"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/lobster"
                 android:text="Username"
@@ -55,7 +55,7 @@
 
             <TextView
                 android:id="@+id/txtFullNameShowUser"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/userPicShowUser"
                 android:fontFamily="@font/lobster"

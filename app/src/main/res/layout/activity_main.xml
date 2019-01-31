@@ -83,8 +83,9 @@
                 android:id="@+id/lstBooks"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:listSelector="@drawable/my_selector"
                 android:textAlignment="center"
+                android:background="@drawable/normal"
+                android:longClickable="true"
                 android:textColor="@color/white">
 
             </ListView>

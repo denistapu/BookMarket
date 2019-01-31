@@ -3,6 +3,7 @@ package com.example.denis.loginui;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -76,7 +77,6 @@ public class MainActivity extends AppCompatActivity{
                         for(int i =0; i<removeList.size(); i++){
                             Log.d("gx8", booksData.get(removeList.get(i)).getTitolo());
                             booksData.remove(removeList.get(i));
-                            getViewByPosition(removeList.get(i), books).setSelected(false);
                             adapterBooks.remove(adapterBooks.getItem(removeList.get(i)));
                             //devo cancellarlo dal DB
                         }
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity{
                        // adapterBooks.notifyDataSetChanged();
                         removeList.clear();
                         isRemoving=false;
-                        add.setEnabled(true);
+
                     }
                 });
 
@@ -121,6 +121,8 @@ public class MainActivity extends AppCompatActivity{
         menuItem.setChecked(true);
 
         books = (ListView) findViewById(R.id.lstBooks);
+
+
         booksData = new ArrayList<Book>();
        /* bookList.add("Test1");
         bookList.add("Test2");
@@ -187,6 +189,15 @@ public class MainActivity extends AppCompatActivity{
 
                tMyBooks.putExtra("isNew", true);
 
+                if(isRemoving){
+                    for(int i=0; i<removeList.size(); i++){
+                        TextView tv = (TextView) getViewByPosition(removeList.get(i), books).findViewById(android.R.id.text1);
+                        tv.setTextColor(Color.BLACK);
+                    }
+                    isRemoving = false;
+                    removeList.clear();
+                }
+
                 startActivity(tMyBooks);
 
                 adapterBooks.notifyDataSetChanged();
@@ -197,7 +208,7 @@ public class MainActivity extends AppCompatActivity{
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(removeList.size()>0)
+                if(!removeList.isEmpty())
                     removeDialog().show();
             }
         });
@@ -211,15 +222,19 @@ public class MainActivity extends AppCompatActivity{
 
                 if(isRemoving){
                     if(removeList.contains(i)){
-                        removeList.remove(i);
-                        view.setSelected(false);
+                        removeList.remove(removeList.indexOf(i));
+
+                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                        tv.setTextColor(Color.BLACK);
+
                         if(removeList.isEmpty()){
                             isRemoving=false;
-                            add.setEnabled(true);
                         }
                     }else{
                         removeList.add(i);
-                        view.setSelected(true);
+
+                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                        tv.setTextColor(Color.RED);
                     }
 
                 }
@@ -252,13 +267,14 @@ public class MainActivity extends AppCompatActivity{
 
                 int i=position;
 
-                removeList.add(i);
+                if(!isRemoving){
+                    removeList.add(i);
 
-                isRemoving=true;
+                    isRemoving=true;
 
-                add.setEnabled(false);
-
-                view.setSelected(true);
+                    TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                    tv.setTextColor(Color.RED);
+                }
 
                 return true;
             }
@@ -271,7 +287,8 @@ public class MainActivity extends AppCompatActivity{
     public void onBackPressed() {
         if(isRemoving){
             for(int i=0; i<removeList.size(); i++){
-                getViewByPosition(removeList.get(i), books).setSelected(false);
+                TextView tv = (TextView) getViewByPosition(removeList.get(i), books).findViewById(android.R.id.text1);
+                tv.setTextColor(Color.BLACK);
             }
             isRemoving = false;
             removeList.clear();

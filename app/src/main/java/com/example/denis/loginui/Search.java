@@ -119,11 +119,14 @@ public class Search extends AppCompatActivity {
                 R.array.typeBooks, R.layout.simple_spinner_item);
         final ArrayAdapter<CharSequence> adapterUsers = ArrayAdapter.createFromResource(Search.this,
                 R.array.typeUsers, R.layout.simple_spinner_item);
+        adapterBooks.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterUsers.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         type.setAdapter(adapterBooks);
         type.setSelection(0);
         order = (Spinner) findViewById(R.id.spnOrder);
         ArrayAdapter<CharSequence> adapterOrder = ArrayAdapter.createFromResource(Search.this,
                 R.array.orderBooks, R.layout.simple_spinner_item);
+        adapterOrder.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         order.setAdapter(adapterOrder);
         order.setSelection(0);
 
@@ -206,6 +209,7 @@ public class Search extends AppCompatActivity {
         type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                info.setHint(type.getSelectedItem().toString());
                 if(++check > 1) {
                     adapterInfo.clear();
                     Search(info, type, searchType, infoView);

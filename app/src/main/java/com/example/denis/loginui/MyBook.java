@@ -56,6 +56,7 @@ public class MyBook extends AppCompatActivity {
         condition = (Spinner) findViewById(R.id.spnConditionMyBook);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(MyBook.this,
                 R.array.bookCondition, R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         condition.setAdapter(adapter);
         condition.setSelection(0);
         requests = new RequestsManager(this);
