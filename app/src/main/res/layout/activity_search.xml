@@ -26,7 +26,8 @@
             android:text="Search  Books"
             android:textAllCaps="true"
             android:textColor="@color/orange"
-            android:textSize="20dp"/>
+            android:textSize="20dp"
+            />
 
         <Button
             android:id="@+id/btnUserSearch"
@@ -47,7 +48,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rellay1Search"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp">
 
         <LinearLayout
             android:id="@+id/linlayType"
@@ -58,11 +60,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:fontFamily="@font/lobster"
                 android:text="Search by:  "
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:layout_gravity="center"
                 android:textSize="30dp" />
 
         <Spinner
@@ -70,8 +72,37 @@
             android:layout_width="200dp"
             android:layout_height="40dp"
             android:background="@drawable/spn_bg"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:drawablePadding="15dp" />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linlayCondition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linlayType"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/lobster"
+                android:text="Order by:   "
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="30dp" />
+
+            <Spinner
+                android:id="@+id/spnOrder"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:background="@drawable/spn_bg"
+                android:textColor="@color/black"
+                android:drawablePadding="15dp" />
 
 
 
@@ -80,7 +111,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/linlayType">
+            android:layout_below="@+id/linlayCondition"
+            android:layout_marginTop="20dp">
 
         <EditText
             android:id="@+id/edtInfo"
@@ -118,7 +150,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/navigationS">
+            android:layout_above="@+id/navigationS"
+            android:layout_marginTop="20dp">
 
             <ListView
                 android:id="@+id/lstSearch"
@@ -140,7 +173,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="0dp"
             android:layout_marginEnd="0dp"
-            android:background="?android:attr/windowBackground"
+            android:background="@color/white"
             app:menu="@menu/navigation" />
 
 

@@ -56,7 +56,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
-                        android:background="@drawable/et_bg"
+                        android:background="@drawable/txt_bg"
                         android:fontFamily="sans-serif-light"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
@@ -88,7 +88,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
-                        android:background="@drawable/et_bg"
+                        android:background="@drawable/txt_bg"
                         android:fontFamily="sans-serif-light"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
@@ -96,6 +96,38 @@
                         android:textSize="15dp"
                         android:gravity="center"
                         android:drawableLeft="@drawable/ic_title"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lobster"
+                        android:text="Condition"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="22dp" />
+
+                    <TextView
+                        android:id="@+id/txtCondition"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/txt_bg"
+                        android:fontFamily="sans-serif-light"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:textColor="@color/white"
+                        android:textSize="15dp"
+                        android:gravity="center"
+                        android:drawableLeft="@drawable/ic_condition"
                         />
 
                 </LinearLayout>
@@ -120,7 +152,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
-                        android:background="@drawable/et_bg"
+                        android:background="@drawable/txt_bg"
                         android:fontFamily="sans-serif-light"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
@@ -152,7 +184,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
-                        android:background="@drawable/et_bg"
+                        android:background="@drawable/txt_bg"
                         android:fontFamily="sans-serif-light"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
@@ -183,7 +215,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
-                        android:background="@drawable/et_bg"
+                        android:background="@drawable/txt_bg"
                         android:fontFamily="sans-serif-light"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
@@ -215,7 +247,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
-                        android:background="@drawable/et_bg"
+                        android:background="@drawable/txt_bg"
                         android:fontFamily="sans-serif-light"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
@@ -247,7 +279,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:layout_marginTop="5dp"
-                        android:background="@drawable/et_bg"
+                        android:background="@drawable/txt_bg"
                         android:fontFamily="sans-serif-light"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
@@ -279,7 +311,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:layout_marginTop="5dp"
-                        android:background="@drawable/et_bg"
+                        android:background="@drawable/txt_bg"
                         android:fontFamily="sans-serif-light"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"

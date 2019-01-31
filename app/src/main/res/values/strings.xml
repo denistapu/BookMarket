@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LoginUI</string>
+    <string name="app_name">Book Market</string>
 
 
     <string-array name="gender">
@@ -18,6 +18,21 @@
         <item>Name and Surname</item>
         <item>Username</item>
         <item>k</item>
+    </string-array>
+
+    <string-array name="bookCondition">
+        <item>Pristine</item>
+        <item>Like new</item>
+        <item>Good</item>
+        <item>Worn</item>
+        <item>Extremely poor</item>
+    </string-array>
+
+    <string-array name="orderBooks">
+        <item>Price down</item>
+        <item>Price up</item>
+        <item>Condition down</item>
+        <item>Condition up</item>
     </string-array>
 
     <string name="title_activity_main">MainActivity</string>
