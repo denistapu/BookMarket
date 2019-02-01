@@ -30,6 +30,13 @@ public class SessionManager {
         Gson gson = new Gson();
         return gson.fromJson(pref.getString("User",null),User.class);
     }
+    public void updateUser(User user){
+        Gson gson = new Gson();
+        String json = gson.toJson(user);
+        editor.remove("User");
+        editor.putString("User", json);
+        editor.apply();
+    }
     public void logout(){
         editor.clear();
         editor.apply();

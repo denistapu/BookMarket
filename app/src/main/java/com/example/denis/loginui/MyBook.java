@@ -139,7 +139,6 @@ public class MyBook extends AppCompatActivity {
                 if(!conditionStr.equals(tStart.getStringExtra("Condition")) && !isNewBook)
                     isModified = true;
 //-------------------------------------------------------------------------------------------------------------------------
-                Log.d("gx8", "LMAO IM IN ");
                 if((isModified || isNewBook) && editTextsNotEmpty(Arrays.copyOfRange(etexts,0,2)) ){
                     //salva sul DB i dati del libro
                     Log.d("gx8", isModified.toString());
@@ -155,13 +154,11 @@ public class MyBook extends AppCompatActivity {
                         params.put("Condizione", conditionStr);
 
                     if(isNewBook){
-                        Log.d("gx8", "Fake love");
                         params.put("ownerAuth", session.getUser().getAuth());
                         params.put("ownerID", Integer.toString(session.getUser().getID()));
-                        requests.execRequest("editBook", params,  new Response.Listener<String>() {
+                        requests.execRequest("addBook", params,  new Response.Listener<String>() {
                             @Override
                             public void onResponse(String res){
-                                Log.d("gx8", res);
                                 JSONObject response = null;
                                 try {
                                     response = new JSONObject(res);
@@ -212,7 +209,6 @@ public class MyBook extends AppCompatActivity {
 
 //-------------------------------------------------------------------------------------------------------------------------
 
-                isNewBook = false;
             }
         });
 

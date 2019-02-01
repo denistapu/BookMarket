@@ -111,6 +111,11 @@ public class ShowUser extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //apre un intent di una chat o qualcosa
+                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                emailIntent.setType("vnd.android.cursor.item/email");
+                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{tStart.getStringExtra("email")});
+                startActivity(Intent.createChooser(emailIntent, "Send mail using..."));
             }
         });
 

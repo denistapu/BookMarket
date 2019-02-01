@@ -28,6 +28,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -63,7 +64,7 @@ public class Search extends AppCompatActivity {
     ListView infoView;
     RequestsManager requests;
     LinkedHashMap<String,Book> booksList;
-
+    List<String> booksDisplayed;
     List<User> usersList;
     ArrayList infoList;
     int check;
@@ -91,7 +92,7 @@ public class Search extends AppCompatActivity {
         booksList = new LinkedHashMap<String,Book>();
         usersList = new ArrayList<User>();
         bottomNav = (BottomNavigationView) findViewById(R.id.navigationS);
-
+        booksDisplayed = new ArrayList<String>();
         BottomViewHelper.enableNavigation(Search.this, bottomNav);
 
         Menu menu = bottomNav.getMenu();
@@ -101,7 +102,7 @@ public class Search extends AppCompatActivity {
 
 
         infoView = (ListView) findViewById(R.id.lstSearch);
-        adapterInfo = new ArrayAdapter(this, android.R.layout.simple_list_item_1){
+        adapterInfo = new ArrayAdapter(this, android.R.layout.simple_list_item_1, booksDisplayed){
             @Override
             public boolean isEnabled(int position){
                 return (!(adapterInfo.getItem(position).equals("No results found")));
@@ -199,8 +200,23 @@ public class Search extends AppCompatActivity {
 
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
                 return false;
+            }
+
+        });
+        order.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+               if(!booksDisplayed.isEmpty()) {
+                   Log.d("gx8", "test8");
+                   Collections.reverse(booksDisplayed);
+                   adapterInfo.notifyDataSetChanged();
+               }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+
             }
 
         });
@@ -247,17 +263,12 @@ public class Search extends AppCompatActivity {
                 }else{
 
                     tUser = new Intent(Search.this, ShowUser.class);
-                    /*negli extra devo mettere tutti i dettagli dell'utente presi dal DB*/
-
-                    Log.d("gx8", usersList.get(position).getUsername());
                     tUser.putExtra("Username",usersList.get(position).getUsername());
                     tUser.putExtra("FullName",usersList.get(position).getName()+ " "+ usersList.get(position).getSurname());
+                    tUser.putExtra("email", usersList.get(position).getEmail());
                     //tBook.putExtra("ProfilePic","");
                     //tBook.putExtra("Books", "");
 
-                   /* cosi oppure gli metto l'ID e poi nell'altra activity
-                    gli prendo i libri il nome completo e lo username in base a quello (penso sia meglio così)
-                    */
 
                     startActivity(tUser);
                 }
@@ -279,7 +290,13 @@ public class Search extends AppCompatActivity {
 
 
         if(searchType){
-            booksList.clear();
+
+
+            if(order.getSelectedItem().toString().equals("Price down"))
+                params.put("order", "0");
+            else if(order.getSelectedItem().toString().equals("Price down"))
+                params.put("order", "1");
+
             if(typeStr.equals("ISBN")){
                 if(is_Valid_ISBN(infoStr)){
 
@@ -296,8 +313,7 @@ public class Search extends AppCompatActivity {
                         adapterInfo.add("No results found");
                 }
             }else if(typeStr.equals("Title")){
-                //faccio ricerca su titolo
-                //se non trova nulla glielo dico
+
                 params.put("Titolo", infoStr);
                 requests.execRequest("selectBooks", params, new Response.Listener<String>() {
                     @Override
@@ -307,14 +323,12 @@ public class Search extends AppCompatActivity {
                 });
             }
 
-        }else{              //se devo cercare per utente
-            Log.d("gx8", typeStr);
+        }else{
             usersList.clear();
             if(typeStr.equals("Name and Surname")){
-                Log.d("gx8", "test2");
+
                 if(is_Valid_Name(infoStr)){
-                    Log.d("gx8", "test3");
-                    Log.d("gx8", infoStr);
+
                     params.put("fullname", infoStr);
                     requests.execRequest("searchByFullName", params, new Response.Listener<String>() {
                         @Override
@@ -352,12 +366,12 @@ public class Search extends AppCompatActivity {
                     for (int i = 0; i < data.length(); i++) {
                         booksList.put(data.getJSONObject(i).getString("OwnerUsername"),new Book(data.getJSONObject(i)));
                         String key = data.getJSONObject(i).getString("OwnerUsername");
-                        adapterInfo.add(booksList.get(key).getTitolo() + "   "+booksList.get(key).getPrezzo() + "\n"+ booksList.get(key).getCondizione());
+                        booksDisplayed.add(booksList.get(key).getTitolo() + "   "+booksList.get(key).getPrezzo() + "\n"+ booksList.get(key).getCondizione());
                     }
                 }
                 adapterInfo.notifyDataSetChanged();
             } catch (JSONException e) {
-                Log.d("gx8", "Test");
+
             }
 
     }
@@ -388,7 +402,7 @@ public class Search extends AppCompatActivity {
             }
             adapterInfo.notifyDataSetChanged();
         } catch (JSONException e) {
-            Log.d("gx8",e.getMessage());
+
         }
     }
 

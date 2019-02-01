@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,20 +20,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.reflect.TypeToken;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+import android.graphics.Color;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -81,9 +76,9 @@ public class MainActivity extends AppCompatActivity{
                             params.put("auth", session.getUser().getAuth());
                             params.put("bookID", Integer.toString(booksData.get(removeList.get(i)).getID()));
                             booksData.remove(removeList.get(i));
-                            getViewByPosition(removeList.get(i), books).setSelected(false);
                             adapterBooks.remove(adapterBooks.getItem(removeList.get(i)));
-
+                            TextView tv = (TextView) getViewByPosition(removeList.get(i), books).findViewById(android.R.id.text1);
+                            tv.setTextColor(Color.BLACK);
                             requests.execRequest("removeBook", params,new Response.Listener<String>() {
 
                                 @Override
@@ -109,7 +104,6 @@ public class MainActivity extends AppCompatActivity{
                        // adapterBooks.notifyDataSetChanged();
                         removeList.clear();
                         isRemoving=false;
-                        add.setEnabled(true);
                     }
                 });
 
@@ -153,16 +147,7 @@ public class MainActivity extends AppCompatActivity{
 
         books = (ListView) findViewById(R.id.lstBooks);
         booksData = new ArrayList<Book>();
-       /* bookList.add("Test1");
-        bookList.add("Test2");
-        bookList.add("Test3");
-        bookList.add("Test4");
-        bookList.add("Test4");
-        bookList.add("Test4");
-        bookList.add("Test4");
-        bookList.add("Test4");*/
 
-        //inserisco i dati dal database all'ArrayList bookList che poi setto sull'adapter
         HashMap<String,String> args = new HashMap<String,String>();
         args.put("request", "getBooks");
         args.put("owner", session.getUser().getUsername());
@@ -225,6 +210,14 @@ public class MainActivity extends AppCompatActivity{
                 tMyBooks.putExtra("Price","");
                 tMyBooks.putExtra("Authors", "");
                tMyBooks.putExtra("isNew", true);
+                if(isRemoving){
+                    for(int i=0; i<removeList.size(); i++){
+                        TextView tv = (TextView) getViewByPosition(removeList.get(i), books).findViewById(android.R.id.text1);
+                        tv.setTextColor(Color.BLACK);
+                    }
+                    isRemoving = false;
+                    removeList.clear();
+                }
 
                 startActivity(tMyBooks);
 
@@ -236,7 +229,7 @@ public class MainActivity extends AppCompatActivity{
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(removeList.size()>0)
+                if(!removeList.isEmpty())
                     removeDialog().show();
             }
         });
@@ -250,16 +243,18 @@ public class MainActivity extends AppCompatActivity{
 
                 if(isRemoving){
                     if(removeList.contains(i)){
-                        removeList.remove(i);
-                        view.setSelected(false);
+                        removeList.remove(removeList.indexOf(i));
+
+                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                        tv.setTextColor(Color.BLACK);
+
                         if(removeList.isEmpty()){
                             isRemoving=false;
-                            add.setEnabled(true);
                         }
                     }else{
                         removeList.add(i);
-                        view.setSelected(true);
-                        selected = position;
+                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                        tv.setTextColor(Color.RED);
                     }
 
                 }
@@ -292,15 +287,13 @@ public class MainActivity extends AppCompatActivity{
 
                 int i=position;
 
-                removeList.add(i);
+                if(!isRemoving) {
+                    removeList.add(i);
+                    isRemoving = true;
 
-                isRemoving=true;
-
-                add.setEnabled(false);
-
-                view.setSelected(true);
-                selected = position;
-
+                    TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                    tv.setTextColor(Color.RED);
+                }
                 return true;
             }
         });
@@ -312,7 +305,8 @@ public class MainActivity extends AppCompatActivity{
     public void onBackPressed() {
         if(isRemoving){
             for(int i=0; i<removeList.size(); i++){
-                getViewByPosition(removeList.get(i), books).setSelected(false);
+                TextView tv = (TextView) getViewByPosition(removeList.get(i), books).findViewById(android.R.id.text1);
+                tv.setTextColor(Color.BLACK);
             }
             isRemoving = false;
             removeList.clear();

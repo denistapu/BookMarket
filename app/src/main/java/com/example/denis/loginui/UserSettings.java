@@ -210,7 +210,8 @@ public class UserSettings extends AppCompatActivity {
 
 
                 if(isModified){
-                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                    DateFormat to = new SimpleDateFormat("yyyy-MM-dd");
                     Log.d("gx8", "test2");
                     HashMap<String,String> params = new HashMap<String,String>();
                     params.put("id", Integer.toString(session.getUser().getID()));
@@ -220,7 +221,8 @@ public class UserSettings extends AppCompatActivity {
                     params.put("nome", nameStr);
                     params.put("cognome", surnameStr);
                     try {
-                        params.put("DataNascita",df.format(df.parse(birthStr)));
+                        params.put("DataNascita",to.format(df.parse(birthStr)));
+                        Log.d("gx8", birthStr);
                         Log.d("gx8", df.format(df.parse(birthStr)));
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -234,12 +236,10 @@ public class UserSettings extends AppCompatActivity {
                     requests.execRequest("edit", params, new Response.Listener<String>(){
                         @Override
                         public void onResponse(String res) {
-                            Log.d("gx8", "lmfao "+res);
                             JSONObject response = null;
                             try {
                                 response = new JSONObject(res);
                             } catch (JSONException e) {
-                               Log.d("gx8", "NANANANA");
                             }
                             try {
                                 if (!response.getString("status").equals("OK")) {
@@ -250,6 +250,9 @@ public class UserSettings extends AppCompatActivity {
                                 else {
 
                                     Toast.makeText(getApplicationContext(),"User settings saved correctly!", Toast.LENGTH_SHORT).show();
+                                    User user = session.getUser();
+                                    user.updateUser(params);
+                                    session.updateUser(user);
                                    // finish();
                                 }
                             } catch (JSONException e) {

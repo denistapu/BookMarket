@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class User {
@@ -55,7 +56,6 @@ public class User {
             this.email =json.getString("Email");
             this.surname = json.getString("LastName");
             this.setup = (json.getInt("Setup")==1);
-            Log.d("gx9",json.toString());
             this.auth = json.getString("Dcane");
             this.city = json.getString("Citta");
             this.gender = json.getString("sesso");
@@ -72,7 +72,7 @@ public class User {
 
             //this.picture = json.getString("Picture").getBytes();
         } catch (JSONException  e) {
-            Log.d("gx9", "merda");
+
         }
     }
     public int getID() {
@@ -162,7 +162,21 @@ public class User {
     public void setAuth(String auth) {
         this.auth = auth;
     }
+    public void updateUser(HashMap<String,String> params){
+        Log.d("gx8", "ZZ");
+        this.username = params.get("username");
+        this.email = params.get("email");
+        this.name = params.get("nome");
+        this.surname = params.get("cognome");
+        try {
+            this.bdate = new SimpleDateFormat().parse(params.get("DataNascita"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.gender = params.get("Sesso");
+        this.city = params.get("Citta");
 
+    }
    /* public void JSONtoUser(JSONObject json){
         try {
             this.ID = Integer.parseInt(json.getString("id"));

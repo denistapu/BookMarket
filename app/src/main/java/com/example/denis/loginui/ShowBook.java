@@ -3,10 +3,18 @@ package com.example.denis.loginui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.android.volley.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 public class ShowBook extends AppCompatActivity {
 
@@ -26,6 +34,7 @@ public class ShowBook extends AppCompatActivity {
     TextView price;
     TextView authors;
     TextView condition;
+    RequestsManager requests;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +42,7 @@ public class ShowBook extends AppCompatActivity {
         setContentView(R.layout.activity_show_book);
 
         tStart = getIntent();
-
+        requests = new RequestsManager(this);
         back= (Button) findViewById(R.id.btnBackShowBook);
         contact= (Button) findViewById(R.id.btnContactOwnerB);
 
@@ -60,7 +69,35 @@ public class ShowBook extends AppCompatActivity {
         contact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //apre un intent di una chat o qualcosa
+
+                HashMap<String,String> params = new HashMap<String,String>();
+                params.put("username", tStart.getStringExtra("Username"));
+                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                emailIntent.setType("vnd.android.cursor.item/email");
+                requests.execRequest("searchByUsername", params, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String res){
+                        Log.d("gx8", res);
+                        try {
+                            JSONObject response = new JSONObject(res);
+                            if (!response.getString("status").equals("OK")) {
+                                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{""});
+
+                            } else {
+
+                                JSONObject arr = response.getJSONObject("data");
+                                Log.d("gx8", arr.getString("Email"));
+                                emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{arr.getString("Email")});
+                            }
+                            startActivity(Intent.createChooser(emailIntent, "Send mail using..."));
+                        }catch(JSONException e){
+
+                        }
+                    }
+                });
+
+
             }
         });
 
