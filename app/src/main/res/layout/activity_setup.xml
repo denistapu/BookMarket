@@ -79,7 +79,8 @@
                 android:id="@+id/scrollViewSetup"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_below="@+id/txtInfoSetup">
+                android:layout_below="@+id/txtInfoSetup"
+                android:layout_above="@+id/btnStart">
 
             <LinearLayout
                 android:id="@+id/linlay1Setup"
@@ -244,8 +245,8 @@
 
             </LinearLayout>
 
-            </ScrollView>
 
+            </ScrollView>
 
             <Button
                 android:id="@+id/btnStart"
@@ -264,6 +265,8 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16dp" />
+
+
 
         </RelativeLayout>
 
