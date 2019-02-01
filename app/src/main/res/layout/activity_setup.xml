@@ -55,8 +55,18 @@
             android:text="Let's setup your account..."
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:textSize="40dp" />
+            android:textSize="40dp"
+            />
 
+
+
+
+        <ScrollView
+            android:id="@+id/scrollViewSetup"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/imgView_setup"
+            >
 
         <RelativeLayout
             android:id="@+id/rellay1Setup"
@@ -64,6 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/imgView_setup"
             android:visibility="gone">
+
 
             <TextView
                 android:id="@+id/txtInfoSetup"
@@ -74,13 +85,6 @@
                 android:text="Insert your data:"
                 android:textColor="@color/white"
                 android:textSize="30dp" />
-
-            <ScrollView
-                android:id="@+id/scrollViewSetup"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_below="@+id/txtInfoSetup"
-                android:layout_above="@+id/btnStart">
 
             <LinearLayout
                 android:id="@+id/linlay1Setup"
@@ -246,13 +250,13 @@
             </LinearLayout>
 
 
-            </ScrollView>
+
 
             <Button
                 android:id="@+id/btnStart"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_below="@+id/scrollViewSetup"
+                android:layout_below="@+id/linlay1Setup"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
                 android:background="@drawable/btn_bg_old"
@@ -269,6 +273,8 @@
 
 
         </RelativeLayout>
+
+        </ScrollView>
 
     </RelativeLayout>
 
