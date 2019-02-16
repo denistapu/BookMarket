@@ -11,13 +11,11 @@
     <string-array name="typeBooks">
         <item>ISBN</item>
         <item>Title</item>
-        <item>z</item>
     </string-array>
 
     <string-array name="typeUsers">
         <item>Name and Surname</item>
         <item>Username</item>
-        <item>k</item>
     </string-array>
 
     <string-array name="bookCondition">
@@ -31,8 +29,6 @@
     <string-array name="orderBooks">
         <item>Price down</item>
         <item>Price up</item>
-        <item>Condition down</item>
-        <item>Condition up</item>
     </string-array>
 
     <string name="title_activity_main">MainActivity</string>

@@ -78,7 +78,6 @@ public class ShowBook extends AppCompatActivity {
                 requests.execRequest("searchByUsername", params, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String res){
-                        Log.d("gx8", res);
                         try {
                             JSONObject response = new JSONObject(res);
                             if (!response.getString("status").equals("OK")) {
@@ -87,7 +86,6 @@ public class ShowBook extends AppCompatActivity {
                             } else {
 
                                 JSONObject arr = response.getJSONObject("data");
-                                Log.d("gx8", arr.getString("Email"));
                                 emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, new String[]{arr.getString("Email")});
                             }
                             startActivity(Intent.createChooser(emailIntent, "Send mail using..."));

@@ -41,9 +41,7 @@ public class Account extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         tLogin = new Intent(Account.this, Login.class);
                         session.logout();
-                        //tLogin.putExtra("Logout", "Yes");
                         startActivity(tLogin);
-                        //poi sul login bisogna togliere in qualche modo le preferences fatte col remember me
                         finish();
                     }
                 });
@@ -84,17 +82,6 @@ public class Account extends AppCompatActivity {
             public void onClick(View v) {
 
                 tUserSet = new Intent(Account.this, UserSettings.class);
-
-                /*nei rispettivi valori va messo il valore dal DB
-                tUserSet.putExtra("ProfilePicture","");
-                tUserSet.putExtra("Email","");
-                tUserSet.putExtra("Username","");
-                tUserSet.putExtra("Name","");
-                tUserSet.putExtra("Surname","");
-                tUserSet.putExtra("City","");
-                tUserSet.putExtra("BirthDay","");
-                tUserSet.putExtra("Gender","");
-                */
 
                 startActivity(tUserSet);
 

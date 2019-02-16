@@ -200,8 +200,6 @@ public class Login extends AppCompatActivity {
                                     }else{
 
                                         JSONObject arr = response.getJSONObject("data");
-                                        //JSONObject data = arr.getJSONObject(0);
-                                        Log.d("gx8", arr.getString("Dcane"));
                                         session.createSession(new User(arr));
                                         if(remember.isChecked()){
                                             loginPrefsEditor.putBoolean("saveLogin", true);
@@ -212,7 +210,6 @@ public class Login extends AppCompatActivity {
                                             loginPrefsEditor.clear();
                                             loginPrefsEditor.apply();
                                         }
-                                       // if(session.isLoggedIn())
                                         if(!session.getUser().isSetup()){
                                             tSetup = new Intent(Login.this, Setup.class);
                                             startActivity(tSetup);

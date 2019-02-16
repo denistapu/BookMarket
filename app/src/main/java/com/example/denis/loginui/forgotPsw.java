@@ -95,43 +95,8 @@ public class forgotPsw extends AppCompatActivity {
                             }
                         }
                     });
-                   /* RequestQueue mQueue = Volley.newRequestQueue(forgotPsw.this);
-                    String url = "http:/192.168.1.119/AppAndroid/LoginSystem/api.php?request=forgotpsw&"+params;
-                    JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-                            new Response.Listener<JSONObject>() {
-                                @Override
-                                public void onResponse(JSONObject response) {
-                                    try {
-                                        if(!response.getString("status").equals("OK")) {
-                                            errorEmail.setVisibility(View.VISIBLE);
-                                        } else {
-                                            info.setText("We sent to the given Email a message containing its corresponding reset password !");
-                                        }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        error.printStackTrace();
-                    }
-                });
-                    mQueue.add(request);*/
 
                 }
-                    //controllo se la stringa username non è vuota
-                    //se non è vuota controllo controllo che lo username esista nel DB
-                    //se non esiste faccio errorEmail..setVisibility(View.VISIBLE);
-                    //altrimenti invia la mail alla email corrispondente a quell user e mette info.setText("We sent to the given Email a message containing its corresponding reset password !");
-
-                    //se invece username è vuoto
-                    //controlla se la mail è nel DB
-
-                    //se non lo è mette errorEmail.setVisibility(View.VISIBLE);
-
-
-                    //se lo è manda la mail e mette info.setText("We sent to the given Email a message containing its corresponding reset password !");
 
             }
         });

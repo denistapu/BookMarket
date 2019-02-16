@@ -84,7 +84,6 @@ public class MyBook extends AppCompatActivity {
         ArrayAdapter<String> array_spinner=(ArrayAdapter<String>)condition.getAdapter();
         condition.setSelection(array_spinner.getPosition(tStart.getStringExtra("Condition")));
         EditText[] etexts = new EditText[] {title,  isbn, price, publisher,amount, desc,  authors};
-        Log.d("gx8", "1: "+isModified.toString());
             TextWatcher tw = new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -105,7 +104,6 @@ public class MyBook extends AppCompatActivity {
             for(EditText t : etexts){
                 t.addTextChangedListener(tw);
             }
-        Log.d("gx8", "2: "+isModified.toString());
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,7 +115,6 @@ public class MyBook extends AppCompatActivity {
                 String priceStr = price.getText().toString();
                 String authorsStr = authors.getText().toString();
                 String conditionStr = condition.getSelectedItem().toString();
-                Log.d("gx8", "3: "+isNewBook.toString());
 
                 int amountInt = -1;
                 double priceDb = -1;
@@ -140,8 +137,7 @@ public class MyBook extends AppCompatActivity {
                     isModified = true;
 //-------------------------------------------------------------------------------------------------------------------------
                 if((isModified || isNewBook) && editTextsNotEmpty(Arrays.copyOfRange(etexts,0,2)) ){
-                    //salva sul DB i dati del libro
-                    Log.d("gx8", isModified.toString());
+
                         HashMap<String,String> params = new HashMap<String,String>();
 
                         params.put("Titolo", titleStr);
@@ -177,13 +173,12 @@ public class MyBook extends AppCompatActivity {
                         });
 
                     } else  {
-                        Log.d("gx8", "sossa");
                         params.put("ID", tStart.getStringExtra("id"));
                         params.put("ownerHash", session.getUser().getAuth());
                         requests.execRequest("editBook", params,  new Response.Listener<String>() {
                             @Override
                             public void onResponse(String res){
-                                Log.d("gx8", res);
+
                                 JSONObject response = null;
                                 try {
                                     response = new JSONObject(res);

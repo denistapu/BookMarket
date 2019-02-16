@@ -52,11 +52,14 @@ public class User {
         try {
             this.ID = json.getInt("ID");
             this.username = json.getString("Username");
+            this.auth = json.getString("Hash");
             this.name = json.getString("Name");
             this.email =json.getString("Email");
+
             this.surname = json.getString("LastName");
             this.setup = (json.getInt("Setup")==1);
-            this.auth = json.getString("Dcane");
+
+            Log.d("gx8", json.getString("Hash"));
             this.city = json.getString("Citta");
             this.gender = json.getString("sesso");
             try {
@@ -169,7 +172,7 @@ public class User {
         this.name = params.get("nome");
         this.surname = params.get("cognome");
         try {
-            this.bdate = new SimpleDateFormat().parse(params.get("DataNascita"));
+            this.bdate = new SimpleDateFormat("yyyy/MM/dd",Locale.getDefault()).parse(params.get("DataNascita").replace("-", "/"));
         } catch (ParseException e) {
             e.printStackTrace();
         }

@@ -128,7 +128,6 @@ public class ShowUser extends AppCompatActivity {
 
     }
     public void displayBooks(String result){
-        Log.d("gx9", result);
         try {
             JSONObject response = new JSONObject(result);
             if (!response.getString("status").equals("OK")) {
@@ -137,7 +136,6 @@ public class ShowUser extends AppCompatActivity {
 
             } else {
                 JSONArray data = response.getJSONArray("data");
-                Log.d("gx9", Integer.toString(data.length()));
                 for (int i = 0; i < data.length(); i++) {
                     bookList.add(new Book(data.getJSONObject(i)));
                     adapterBook.add(bookList.get(i).getTitolo() + "   "+bookList.get(i).getPrezzo() + "\n"+ bookList.get(i).getCondizione());

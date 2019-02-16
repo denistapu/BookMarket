@@ -13,6 +13,7 @@ import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -22,9 +23,19 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 
 import static com.example.denis.loginui.CheckInput.is_Valid_Name;
 
@@ -51,7 +62,8 @@ public class Setup extends AppCompatActivity {
     TextView setupText;
     TextView profilePic;
     TextView error;
-
+    RequestsManager requests;
+    SessionManager session;
     ImageView imgLogo;
 
     Spinner gender;
@@ -77,7 +89,7 @@ public class Setup extends AppCompatActivity {
         setContentView(R.layout.activity_setup);
 
         tStart = getIntent();
-
+        session = new SessionManager(this);
         rellay1 = (RelativeLayout) findViewById(R.id.rellaySetup);
         rellay2 = (RelativeLayout) findViewById(R.id.rellay1Setup);
 
@@ -91,7 +103,7 @@ public class Setup extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gender.setAdapter(adapter);
         gender.setSelection(0);
-
+        requests = new RequestsManager(this);
 
         start = (Button) findViewById(R.id.btnStart);
         birthDay = (Button) findViewById(R.id.btnDate);
@@ -139,10 +151,41 @@ public class Setup extends AppCompatActivity {
                 }
 
                 if(success){
-                    //salva i dati sul DB (non dimenticarsi della foto profilo)
-                    //imposta il booleano setup sul DB a true
-                    tGo = new Intent(Setup.this, MainActivity.class);
-                    finish();
+                    DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                    DateFormat to = new SimpleDateFormat("yyyy-MM-dd");
+                    HashMap<String,String> params = new HashMap<String,String>();
+                    params.put("username", session.getUser().getUsername());
+                    params.put("name", nameStr);
+                    params.put("lastname", surnameStr);
+                    params.put("city",cityStr);
+                    try {
+                        params.put("bdate",to.format(df.parse(birthStr)));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    params.put("gender",genderStr);
+                    params.put("auth", session.getUser().getAuth());
+                    requests.execRequest("setup", params, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String res) {
+                            Log.d("gx8", res);
+                            JSONObject response = null;
+                            try {
+                                response = new JSONObject(res);
+                                if(!response.getString("status").equals("OK")){
+                                    Toast.makeText(Setup.this, "Something went wrong", Toast.LENGTH_SHORT);
+                                } else {
+                                    User u = session.getUser();
+                                    u.setSetup(true);
+                                    session.updateUser(u);
+                                    tGo = new Intent(Setup.this, MainActivity.class);
+                                    startActivity(tGo);
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }});
+
                 }
 
             }
@@ -161,7 +204,7 @@ public class Setup extends AppCompatActivity {
                         android.R.style.Theme_Material_Light_DarkActionBar,
                         datePicker,
                         year,month,day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
                 dialog.show();
             }
         });

@@ -146,8 +146,8 @@ public class Search extends AppCompatActivity {
                     searchType = true;
 
                     if(infoStr.length()>0){
-                        //fare di nuovo ricerca con quello che cè su infoStr però su books
-                        //e metterlo sulla listView
+                        adapterInfo.clear();
+                        Search(info, type, searchType, infoView);
                     }
 
                 }
@@ -170,8 +170,8 @@ public class Search extends AppCompatActivity {
                     searchType = false;
 
                     if(infoStr.length()>0){
-                        //fare di nuovo ricerca con quello che cè su infoStr però su users
-                        //e metterlo sulla listView
+                        adapterInfo.clear();
+                        Search(info, type, searchType, infoView);
                     }
                 }
             }

@@ -83,6 +83,7 @@ public class UserSettings extends AppCompatActivity {
         gender = (Spinner) findViewById(R.id.spnGenderU);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(UserSettings.this,
                 R.array.gender, R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gender.setAdapter(adapter);
         gender.setSelection(0);
 
@@ -119,7 +120,7 @@ public class UserSettings extends AppCompatActivity {
        city.setText(session.getUser().getCity());
        birthDay.setText(new SimpleDateFormat("dd/MM/yyyy").format(session.getUser().getBdate()));
        //birthDay.set*/
-       gender.setSelection((session.getUser().getGender().equals('M') ? 0 : 1));
+       gender.setSelection((session.getUser().getGender().equals('M') || session.getUser().getGender().equals("Male") ? 0 : 1));
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +138,6 @@ public class UserSettings extends AppCompatActivity {
                 String birthStr = birthDay.getText().toString();
 
                 //devo trovare un modo per prendere anche la foto profilo
-                Log.d("gx8", "test");
 //-------------------------------------------------------------------------------------------------------------------------
                 Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
                 Matcher matcher = pattern.matcher(emailStr);
@@ -212,27 +212,21 @@ public class UserSettings extends AppCompatActivity {
                 if(isModified){
                     DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                     DateFormat to = new SimpleDateFormat("yyyy-MM-dd");
-                    Log.d("gx8", "test2");
                     HashMap<String,String> params = new HashMap<String,String>();
                     params.put("id", Integer.toString(session.getUser().getID()));
-                    Log.d("gx8", Integer.toString(session.getUser().getID()));
                     params.put("email", emailStr);
                     params.put("username",usernameStr);
                     params.put("nome", nameStr);
                     params.put("cognome", surnameStr);
                     try {
                         params.put("DataNascita",to.format(df.parse(birthStr)));
-                        Log.d("gx8", birthStr);
-                        Log.d("gx8", df.format(df.parse(birthStr)));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    // Log.d("gx8", new SimpleDateFormat("yyyy-MM-dd").format(birthStr));
                     params.put("Sesso",genderStr);
                     params.put("Citta",cityStr);
                     params.put("auth", session.getUser().getAuth());
                     Log.d("gx8", session.getUser().getAuth());
-                    //salva sul DB i dati del account
                     requests.execRequest("edit", params, new Response.Listener<String>(){
                         @Override
                         public void onResponse(String res) {
@@ -243,7 +237,6 @@ public class UserSettings extends AppCompatActivity {
                             }
                             try {
                                 if (!response.getString("status").equals("OK")) {
-                                    Log.d("gx8", "test3");
                                     Toast.makeText(getApplicationContext(), "Couldn't update your settings, try again", Toast.LENGTH_SHORT).show();
 
                                 }
