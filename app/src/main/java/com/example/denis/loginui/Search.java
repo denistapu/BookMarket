@@ -2,6 +2,7 @@ package com.example.denis.loginui;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Handler;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.content.res.ResourcesCompat;
@@ -13,12 +14,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -59,17 +62,24 @@ public class Search extends AppCompatActivity {
 
     Spinner type;
     Spinner order;
+
     LinearLayout linearLayoutOrder;
+
     String result;
+
     ListView infoView;
+
     RequestsManager requests;
     LinkedHashMap<String,Book> booksList;
+
     List<String> booksDisplayed;
     List<User> usersList;
     ArrayList infoList;
+
     int check;
     long delay = 500;
     long last_text_edit = 0;
+
     ArrayAdapter adapterInfo;
     Handler handler = new Handler();
 
@@ -106,6 +116,21 @@ public class Search extends AppCompatActivity {
             @Override
             public boolean isEnabled(int position){
                 return (!(adapterInfo.getItem(position).equals("No results found")));
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+
+                View view = super.getView(position, convertView, parent);
+                TextView text = (TextView) view.findViewById(android.R.id.text1);
+                Typeface textFont= ResourcesCompat.getFont(getApplicationContext(), R.font.bookshelves);
+
+                text.setTypeface(textFont);
+                text.setTextColor(Color.WHITE);
+
+
+
+                return view;
             }
         };
         infoView.setAdapter(adapterInfo);

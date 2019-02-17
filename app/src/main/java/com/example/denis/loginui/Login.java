@@ -18,6 +18,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +42,8 @@ public class Login extends AppCompatActivity {
 
     int attempts;
 
-    RelativeLayout rellay1, rellay2;
+    RelativeLayout rellay2;
+    ScrollView scrollView;
 
     ImageView imgLogo;
 
@@ -56,6 +58,7 @@ public class Login extends AppCompatActivity {
 
     TextView error;
     TextView loginText;
+    TextView bookmarketText;
 
     Intent tStart;
     Intent tMain;
@@ -75,9 +78,10 @@ public class Login extends AppCompatActivity {
     Runnable rStart = new Runnable() {
         @Override
         public void run() {
-            rellay1.setVisibility(View.VISIBLE);
+            scrollView.setVisibility(View.VISIBLE);
             rellay2.setVisibility(View.VISIBLE);
-            loginText.setVisibility(View.GONE);
+            bookmarketText.setVisibility(View.GONE);
+            loginText.setVisibility(View.VISIBLE);
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) imgLogo.getLayoutParams();
             params.addRule(RelativeLayout.CENTER_HORIZONTAL, 0);
             imgLogo.setLayoutParams(params);
@@ -88,8 +92,10 @@ public class Login extends AppCompatActivity {
     Runnable rDisableLogin = new Runnable() {
         @Override
         public void run() {
-            login.setEnabled(false);
-            error.setText("Username or password incorrect, number of attempts remaining: " + Integer.toString(attempts) + ".  Wait 10 seconds.");
+            error.setText("Username or password incorrect, number of attempts remaining: " + Integer.toString(attempts));
+            login.setEnabled(true);
+
+
         }
     };
 
@@ -134,10 +140,14 @@ public class Login extends AppCompatActivity {
 
         showPass=false;
 
-        rellay1 = (RelativeLayout) findViewById(R.id.rellay1);
+        scrollView = (ScrollView) findViewById(R.id.scrollViewLogin);
         rellay2 = (RelativeLayout) findViewById(R.id.rellay2);
 
         imgLogo = (ImageView) findViewById(R.id.imgView_logo);
+
+        error = (TextView) findViewById(R.id.txtError);
+        loginText = (TextView) findViewById(R.id.tv_login);
+        bookmarketText = (TextView) findViewById(R.id.txtLogin);
 
         hStart.postDelayed(rStart, 1700);
 
@@ -147,8 +157,7 @@ public class Login extends AppCompatActivity {
 
         remember = (CheckBox) findViewById(R.id.chbRemember);
 
-        error = (TextView) findViewById(R.id.txtError);
-        loginText = (TextView) findViewById(R.id.txtLogin);
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,70 +171,77 @@ public class Login extends AppCompatActivity {
                 String email = null;
                 Map<String,String> params = new HashMap<String,String>();
 
-                Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
-                Matcher matcher = pattern.matcher(userStr);
-                if(matcher.matches())
-                    email=userStr;
 
 
-                //controllo nel DB se user e password sono giusti
-                if(email!=null) {
-                    params.put("email", email);
-                    params.put("password", passwordStr);
-                }
-                else{
-                    params.put("username", userStr);
-                    params.put("password", passwordStr);
-                }
-               requests.execRequest("login",params,
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String res) {
-                                JSONObject response = null;
-                                try {
-                                    response = new JSONObject(res);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                try {
-                                    if(!response.getString("status").equals("OK")) {
-                                        attempts--;
-                                        if(attempts == 0){
-                                            hDisableLogin.postDelayed(rDisableLogin, 10000);
-                                            login.setEnabled(true);
-                                            attempts=5;
-                                        }
-                                        error.setText("Username or password incorrect, number of attempts remaining: " + Integer.toString(attempts));
-                                        error.setVisibility(View.VISIBLE);
-                                    }else{
+                    Pattern pattern = Pattern.compile("[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}");
+                    Matcher matcher = pattern.matcher(userStr);
+                    if (matcher.matches())
+                        email = userStr;
 
-                                        JSONObject arr = response.getJSONObject("data");
-                                        session.createSession(new User(arr));
-                                        if(remember.isChecked()){
-                                            loginPrefsEditor.putBoolean("saveLogin", true);
-                                            loginPrefsEditor.putString("username", userStr);
-                                            loginPrefsEditor.putString("password", passwordStr);
-                                            loginPrefsEditor.apply();
-                                        } else {
-                                            loginPrefsEditor.clear();
-                                            loginPrefsEditor.apply();
-                                        }
-                                        if(!session.getUser().isSetup()){
-                                            tSetup = new Intent(Login.this, Setup.class);
-                                            startActivity(tSetup);
-                                            finish();
-                                        } else {
-                                            tMain = new Intent(Login.this, MainActivity.class);
-                                            startActivity(tMain);
-                                            finish();
-                                        }
 
+                    //controllo nel DB se user e password sono giusti
+                    if (email != null) {
+                        params.put("email", email);
+                        params.put("password", passwordStr);
+                    } else {
+                        params.put("username", userStr);
+                        params.put("password", passwordStr);
+                    }
+                    requests.execRequest("login", params,
+                            new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String res) {
+                                    JSONObject response = null;
+                                    try {
+                                        response = new JSONObject(res);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
                                     }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
+                                    try {
+                                        if (!response.getString("status").equals("OK")) {
+                                            attempts--;
+                                            if (attempts == 0) {
+                                                error.setText("Username or password incorrect, number of attempts remaining: " + Integer.toString(attempts) + ".  Wait 10 seconds.");
+                                                login.setEnabled(false);
+                                                error.setVisibility(View.VISIBLE);
+                                                attempts=5;
+                                                hDisableLogin.postDelayed(rDisableLogin, 10000);
+
+
+                                            }else{
+                                                error.setText("Username or password incorrect, number of attempts remaining: " + Integer.toString(attempts));
+                                                error.setVisibility(View.VISIBLE);
+                                            }
+
+                                        } else {
+
+                                            JSONObject arr = response.getJSONObject("data");
+                                            session.createSession(new User(arr));
+                                            if (remember.isChecked()) {
+                                                loginPrefsEditor.putBoolean("saveLogin", true);
+                                                loginPrefsEditor.putString("username", userStr);
+                                                loginPrefsEditor.putString("password", passwordStr);
+                                                loginPrefsEditor.apply();
+                                            } else {
+                                                loginPrefsEditor.clear();
+                                                loginPrefsEditor.apply();
+                                            }
+                                            if (!session.getUser().isSetup()) {
+                                                tSetup = new Intent(Login.this, Setup.class);
+                                                startActivity(tSetup);
+                                                finish();
+                                            } else {
+                                                tMain = new Intent(Login.this, MainActivity.class);
+                                                startActivity(tMain);
+                                                finish();
+                                            }
+
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                            }
-                });
+                            });
 
 
 

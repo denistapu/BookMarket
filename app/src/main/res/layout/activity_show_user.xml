@@ -94,9 +94,9 @@
                 android:id="@+id/lstSearchShowUser"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:listSelector="@drawable/my_selector"
                 android:textAlignment="center"
-                android:textColor="@color/white">
+                android:textColor="@color/white"
+                android:background="@drawable/normal">
 
             </ListView>
 

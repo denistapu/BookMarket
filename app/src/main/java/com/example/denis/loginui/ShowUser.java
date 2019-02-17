@@ -1,10 +1,15 @@
 package com.example.denis.loginui;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -52,12 +57,30 @@ public class ShowUser extends AppCompatActivity {
         contact= (Button) findViewById(R.id.btnContactOwnerU);
 
         fullName= (TextView) findViewById(R.id.txtFullNameShowUser);
+        fullName.setPaintFlags(fullName.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
         username= (TextView) findViewById(R.id.txtUsernameShowUser);
+        username.setPaintFlags(username.getPaintFlags() |   Paint.UNDERLINE_TEXT_FLAG);
+
         bookList = new ArrayList<Book>();
         adapterBook = new ArrayAdapter(this, android.R.layout.simple_list_item_1){
             @Override
             public boolean isEnabled(int position){
                 return (!(adapterBook.getItem(position).equals("No results found")));
+            }
+
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+
+                View view = super.getView(position, convertView, parent);
+                TextView text = (TextView) view.findViewById(android.R.id.text1);
+                Typeface textFont= ResourcesCompat.getFont(getApplicationContext(), R.font.bookshelves);
+
+                text.setTypeface(textFont);
+
+                    text.setTextColor(Color.WHITE);
+
+
+                return view;
             }
         };
         profilePic = (ImageView) findViewById(R.id.userPicShowUser);
@@ -78,6 +101,8 @@ public class ShowUser extends AppCompatActivity {
         bookView = (ListView) findViewById(R.id.lstSearchShowUser);
 
         bookView.setAdapter(adapterBook);
+
+
 
         //inserisco i dati dal database all'ArrayList bookList che poi setto sull'adapter
 
@@ -139,6 +164,7 @@ public class ShowUser extends AppCompatActivity {
                 for (int i = 0; i < data.length(); i++) {
                     bookList.add(new Book(data.getJSONObject(i)));
                     adapterBook.add(bookList.get(i).getTitolo() + "   "+bookList.get(i).getPrezzo() + "\n"+ bookList.get(i).getCondizione());
+
                 }
             }
             //adapterBook.notifyDataSetChanged();
@@ -148,3 +174,4 @@ public class ShowUser extends AppCompatActivity {
 
     }
 }
+

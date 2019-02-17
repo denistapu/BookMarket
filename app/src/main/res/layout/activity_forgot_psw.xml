@@ -12,8 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:layout_above="@+id/rellay2Forgot"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp">
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="100dp">
 
         <ImageView
             android:id="@+id/imgView_logo"
@@ -23,6 +25,26 @@
             android:scaleType="fitCenter"
             app:srcCompat="@drawable/ic_logo" />
 
+        <TextView
+            android:id="@+id/tv_forgot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/lobster"
+            android:text="Forgot Password?"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:layout_below="@+id/imgView_logo"/>
+
+        <ScrollView
+            android:id="@+id/scrollViewForgotPsw"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/tv_forgot"
+
+            >
+
         <RelativeLayout
             android:id="@+id/rellay1Forgot"
             android:layout_width="wrap_content"
@@ -30,16 +52,7 @@
             android:layout_below="@+id/imgView_logo"
             android:visibility="visible">
 
-            <TextView
-                android:id="@+id/tv_forgot"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/lobster"
-                android:text="Forgot Password?"
-                android:textColor="@color/white"
-                android:textSize="30dp" />
+
 
             <LinearLayout
                 android:id="@+id/linlay1Forgot"
@@ -126,6 +139,8 @@
 
 
         </RelativeLayout>
+
+        </ScrollView>>
 
     </RelativeLayout>
 
