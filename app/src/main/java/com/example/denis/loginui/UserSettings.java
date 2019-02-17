@@ -120,7 +120,7 @@ public class UserSettings extends AppCompatActivity {
        city.setText(session.getUser().getCity());
        birthDay.setText(new SimpleDateFormat("dd/MM/yyyy").format(session.getUser().getBdate()));
        //birthDay.set*/
-       gender.setSelection((session.getUser().getGender().equals('M') || session.getUser().getGender().equals("Male") ? 0 : 1));
+       gender.setSelection((session.getUser().getGender().equals("M") || session.getUser().getGender().equals("Male") ? 0 : 1));
 
         save.setOnClickListener(new View.OnClickListener() {
             @Override
