@@ -310,7 +310,7 @@ public class MainActivity extends AppCompatActivity{
                 if(!isRemoving) {
                     removeList.add(i);
                     isRemoving = true;
-
+                    selected = i;
                     TextView tv = (TextView) view.findViewById(android.R.id.text1);
                     tv.setTextColor(Color.RED);
                 }

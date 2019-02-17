@@ -191,6 +191,7 @@ public class Login extends AppCompatActivity {
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String res) {
+                                    Log.d("testgx8", res);
                                     JSONObject response = null;
                                     try {
                                         response = new JSONObject(res);
@@ -217,6 +218,7 @@ public class Login extends AppCompatActivity {
 
                                             JSONObject arr = response.getJSONObject("data");
                                             session.createSession(new User(arr));
+                                            Log.d("testgx8", session.getUser().getBdate().toString());
                                             if (remember.isChecked()) {
                                                 loginPrefsEditor.putBoolean("saveLogin", true);
                                                 loginPrefsEditor.putString("username", userStr);
