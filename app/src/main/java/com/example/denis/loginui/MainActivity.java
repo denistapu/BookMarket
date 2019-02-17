@@ -218,7 +218,6 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 tMyBooks.putExtra("id", "");
-                //Log.d("gx8","LMAO: "+Integer.toString(booksData.get(position).getID()));
                 tMyBooks.putExtra("Title", "");
                 tMyBooks.putExtra("Publisher", "");
                 tMyBooks.putExtra("ISBN", "");
