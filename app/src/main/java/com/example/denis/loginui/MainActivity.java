@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity{
                             booksData.remove(removeList.get(i));
                             adapterBooks.remove(adapterBooks.getItem(removeList.get(i)));
                             TextView tv = (TextView) getViewByPosition(removeList.get(i), books).findViewById(android.R.id.text1);
-                            tv.setTextColor(Color.BLACK);
+                            tv.setTextColor(Color.WHITE);
                             requests.execRequest("removeBook", params,new Response.Listener<String>() {
 
                                 @Override
@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity{
                 if(isRemoving){
                     for(int i=0; i<removeList.size(); i++){
                         TextView tv = (TextView) getViewByPosition(removeList.get(i), books).findViewById(android.R.id.text1);
-                        tv.setTextColor(Color.BLACK);
+                        tv.setTextColor(Color.WHITE);
                     }
                     isRemoving = false;
                     removeList.clear();
@@ -266,7 +266,7 @@ public class MainActivity extends AppCompatActivity{
                         removeList.remove(removeList.indexOf(i));
 
                         TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                        tv.setTextColor(Color.BLACK);
+                        tv.setTextColor(Color.WHITE);
 
                         if(removeList.isEmpty()){
                             isRemoving=false;
@@ -326,7 +326,7 @@ public class MainActivity extends AppCompatActivity{
         if(isRemoving){
             for(int i=0; i<removeList.size(); i++){
                 TextView tv = (TextView) getViewByPosition(removeList.get(i), books).findViewById(android.R.id.text1);
-                tv.setTextColor(Color.BLACK);
+                tv.setTextColor(Color.WHITE);
             }
             isRemoving = false;
             removeList.clear();
