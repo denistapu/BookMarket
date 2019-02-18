@@ -68,7 +68,6 @@ public class User {
             } catch (ParseException e) {
                 Log.d("gx9", json.getString("DataNascita"));
             }
-            //this.bdate =json.getString("DataNascita");
 
 
 

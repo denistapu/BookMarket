@@ -218,7 +218,6 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 tMyBooks.putExtra("id", "");
-                //Log.d("gx8","LMAO: "+Integer.toString(booksData.get(position).getID()));
                 tMyBooks.putExtra("Title", "");
                 tMyBooks.putExtra("Publisher", "");
                 tMyBooks.putExtra("ISBN", "");
@@ -310,7 +309,7 @@ public class MainActivity extends AppCompatActivity{
                 if(!isRemoving) {
                     removeList.add(i);
                     isRemoving = true;
-
+                    selected = i;
                     TextView tv = (TextView) view.findViewById(android.R.id.text1);
                     tv.setTextColor(Color.RED);
                 }
